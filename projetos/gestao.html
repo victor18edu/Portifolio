@@ -1,0 +1,2144 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cobalto Gestão | Plataforma de gestão empresarial</title>
+    <meta
+      name="description"
+      content="Cobalto Gestão é uma demonstração de plataforma web de gestão empresarial com quadro de processos, cadastro de colaboradores, documentos, relatórios e configurações. Dados fictícios."
+    />
+    <meta name="author" content="Victor Eduardo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0B0F19" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F19'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23FFC61A' stroke-width='7'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23FFC61A'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0f19;
+        --bg-2: #101623;
+        --side: #0e1421;
+        --panel: #131a29;
+        --panel-2: #182032;
+        --text: #f8fafc;
+        --muted: #9aa4b2;
+        --muted-2: #6b7686;
+        --accent: #ffc61a;
+        --accent-soft: rgba(255, 198, 26, 0.12);
+        --green: #34d399;
+        --red: #f87171;
+        --blue: #60a5fa;
+        --violet: #a78bfa;
+        --border: rgba(255, 255, 255, 0.08);
+        --border-2: rgba(255, 255, 255, 0.15);
+        --side-w: 262px;
+        --topbar-h: 68px;
+        --radius: 16px;
+        --display: "Space Grotesk", "Inter", sans-serif;
+        --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0; background: var(--bg); color: var(--text);
+        font-family: var(--sans); font-size: 15px; line-height: 1.6;
+        -webkit-font-smoothing: antialiased; overflow-x: hidden;
+      }
+      img { max-width: 100%; display: block; }
+      a { text-decoration: none; color: inherit; }
+      h1, h2, h3, h4, h5 { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; margin: 0; }
+      p { margin: 0; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+      ::selection { background: var(--accent); color: #0b0f19; }
+
+      /* ---------------- Sidebar ---------------- */
+      .sidebar {
+        position: fixed; top: 0; left: 0; bottom: 0; width: var(--side-w); z-index: 1045;
+        display: flex; flex-direction: column; background: var(--side);
+        border-right: 1px solid var(--border); transition: transform 0.32s ease;
+      }
+      .sidebar__head {
+        display: flex; align-items: center; justify-content: space-between; gap: 10px;
+        height: var(--topbar-h); padding: 0 20px; border-bottom: 1px solid var(--border);
+      }
+      .logo { display: flex; align-items: center; gap: 11px; }
+      .logo i { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--accent); color: #0b0f19; font-size: 1rem; }
+      .logo strong { font-family: var(--display); font-size: 1.02rem; }
+      .logo small { display: block; color: var(--muted-2); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; }
+      .x-btn { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; }
+      .x-btn:hover { color: var(--text); border-color: var(--border-2); }
+      .sidebar__nav { flex: 1; overflow-y: auto; padding: 16px 14px; }
+      .nav-label { display: block; padding: 16px 12px 8px; color: var(--muted-2); font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+      .nav-item {
+        position: relative; display: flex; align-items: center; gap: 12px; width: 100%;
+        padding: 11px 12px; margin-bottom: 2px; border: 0; border-radius: 11px;
+        background: transparent; color: var(--muted); font-family: var(--sans);
+        font-size: 0.9rem; text-align: left; cursor: pointer; transition: all 0.2s ease;
+      }
+      .nav-item i { font-size: 1.05rem; width: 20px; text-align: center; }
+      .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+      .nav-item.is-active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+      .nav-item.is-active::before { content: ""; position: absolute; left: -14px; top: 50%; transform: translateY(-50%); width: 3px; height: 22px; background: var(--accent); border-radius: 0 3px 3px 0; }
+      .nav-item .tag { margin-left: auto; padding: 2px 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); color: var(--muted); font-size: 10.5px; font-weight: 600; }
+      .nav-item.is-active .tag { background: rgba(255, 198, 26, 0.2); color: var(--accent); }
+      .sidebar__foot { padding: 16px 20px; border-top: 1px solid var(--border); }
+      .sidebar__foot a { display: inline-flex; align-items: center; gap: 9px; color: var(--muted); font-size: 0.82rem; font-weight: 500; }
+      .sidebar__foot a:hover { color: var(--accent); }
+      .sidebar__foot p { margin-top: 10px; color: var(--muted-2); font-size: 0.72rem; }
+
+      /* ---------------- Topbar ---------------- */
+      .app { min-height: 100vh; }
+      .topbar {
+        position: fixed; top: 0; right: 0; left: var(--side-w); z-index: 1040; height: var(--topbar-h);
+        display: flex; align-items: center; gap: 16px; padding: 0 26px;
+        background: rgba(11, 15, 25, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+      .burger { display: none; width: 42px; height: 42px; border-radius: 11px; border: 1px solid var(--border-2); background: var(--panel); color: var(--text); font-size: 1.1rem; cursor: pointer; }
+      .search { position: relative; flex: 1; max-width: 400px; }
+      .search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted-2); font-size: 0.95rem; }
+      .search input { width: 100%; height: 42px; padding: 0 16px 0 40px; border-radius: 11px; border: 1px solid var(--border); background: var(--panel); color: var(--text); font-family: var(--sans); font-size: 0.9rem; transition: all 0.2s ease; }
+      .search input::placeholder { color: var(--muted-2); }
+      .search input:focus { outline: none; border-color: var(--accent); background: var(--panel-2); }
+      .topbar__right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+      .icon-btn { position: relative; width: 42px; height: 42px; border-radius: 11px; border: 1px solid var(--border); background: var(--panel); color: var(--muted); cursor: pointer; transition: all 0.2s ease; }
+      .icon-btn:hover { color: var(--text); border-color: var(--border-2); }
+      .icon-btn .dot { position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); border: 2px solid var(--panel); }
+      .user-chip { display: flex; align-items: center; gap: 10px; padding: 5px 12px 5px 5px; border-radius: 999px; border: 1px solid var(--border); background: var(--panel); cursor: pointer; transition: all 0.2s ease; }
+      .user-chip:hover { border-color: var(--border-2); }
+      .user-chip img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      .user-chip span { font-size: 0.84rem; font-weight: 600; }
+      .user-chip small { display: block; color: var(--muted-2); font-size: 10.5px; font-weight: 500; }
+      .menu { padding: 8px; }
+      .menu a, .menu button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 12px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-size: 0.88rem; text-align: left; }
+      .menu a:hover, .menu button:hover { background: rgba(255, 255, 255, 0.06); color: var(--text); }
+      .menu hr { margin: 6px 0; border-color: var(--border); }
+
+      /* ---------------- Conteúdo ---------------- */
+      .content { padding: calc(var(--topbar-h) + 26px) 26px 60px; margin-left: var(--side-w); }
+      .page-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px; margin-bottom: 24px; }
+      .page-head h1 { font-size: 1.5rem; }
+      .page-head p { margin-top: 5px; color: var(--muted); font-size: 0.9rem; }
+      .page-head__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px; padding: 0 18px;
+        border: 1px solid transparent; border-radius: 11px; font-family: var(--sans);
+        font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+      }
+      .btn--p { background: var(--accent); color: #0b0f19; }
+      .btn--p:hover { background: #ffd54d; transform: translateY(-1px); }
+      .btn--g { border-color: var(--border-2); background: var(--panel); color: var(--text); }
+      .btn--g:hover { background: var(--panel-2); }
+      .btn--s { height: 36px; padding: 0 13px; font-size: 0.82rem; border-color: var(--border); background: transparent; color: var(--muted); }
+      .btn--s:hover { color: var(--text); border-color: var(--border-2); }
+      .btn.is-done { background: #15803d !important; color: #fff !important; border-color: transparent !important; }
+      .view { display: none; }
+      .view.is-active { display: block; animation: fade 0.35s ease; }
+      @keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+      /* ---------------- Cards e indicadores ---------------- */
+      .grid-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 225px), 1fr)); gap: 16px; }
+      .kpi { padding: 20px; border: 1px solid var(--border); border-radius: var(--radius); background: linear-gradient(180deg, var(--panel-2) 0%, var(--panel) 100%); transition: all 0.25s ease; }
+      .kpi:hover { border-color: var(--border-2); transform: translateY(-3px); }
+      .kpi__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .kpi__icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; font-size: 1.1rem; }
+      .kpi__label { color: var(--muted); font-size: 0.8rem; font-weight: 500; }
+      .kpi__value { font-family: var(--display); font-size: 1.85rem; font-weight: 700; margin-top: 14px; line-height: 1; }
+      .kpi__foot { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 0.78rem; color: var(--muted-2); }
+      .trend { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+      .trend--up { background: rgba(52, 211, 153, 0.14); color: var(--green); }
+      .trend--down { background: rgba(248, 113, 113, 0.14); color: var(--red); }
+      .card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel); overflow: hidden; }
+      .card__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+      .card__head h2 { font-size: 1rem; }
+      .card__head p { color: var(--muted-2); font-size: 0.8rem; margin-top: 3px; }
+      .card__body { padding: 20px; }
+      .chart-box { position: relative; height: 290px; }
+      .chart-box--sm { height: 230px; }
+      .chip { display: inline-flex; padding: 3px; border-radius: 11px; background: var(--bg-2); border: 1px solid var(--border); gap: 2px; }
+      .chip button { padding: 7px 14px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; }
+      .chip button:hover { color: var(--text); }
+      .chip button.is-on { background: var(--accent); color: #0b0f19; font-weight: 600; }
+
+      /* ---------------- Filtros ---------------- */
+      .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--panel); margin-bottom: 18px; }
+      .filters .field { position: relative; flex: 1 1 190px; min-width: 0; max-width: 100%; }
+      .filters .field i { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: var(--muted-2); font-size: 0.9rem; pointer-events: none; }
+      .filters input[type="search"], .filters select {
+        width: 100%; height: 40px; padding: 0 13px 0 37px; border-radius: 10px;
+        border: 1px solid var(--border); background: var(--bg-2); color: var(--text);
+        font-family: var(--sans); font-size: 0.86rem; transition: all 0.2s ease;
+      }
+      .filters select { padding-left: 13px; cursor: pointer; }
+      .filters input:focus, .filters select:focus { outline: none; border-color: var(--accent); }
+      .filters .count { margin-left: auto; color: var(--muted-2); font-size: 0.82rem; }
+      .filters .count strong { color: var(--text); font-family: var(--display); }
+
+      /* ---------------- Kanban ---------------- */
+      .board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start; }
+      .col { background: var(--bg-2); border: 1px solid var(--border); border-radius: 14px; padding: 14px; min-height: 180px; transition: all 0.2s ease; }
+      .col.is-over { border-color: var(--accent); background: var(--accent-soft); }
+      .col__head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+      .col__head strong { font-size: 0.86rem; font-family: var(--display); }
+      .col__count { min-width: 24px; height: 24px; padding: 0 7px; border-radius: 999px; display: grid; place-items: center; background: rgba(255, 255, 255, 0.07); color: var(--muted); font-size: 0.75rem; font-weight: 600; }
+      .col__dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 7px; display: inline-block; }
+      .task { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 10px; cursor: grab; transition: all 0.2s ease; }
+      .task:hover { border-color: var(--border-2); transform: translateY(-2px); }
+      .task:active { cursor: grabbing; }
+      .task.is-drag { opacity: 0.4; }
+      .task__title { font-size: 0.88rem; font-weight: 600; line-height: 1.35; }
+      .task__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 10px; }
+      .task__who { display: flex; align-items: center; gap: 7px; color: var(--muted-2); font-size: 0.76rem; }
+      .task__who img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
+      .task__move { display: flex; gap: 6px; margin-top: 10px; }
+      .task__move button { flex: 1; height: 30px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 0.78rem; cursor: pointer; transition: all 0.2s ease; }
+      .task__move button:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+      .task__move button:disabled { opacity: 0.3; cursor: not-allowed; }
+      .prio { padding: 3px 8px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; }
+      .prio--alta { background: rgba(248, 113, 113, 0.15); color: var(--red); }
+      .prio--media { background: rgba(255, 198, 26, 0.15); color: var(--accent); }
+      .prio--baixa { background: rgba(96, 165, 250, 0.15); color: var(--blue); }
+      .due { display: inline-flex; align-items: center; gap: 5px; color: var(--muted-2); font-size: 0.76rem; }
+      .due.is-late { color: var(--red); }
+      .col__empty { padding: 22px 8px; text-align: center; color: var(--muted-2); font-size: 0.8rem; border: 1px dashed var(--border-2); border-radius: 10px; }
+
+      /* ---------------- Tabela ---------------- */
+      .table-wrap { overflow-x: auto; }
+      table.tbl { width: 100%; border-collapse: collapse; min-width: 720px; }
+      table.tbl th, table.tbl td { padding: 13px 16px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+      table.tbl thead th { color: var(--muted); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+      table.tbl tbody tr { transition: background 0.18s ease; }
+      table.tbl tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+      table.tbl tbody td { font-size: 0.88rem; }
+      table.tbl tbody tr:last-child td { border-bottom: 0; }
+      th.sortable { cursor: pointer; user-select: none; }
+      th.sortable:hover { color: var(--text); }
+      th.sortable i { margin-left: 6px; opacity: 0.4; font-size: 0.7rem; }
+      th.sortable.is-sorted { color: var(--accent); }
+      th.sortable.is-sorted i { opacity: 1; }
+      .who { display: flex; align-items: center; gap: 10px; }
+      .who img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+      .who strong { display: block; font-size: 0.88rem; }
+      .who small { color: var(--muted-2); font-size: 0.76rem; }
+      .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+      .badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+      .badge--ok { background: rgba(52, 211, 153, 0.14); color: var(--green); }
+      .badge--warn { background: rgba(255, 198, 26, 0.14); color: var(--accent); }
+      .badge--off { background: rgba(107, 118, 134, 0.18); color: var(--muted); }
+      .badge--info { background: rgba(96, 165, 250, 0.14); color: var(--blue); }
+      .row-act { display: flex; align-items: center; gap: 6px; }
+      .act-btn { width: 32px; height: 32px; border-radius: 9px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s ease; }
+      .act-btn:hover { color: var(--accent); border-color: var(--accent); }
+      .act-btn--danger:hover { color: var(--red); border-color: var(--red); }
+      .empty { padding: 46px 20px; text-align: center; color: var(--muted-2); }
+      .empty i { display: block; font-size: 2rem; margin-bottom: 12px; opacity: 0.5; }
+      .tbl-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 20px; border-top: 1px solid var(--border); color: var(--muted-2); font-size: 0.83rem; }
+      .pages { display: flex; gap: 6px; }
+      .pages button { min-width: 34px; height: 34px; padding: 0 10px; border-radius: 9px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-size: 0.84rem; cursor: pointer; transition: all 0.2s ease; }
+      .pages button:hover:not(:disabled) { color: var(--text); border-color: var(--border-2); }
+      .pages button.is-on { background: var(--accent); border-color: var(--accent); color: #0b0f19; font-weight: 600; }
+      .pages button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+      /* ---------------- Listas e barras ---------------- */
+      .feed { display: grid; gap: 2px; }
+      .feed > div { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+      .feed > div:last-child { border-bottom: 0; }
+      .feed i { width: 34px; height: 34px; flex: none; border-radius: 10px; display: grid; place-items: center; font-size: 0.95rem; }
+      .feed p { font-size: 0.86rem; }
+      .feed small { color: var(--muted-2); font-size: 0.76rem; }
+      .prog { margin-top: 14px; }
+      .prog__row { display: flex; justify-content: space-between; gap: 10px; font-size: 0.83rem; margin-bottom: 7px; }
+      .prog__row span { color: var(--muted-2); }
+      .prog__bar { height: 8px; border-radius: 999px; background: var(--bg-2); overflow: hidden; }
+      .prog__bar i { display: block; height: 100%; border-radius: 999px; background: var(--accent); transition: width 0.5s ease; }
+      .prog + .prog { margin-top: 15px; }
+
+      /* ---------------- Formulários ---------------- */
+      .form-row { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+      .form-field label { display: block; margin-bottom: 6px; color: var(--muted); font-size: 0.8rem; font-weight: 500; }
+      .form-field input, .form-field select, .form-field textarea {
+        width: 100%; padding: 11px 13px; border-radius: 10px; border: 1px solid var(--border);
+        background: var(--bg-2); color: var(--text); font-family: var(--sans); font-size: 0.9rem; transition: all 0.2s ease;
+      }
+      .form-field textarea { resize: vertical; min-height: 90px; }
+      .form-field select { cursor: pointer; }
+      .form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--accent); }
+      .form-field.has-error input, .form-field.has-error select { border-color: var(--red); }
+      .err { display: none; margin-top: 6px; color: var(--red); font-size: 0.76rem; }
+      .form-field.has-error .err { display: block; }
+      .hint { margin-top: 6px; color: var(--muted-2); font-size: 0.76rem; }
+      input[type="range"] { width: 100%; accent-color: var(--accent); }
+      .switch-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+      .switch-row:last-child { border-bottom: 0; }
+      .switch-row strong { display: block; font-size: 0.9rem; }
+      .switch-row small { color: var(--muted-2); font-size: 0.79rem; }
+      .switch { position: relative; flex: none; width: 46px; height: 26px; }
+      .switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+      .switch i { position: absolute; inset: 0; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--border-2); transition: all 0.22s ease; pointer-events: none; }
+      .switch i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--muted); transition: all 0.22s ease; }
+      .switch input:checked + i { background: var(--accent); border-color: var(--accent); }
+      .switch input:checked + i::after { left: 23px; background: #0b0f19; }
+      .switch input:focus-visible + i { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      /* ---------------- Documentos ---------------- */
+      .file { display: flex; align-items: center; gap: 12px; }
+      .file i { width: 38px; height: 38px; flex: none; border-radius: 10px; display: grid; place-items: center; font-size: 1.05rem; }
+      .file strong { display: block; font-size: 0.88rem; }
+      .file small { color: var(--muted-2); font-size: 0.76rem; }
+
+      /* ---------------- Modal, toast e utilitários ---------------- */
+      .modal-content.nm { background: var(--panel); border: 1px solid var(--border-2); border-radius: 18px; color: var(--text); }
+      .modal-header.nm, .modal-footer.nm { border-color: var(--border); }
+      .modal-title { font-family: var(--display); font-size: 1.08rem; }
+      .list-info { display: grid; gap: 0; }
+      .list-info div { display: flex; justify-content: space-between; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+      .list-info dt { color: var(--muted-2); }
+      .list-info dd { margin: 0; text-align: right; }
+      .toast { position: fixed; right: 22px; bottom: 22px; z-index: 1090; display: flex; align-items: center; gap: 12px; padding: 14px 20px; border: 1px solid var(--border-2); border-radius: 13px; background: var(--panel-2); box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.9); font-size: 0.9rem; transform: translateX(24px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
+      .toast.is-on { opacity: 1; transform: none; }
+      .toast i { color: var(--accent); }
+      .spin { display: inline-block; animation: spin 0.7s linear; }
+      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      .backdrop { position: fixed; inset: 0; z-index: 1044; background: rgba(3, 5, 9, 0.65); backdrop-filter: blur(2px); display: none; }
+      .backdrop.is-on { display: block; }
+      .skip { position: fixed; left: 16px; top: -80px; z-index: 1100; padding: 10px 18px; border-radius: 0 0 10px 10px; background: var(--accent); color: #0b0f19; font-weight: 600; font-size: 0.85rem; transition: top 0.2s ease; }
+      .skip:focus { top: 0; }
+    </style>
+    <style>
+      @media (max-width: 1300px) {
+        .board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 1024px) {
+        :root { --side-w: 0px; }
+        .sidebar { transform: translateX(-100%); width: 280px; }
+        .sidebar.is-open { transform: none; }
+        .topbar { left: 0; padding: 0 18px; }
+        .content { margin-left: 0; padding: calc(var(--topbar-h) + 20px) 18px 50px; }
+        .burger { display: grid; place-items: center; }
+        .user-chip span { display: none; }
+      }
+      @media (max-width: 700px) {
+        .search { max-width: none; }
+        .page-head { align-items: flex-start; }
+        .page-head__actions { width: 100%; }
+        .btn { flex: 1; }
+        .card__head, .card__body { padding: 16px; }
+        .chart-box, .chart-box--sm { height: 240px; }
+        .board { grid-template-columns: minmax(0, 1fr); }
+        .toast { left: 18px; right: 18px; bottom: 18px; transform: translateY(16px); }
+        .toast.is-on { transform: none; }
+      }
+      @media (max-width: 480px) {
+        body { font-size: 14.5px; }
+        .content { padding-left: 14px; padding-right: 14px; }
+        .kpi__value { font-size: 1.6rem; }
+        .user-chip { padding: 4px; }
+        .filters .count { margin-left: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+  </head>
+  <body id="topo">
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <div class="backdrop" id="backdrop" hidden></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+      <div class="sidebar__head">
+        <a class="logo" href="#painel" aria-label="Cobalto Gestão, ir para o painel">
+          <i class="bi bi-hexagon-fill" aria-hidden="true"></i>
+          <span><strong>Cobalto</strong><small>Gestão</small></span>
+        </a>
+        <button class="x-btn" type="button" id="closeSidebar" aria-label="Fechar menu lateral">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <nav class="sidebar__nav">
+        <span class="nav-label">Operação</span>
+        <button class="nav-item is-active" type="button" data-view="painel">
+          <i class="bi bi-speedometer2" aria-hidden="true"></i> Painel
+        </button>
+        <button class="nav-item" type="button" data-view="processos">
+          <i class="bi bi-kanban" aria-hidden="true"></i> Processos <span class="tag" id="tagProcessos">0</span>
+        </button>
+        <button class="nav-item" type="button" data-view="cadastros">
+          <i class="bi bi-people" aria-hidden="true"></i> Cadastros <span class="tag" id="tagCadastros">0</span>
+        </button>
+
+        <span class="nav-label">Empresa</span>
+        <button class="nav-item" type="button" data-view="documentos">
+          <i class="bi bi-folder2-open" aria-hidden="true"></i> Documentos <span class="tag" id="tagDocs">0</span>
+        </button>
+        <button class="nav-item" type="button" data-view="relatorios">
+          <i class="bi bi-file-earmark-bar-graph" aria-hidden="true"></i> Relatórios
+        </button>
+
+        <span class="nav-label">Sistema</span>
+        <button class="nav-item" type="button" data-view="configuracoes">
+          <i class="bi bi-sliders" aria-hidden="true"></i> Configurações
+        </button>
+      </nav>
+
+      <div class="sidebar__foot">
+        <a href="../index.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio</a>
+        <p>Demonstração com dados fictícios.</p>
+      </div>
+    </aside>
+
+    <div class="app">
+      <header class="topbar">
+        <button class="burger" type="button" id="burger" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu lateral">
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
+
+        <div class="search">
+          <i class="bi bi-search" aria-hidden="true"></i>
+          <label class="visually-hidden" for="globalSearch">Buscar colaboradores e processos</label>
+          <input type="search" id="globalSearch" placeholder="Buscar colaborador, processo, documento..." autocomplete="off" />
+        </div>
+
+        <div class="topbar__right">
+          <button class="icon-btn" type="button" id="refreshBtn" aria-label="Atualizar dados">
+            <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+          </button>
+
+          <div class="dropdown">
+            <button class="icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notificações" id="notifBtn">
+              <i class="bi bi-bell" aria-hidden="true"></i>
+              <span class="dot" aria-hidden="true"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end menu" style="width: 340px; max-width: 92vw">
+              <div class="d-flex align-items-center justify-content-between px-2 py-1 mb-1">
+                <strong style="font-size: 0.9rem">Notificações</strong>
+                <span class="badge badge--warn">3 novas</span>
+              </div>
+              <div class="feed">
+                <div>
+                  <i class="bi bi-kanban" style="background: rgba(255, 198, 26, 0.14); color: #ffc61a"></i>
+                  <div><p>Processo <strong>“Revisão contratual”</strong> está atrasado.</p><small>Há 24 minutos</small></div>
+                </div>
+                <div>
+                  <i class="bi bi-person-plus" style="background: rgba(96, 165, 250, 0.14); color: #60a5fa"></i>
+                  <div><p>Novo cadastro pendente de aprovação.</p><small>Há 2 horas</small></div>
+                </div>
+                <div>
+                  <i class="bi bi-check2-circle" style="background: rgba(52, 211, 153, 0.14); color: #34d399"></i>
+                  <div><p>Fechamento mensal concluído.</p><small>Ontem, 17:20</small></div>
+                </div>
+              </div>
+              <hr />
+              <button type="button" class="w-100 justify-content-center" id="markRead">Marcar todas como lidas</button>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="user-chip" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Menu do perfil">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&amp;fit=crop&amp;w=80&amp;q=70" alt="" width="64" height="64" />
+              <span class="text-start">
+                <span>Victor Eduardo</span>
+                <small>Administrador</small>
+              </span>
+              <i class="bi bi-chevron-down" style="font-size: 0.75rem; color: var(--muted-2)" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end menu">
+              <li><a href="#cadastros" data-jump="cadastros"><i class="bi bi-person" aria-hidden="true"></i> Meu perfil</a></li>
+              <li><a href="#configuracoes" data-jump="configuracoes"><i class="bi bi-sliders" aria-hidden="true"></i> Preferências</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a href="../index.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <main class="content" id="conteudo">
+        <div class="page-head">
+          <div>
+            <h1 id="pageTitle">Painel</h1>
+            <p id="pageSub">Visão consolidada da operação</p>
+          </div>
+          <div class="page-head__actions">
+            <div class="chip" role="group" aria-label="Selecionar período">
+              <button type="button" data-period="7">7 dias</button>
+              <button type="button" class="is-on" data-period="30">30 dias</button>
+              <button type="button" data-period="90">90 dias</button>
+            </div>
+            <button class="btn btn--g" type="button" id="exportBtn"><i class="bi bi-download" aria-hidden="true"></i> Exportar</button>
+            <button class="btn btn--p" type="button" id="newTaskBtn"><i class="bi bi-plus-lg" aria-hidden="true"></i> Nova tarefa</button>
+          </div>
+        </div>
+
+        <!-- ========== PAINEL ========== -->
+        <section class="view is-active" id="view-painel" aria-labelledby="pageTitle">
+          <div class="grid-kpi mb-4">
+            <article class="kpi">
+              <div class="kpi__top">
+                <span class="kpi__label">Colaboradores</span>
+                <span class="kpi__icon" style="background: rgba(255, 198, 26, 0.12); color: #ffc61a"><i class="bi bi-people" aria-hidden="true"></i></span>
+              </div>
+              <p class="kpi__value" id="kpiColab">0</p>
+              <div class="kpi__foot"><span class="trend trend--up"><i class="bi bi-arrow-up-short" aria-hidden="true"></i><span id="kpiColabTrend">0%</span></span><span>vs. trimestre anterior</span></div>
+            </article>
+
+            <article class="kpi">
+              <div class="kpi__top">
+                <span class="kpi__label">Processos ativos</span>
+                <span class="kpi__icon" style="background: rgba(96, 165, 250, 0.12); color: #60a5fa"><i class="bi bi-kanban" aria-hidden="true"></i></span>
+              </div>
+              <p class="kpi__value" id="kpiAtivos">0</p>
+              <div class="kpi__foot"><span class="trend trend--up"><i class="bi bi-arrow-up-short" aria-hidden="true"></i><span id="kpiAtivosTrend">0%</span></span><span>vs. mês anterior</span></div>
+            </article>
+
+            <article class="kpi">
+              <div class="kpi__top">
+                <span class="kpi__label">Concluídos no período</span>
+                <span class="kpi__icon" style="background: rgba(52, 211, 153, 0.12); color: #34d399"><i class="bi bi-check2-circle" aria-hidden="true"></i></span>
+              </div>
+              <p class="kpi__value" id="kpiConcluidos">0</p>
+              <div class="kpi__foot"><span class="trend trend--up"><i class="bi bi-arrow-up-short" aria-hidden="true"></i><span id="kpiConcluidosTrend">0%</span></span><span>vs. período anterior</span></div>
+            </article>
+
+            <article class="kpi">
+              <div class="kpi__top">
+                <span class="kpi__label">SLA médio</span>
+                <span class="kpi__icon" style="background: rgba(167, 139, 250, 0.12); color: #a78bfa"><i class="bi bi-stopwatch" aria-hidden="true"></i></span>
+              </div>
+              <p class="kpi__value" id="kpiSla">0 h</p>
+              <div class="kpi__foot"><span class="trend trend--down"><i class="bi bi-arrow-down-short" aria-hidden="true"></i><span id="kpiSlaTrend">0%</span></span><span>meta de 24 h</span></div>
+            </article>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-xl-7">
+              <div class="card h-100">
+                <div class="card__head">
+                  <div>
+                    <h2>Carga de trabalho por área</h2>
+                    <p id="periodoLabel">Últimos 30 dias</p>
+                  </div>
+                  <span class="badge badge--info">Tarefas abertas</span>
+                </div>
+                <div class="card__body"><div class="chart-box" id="boxCarga"><canvas id="chartCarga"></canvas></div></div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-5">
+              <div class="card h-100">
+                <div class="card__head">
+                  <div>
+                    <h2>Processos por departamento</h2>
+                    <p>Distribuição da carteira atual</p>
+                  </div>
+                </div>
+                <div class="card__body"><div class="chart-box chart-box--sm" id="boxDeptos"><canvas id="chartDeptos"></canvas></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-12 col-lg-7">
+              <div class="card h-100">
+                <div class="card__head">
+                  <div>
+                    <h2>Metas do trimestre</h2>
+                    <p>Acompanhamento por indicador</p>
+                  </div>
+                  <button class="btn btn--s" type="button" id="goCadastros"><i class="bi bi-people" aria-hidden="true"></i> Ver equipe</button>
+                </div>
+                <div class="card__body" id="metasBox"></div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-5">
+              <div class="card h-100">
+                <div class="card__head">
+                  <div>
+                    <h2>Próximas entregas</h2>
+                    <p>Processos com prazo mais próximo</p>
+                  </div>
+                </div>
+                <div class="card__body">
+                  <div class="feed" id="entregasBox"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== PROCESSOS ========== -->
+        <section class="view" id="view-processos" aria-labelledby="pageTitle">
+          <div class="filters">
+            <div class="field">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <label class="visually-hidden" for="fProcSearch">Buscar processo</label>
+              <input type="search" id="fProcSearch" placeholder="Buscar processo..." autocomplete="off" />
+            </div>
+            <div class="field">
+              <label class="visually-hidden" for="fProcResp">Filtrar por responsável</label>
+              <select id="fProcResp"><option value="">Todos os responsáveis</option></select>
+            </div>
+            <div class="field">
+              <label class="visually-hidden" for="fProcPrio">Filtrar por prioridade</label>
+              <select id="fProcPrio">
+                <option value="">Todas as prioridades</option>
+                <option value="Alta">Alta</option>
+                <option value="Média">Média</option>
+                <option value="Baixa">Baixa</option>
+              </select>
+            </div>
+            <button class="btn btn--s" type="button" id="clearProc"><i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Limpar</button>
+            <span class="count"><strong id="procCount">0</strong> de <span id="procTotal">0</span> processos</span>
+          </div>
+
+          <p class="hint mb-3">
+            <i class="bi bi-arrows-move" aria-hidden="true"></i>
+            Arraste os cartões entre as colunas ou use as setas de cada cartão. Os indicadores do painel são atualizados automaticamente.
+          </p>
+
+          <div class="board" id="board">
+            <section class="col" data-col="backlog" aria-label="Coluna Backlog">
+              <div class="col__head">
+                <strong><span class="col__dot" style="background: #6b7686"></span>Backlog</strong>
+                <span class="col__count" data-count="backlog">0</span>
+              </div>
+              <div class="col__list" data-list="backlog"></div>
+            </section>
+            <section class="col" data-col="andamento" aria-label="Coluna Em andamento">
+              <div class="col__head">
+                <strong><span class="col__dot" style="background: #60a5fa"></span>Em andamento</strong>
+                <span class="col__count" data-count="andamento">0</span>
+              </div>
+              <div class="col__list" data-list="andamento"></div>
+            </section>
+            <section class="col" data-col="revisao" aria-label="Coluna Em revisão">
+              <div class="col__head">
+                <strong><span class="col__dot" style="background: #a78bfa"></span>Em revisão</strong>
+                <span class="col__count" data-count="revisao">0</span>
+              </div>
+              <div class="col__list" data-list="revisao"></div>
+            </section>
+            <section class="col" data-col="concluido" aria-label="Coluna Concluído">
+              <div class="col__head">
+                <strong><span class="col__dot" style="background: #34d399"></span>Concluído</strong>
+                <span class="col__count" data-count="concluido">0</span>
+              </div>
+              <div class="col__list" data-list="concluido"></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ========== CADASTROS ========== -->
+        <section class="view" id="view-cadastros" aria-labelledby="pageTitle">
+          <div class="filters">
+            <div class="field">
+              <i class="bi bi-search" aria-hidden="true"></i>
+              <label class="visually-hidden" for="fColSearch">Buscar colaborador</label>
+              <input type="search" id="fColSearch" placeholder="Buscar por nome, e-mail ou cargo..." autocomplete="off" />
+            </div>
+            <div class="field">
+              <label class="visually-hidden" for="fColDepto">Filtrar por departamento</label>
+              <select id="fColDepto"><option value="">Todos os departamentos</option></select>
+            </div>
+            <div class="field">
+              <label class="visually-hidden" for="fColStatus">Filtrar por status</label>
+              <select id="fColStatus">
+                <option value="">Todos os status</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Férias">Férias</option>
+                <option value="Afastado">Afastado</option>
+                <option value="Inativo">Inativo</option>
+              </select>
+            </div>
+            <button class="btn btn--s" type="button" id="clearCol"><i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Limpar</button>
+            <button class="btn btn--p" type="button" id="newColabBtn" style="height: 40px"><i class="bi bi-person-plus" aria-hidden="true"></i> Novo colaborador</button>
+            <span class="count"><strong id="colCount">0</strong> registros</span>
+          </div>
+
+          <div class="card">
+            <div class="table-wrap">
+              <table class="tbl">
+                <caption class="visually-hidden">Lista de colaboradores cadastrados</caption>
+                <thead>
+                  <tr>
+                    <th class="sortable" data-key="nome" scope="col">Colaborador <i class="bi bi-arrow-down-up" aria-hidden="true"></i></th>
+                    <th class="sortable" data-key="depto" scope="col">Departamento <i class="bi bi-arrow-down-up" aria-hidden="true"></i></th>
+                    <th class="sortable" data-key="cargo" scope="col">Cargo <i class="bi bi-arrow-down-up" aria-hidden="true"></i></th>
+                    <th scope="col">Admissão</th>
+                    <th class="sortable" data-key="status" scope="col">Status <i class="bi bi-arrow-down-up" aria-hidden="true"></i></th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="colBody"></tbody>
+              </table>
+            </div>
+            <div id="colEmpty" hidden>
+              <p class="empty"><i class="bi bi-person-x" aria-hidden="true"></i>Nenhum colaborador encontrado com os filtros aplicados.</p>
+            </div>
+            <div class="tbl-foot">
+              <span id="colInfo">0 registros</span>
+              <div class="pages" id="colPages"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== DOCUMENTOS ========== -->
+        <section class="view" id="view-documentos" aria-labelledby="pageTitle">
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-lg-8">
+              <div class="filters mb-0">
+                <div class="field">
+                  <i class="bi bi-search" aria-hidden="true"></i>
+                  <label class="visually-hidden" for="fDocSearch">Buscar documento</label>
+                  <input type="search" id="fDocSearch" placeholder="Buscar documento..." autocomplete="off" />
+                </div>
+                <div class="field">
+                  <label class="visually-hidden" for="fDocTipo">Filtrar por tipo</label>
+                  <select id="fDocTipo">
+                    <option value="">Todos os tipos</option>
+                    <option value="Contrato">Contrato</option>
+                    <option value="Relatório">Relatório</option>
+                    <option value="Planilha">Planilha</option>
+                    <option value="Ata">Ata</option>
+                    <option value="Procedimento">Procedimento</option>
+                  </select>
+                </div>
+                <span class="count"><strong id="docCount">0</strong> documentos</span>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4">
+              <div class="card h-100">
+                <div class="card__body">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <strong style="font-size: 0.9rem">Armazenamento</strong>
+                    <span style="color: var(--muted); font-size: 0.84rem" id="storageLabel">0 GB de 50 GB</span>
+                  </div>
+                  <div class="prog" style="margin-top: 0">
+                    <div class="prog__bar"><i id="storageBar" style="width: 0%"></i></div>
+                  </div>
+                  <p class="hint" id="storageHint">Documentos, anexos e backups compartilhados.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="table-wrap">
+              <table class="tbl">
+                <caption class="visually-hidden">Documentos da plataforma</caption>
+                <thead>
+                  <tr>
+                    <th>Documento</th>
+                    <th>Tipo</th>
+                    <th>Área</th>
+                    <th>Versão</th>
+                    <th>Atualizado</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="docBody"></tbody>
+              </table>
+            </div>
+            <div id="docEmpty" hidden>
+              <p class="empty"><i class="bi bi-folder-x" aria-hidden="true"></i>Nenhum documento encontrado com os filtros aplicados.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========== RELATÓRIOS ========== -->
+        <section class="view" id="view-relatorios" aria-labelledby="pageTitle">
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-xl-5">
+              <div class="card h-100">
+                <div class="card__head">
+                  <div>
+                    <h2>Processos concluídos por mês</h2>
+                    <p>Volume de entregas nos últimos 12 meses</p>
+                  </div>
+                </div>
+                <div class="card__body"><div class="chart-box chart-box--sm" id="boxMes"><canvas id="chartMes"></canvas></div></div>
+              </div>
+            </div>
+            <div class="col-12 col-xl-7">
+              <div class="card h-100">
+                <div class="card__head">
+                  <div>
+                    <h2>Qualidade por área</h2>
+                    <p>Índice de conformidade dos processos revisados</p>
+                  </div>
+                </div>
+                <div class="card__body" id="qualidadeBox"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3" id="reportsBox"></div>
+        </section>
+
+        <!-- ========== CONFIGURAÇÕES ========== -->
+        <section class="view" id="view-configuracoes" aria-labelledby="pageTitle">
+          <form class="card" id="cfgForm" novalidate>
+            <div class="card__head">
+              <div>
+                <h2>Preferências da plataforma</h2>
+                <p>Configurações aplicáveis a toda a organização (demonstração)</p>
+              </div>
+            </div>
+            <div class="card__body">
+              <div class="form-row mb-4">
+                <div class="form-field">
+                  <label for="cfgEmpresa">Nome da empresa</label>
+                  <input type="text" id="cfgEmpresa" value="Cobalto Tecnologia" />
+                </div>
+                <div class="form-field">
+                  <label for="cfgRazao">Razão social</label>
+                  <input type="text" id="cfgRazao" value="Cobalto Tecnologia Ltda." />
+                </div>
+                <div class="form-field">
+                  <label for="cfgAno">Exercício fiscal</label>
+                  <select id="cfgAno">
+                    <option>2026</option>
+                    <option>2025</option>
+                    <option>2024</option>
+                  </select>
+                </div>
+                <div class="form-field">
+                  <label for="cfgFuso">Fuso horário</label>
+                  <select id="cfgFuso">
+                    <option value="America/Sao_Paulo">Brasília (GMT-3)</option>
+                    <option value="America/Manaus">Manaus (GMT-4)</option>
+                    <option value="America/Rio_Branco">Rio Branco (GMT-5)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-field mb-4">
+                <label for="cfgSla">Prazo padrão de atendimento: <strong id="cfgSlaOut">24 h</strong></label>
+                <input type="range" id="cfgSla" min="4" max="72" step="4" value="24" />
+                <p class="hint">Processos que ultrapassarem esse prazo entram na lista de atrasados do painel.</p>
+              </div>
+
+              <div class="switch-row">
+                <div>
+                  <strong>Aprovações em duas etapas</strong>
+                  <small>Exige validação de um segundo gestor antes de concluir processos críticos.</small>
+                </div>
+                <span class="switch"><input type="checkbox" id="cfgAprov" checked /><i aria-hidden="true"></i><span class="visually-hidden">Aprovações em duas etapas</span></span>
+              </div>
+              <div class="switch-row">
+                <div>
+                  <strong>Notificações por e-mail</strong>
+                  <small>Envia um resumo diário com processos atrasados e novas solicitações.</small>
+                </div>
+                <span class="switch"><input type="checkbox" id="cfgEmail" checked /><i aria-hidden="true"></i><span class="visually-hidden">Notificações por e-mail</span></span>
+              </div>
+              <div class="switch-row">
+                <div>
+                  <strong>Alertas no painel</strong>
+                  <small>Destaca prazos próximos e desviamentos de orçamento.</small>
+                </div>
+                <span class="switch"><input type="checkbox" id="cfgAlerta" checked /><i aria-hidden="true"></i><span class="visually-hidden">Alertas no painel</span></span>
+              </div>
+              <div class="switch-row">
+                <div>
+                  <strong>Modo sigiloso</strong>
+                  <small>Oculta valores financeiros para usuários sem permissão administrativa.</small>
+                </div>
+                <span class="switch"><input type="checkbox" id="cfgSigilo" /><i aria-hidden="true"></i><span class="visually-hidden">Modo sigiloso</span></span>
+              </div>
+            </div>
+            <div class="card__head" style="border-top: 1px solid var(--border); border-bottom: 0">
+              <p class="hint mb-0">As alterações valem apenas para esta demonstração e não são gravadas em um servidor.</p>
+              <div class="d-flex gap-2">
+                <button class="btn btn--g" type="button" id="cfgReset">Restaurar padrões</button>
+                <button class="btn btn--p" type="submit" id="cfgSave"><i class="bi bi-check2" aria-hidden="true"></i> Salvar preferências</button>
+              </div>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <!-- Modal: nova tarefa -->
+    <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content nm">
+          <form id="taskForm" novalidate>
+            <div class="modal-header nm">
+              <h2 class="modal-title" id="taskModalTitle">Nova tarefa</h2>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body nm">
+              <div class="form-field mb-3" id="tfTitulo">
+                <label for="tTitulo">Título do processo</label>
+                <input type="text" id="tTitulo" placeholder="Ex.: Revisão de contrato de fornecedor" />
+                <p class="err">Informe um título com pelo menos 4 caracteres.</p>
+              </div>
+              <div class="form-row mb-3">
+                <div class="form-field" id="tfResp">
+                  <label for="tResp">Responsável</label>
+                  <select id="tResp"></select>
+                  <p class="err">Selecione um responsável.</p>
+                </div>
+                <div class="form-field" id="tfArea">
+                  <label for="tArea">Área</label>
+                  <select id="tArea"></select>
+                  <p class="err">Selecione uma área.</p>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-field" id="tfPrio">
+                  <label for="tPrio">Prioridade</label>
+                  <select id="tPrio">
+                    <option value="Alta">Alta</option>
+                    <option value="Média" selected>Média</option>
+                    <option value="Baixa">Baixa</option>
+                  </select>
+                  <p class="err">Selecione uma prioridade.</p>
+                </div>
+                <div class="form-field" id="tfPrazo">
+                  <label for="tPrazo">Prazo</label>
+                  <input type="date" id="tPrazo" />
+                  <p class="err">Escolha um prazo válido.</p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer nm">
+              <button type="button" class="btn btn--g" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn--p" id="taskSubmit"><i class="bi bi-check2" aria-hidden="true"></i> Criar tarefa</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: cadastro de colaborador -->
+    <div class="modal fade" id="colabModal" tabindex="-1" aria-labelledby="colabModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content nm">
+          <form id="colabForm" novalidate>
+            <div class="modal-header nm">
+              <h2 class="modal-title" id="colabModalTitle">Novo colaborador</h2>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body nm">
+              <div class="form-row mb-3">
+                <div class="form-field" id="cfNome">
+                  <label for="cNome">Nome completo</label>
+                  <input type="text" id="cNome" placeholder="Ex.: Marina Lopes" autocomplete="off" />
+                  <p class="err">Informe o nome completo (mínimo 3 caracteres).</p>
+                </div>
+                <div class="form-field" id="cfEmail">
+                  <label for="cEmail">E-mail corporativo</label>
+                  <input type="email" id="cEmail" placeholder="nome@cobalto.com.br" autocomplete="off" />
+                  <p class="err">Informe um e-mail válido e ainda não cadastrado.</p>
+                </div>
+              </div>
+              <div class="form-row mb-3">
+                <div class="form-field" id="cfDepto">
+                  <label for="cDepto">Departamento</label>
+                  <select id="cDepto"></select>
+                  <p class="err">Selecione um departamento.</p>
+                </div>
+                <div class="form-field" id="cfCargo">
+                  <label for="cCargo">Cargo</label>
+                  <input type="text" id="cCargo" placeholder="Ex.: Analista de processos" autocomplete="off" />
+                  <p class="err">Informe o cargo.</p>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-field" id="cfStatus">
+                  <label for="cStatus">Status</label>
+                  <select id="cStatus">
+                    <option value="Ativo">Ativo</option>
+                    <option value="Férias">Férias</option>
+                    <option value="Afastado">Afastado</option>
+                    <option value="Inativo">Inativo</option>
+                  </select>
+                  <p class="err">Selecione um status.</p>
+                </div>
+                <div class="form-field" id="cfAdmissao">
+                  <label for="cAdmissao">Data de admissão</label>
+                  <input type="date" id="cAdmissao" />
+                  <p class="err">Escolha uma data válida.</p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer nm">
+              <button type="button" class="btn btn--g" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn--p" id="colabSubmit"><i class="bi bi-check2" aria-hidden="true"></i> Salvar colaborador</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: confirmar exclusão -->
+    <div class="modal fade" id="delModal" tabindex="-1" aria-labelledby="delModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content nm">
+          <div class="modal-header nm">
+            <h2 class="modal-title" id="delModalTitle">Excluir cadastro</h2>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body nm">
+            <p style="font-size: 0.92rem">Deseja remover <strong id="delName">este colaborador</strong> da lista de cadastros?</p>
+            <p class="hint">Esta ação afeta apenas a demonstração e não pode ser desfeita.</p>
+          </div>
+          <div class="modal-footer nm">
+            <button type="button" class="btn btn--g" data-bs-dismiss="modal">Manter</button>
+            <button type="button" class="btn btn--p" id="delConfirm"><i class="bi bi-trash3" aria-hidden="true"></i> Excluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toastBox" role="status" aria-live="polite">
+      <i class="bi bi-info-circle" aria-hidden="true"></i>
+      <span id="toastText"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        /* =======================================================
+           BASE DE DADOS FICTÍCIA
+           ======================================================= */
+        var AVATARS = [
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=90&q=70",
+          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=90&q=70",
+          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=90&q=70",
+          "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=90&q=70",
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=90&q=70",
+          "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=90&q=70"
+        ];
+
+        var DEPTOS = ["Operações", "Financeiro", "Comercial", "Tecnologia", "Pessoas"];
+        var STATUS_COLAB = ["Ativo", "Ativo", "Ativo", "Ativo", "Férias", "Afastado", "Inativo"];
+
+        var BASE = [
+          ["Ana Souza", "Analista de processos", "Operações"],
+          ["Bruno Lima", "Coordenador de operações", "Operações"],
+          ["Carla Alves", "Assistente administrativa", "Pessoas"],
+          ["Diego Rocha", "Contador pleno", "Financeiro"],
+          ["Elisa Ferreira", "Analista financeiro", "Financeiro"],
+          ["Felipe Barbosa", "Gerente comercial", "Comercial"],
+          ["Gabriela Cardoso", "SDR", "Comercial"],
+          ["Henrique Nogueira", "Analista de sistemas", "Tecnologia"],
+          ["Isabela Teixeira", "Desenvolvedora back-end", "Tecnologia"],
+          ["João Moreira", "DevOps", "Tecnologia"],
+          ["Karina Campos", "Especialista em RH", "Pessoas"],
+          ["Lucas Azevedo", "Estagiário de suporte", "Tecnologia"],
+          ["Mariana Dias", "Supervisora de qualidade", "Operações"],
+          ["Nuno Ramos", "Analista de dados", "Tecnologia"],
+          ["Olívia Mendes", "Assistente de controle", "Financeiro"],
+          ["Paulo Duarte", "Técnico de manutenção", "Operações"],
+          ["Renata Siqueira", "Gerente de projetos", "Operações"],
+          ["Sérgio Coelho", "Consultor comercial", "Comercial"],
+          ["Tatiane Prado", "Enfermeira ocupacional", "Pessoas"],
+          ["Vítor Hugo", "Administrador de dados", "Tecnologia"],
+          ["Yasmin Peixoto", "Assistente financeira", "Financeiro"],
+          ["Zeca Ribeiro", "Operador de Empilhadeira", "Operações"]
+        ];
+
+        function pad(n) { return n < 10 ? "0" + n : String(n); }
+        function dateStr(d) { return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear(); }
+        function toISO(d) { return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+        function slug(s) { return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, "."); }
+
+        function addDays(n) {
+          var d = new Date();
+          d.setDate(d.getDate() + n);
+          return d;
+        }
+
+        var COLAB = BASE.map(function (row, i) {
+          var adm = new Date();
+          adm.setMonth(adm.getMonth() - (6 + (i * 5) % 58));
+          adm.setDate(1 + (i * 7) % 27);
+          return {
+            id: i + 1,
+            nome: row[0],
+            cargo: row[1],
+            depto: row[2],
+            email: slug(row[0]) + "@cobalto.com.br",
+            avatar: AVATARS[i % AVATARS.length],
+            status: STATUS_COLAB[i % STATUS_COLAB.length],
+            admissao: dateStr(adm),
+            admissaoISO: toISO(adm)
+          };
+        });
+
+        var COLUNAS = [
+          { key: "backlog", label: "Backlog" },
+          { key: "andamento", label: "Em andamento" },
+          { key: "revisao", label: "Em revisão" },
+          { key: "concluido", label: "Concluído" }
+        ];
+
+        var TEMPLATE = [
+          ["Revisar política de trabalho remoto", "Pessoas", "Média", "backlog", 9],
+          ["Mapear processos de onboarding", "Operações", "Alta", "backlog", 16],
+          ["Avaliar novo fornecedor de TI", "Tecnologia", "Média", "backlog", 21],
+          ["Padronizar indicadores por área", "Operações", "Média", "backlog", 27],
+          ["Atualizar catálogo de serviços", "Comercial", "Baixa", "backlog", 33],
+          ["Migrar base de contratos", "Operações", "Alta", "andamento", -2],
+          ["Implantar controles de despesa", "Financeiro", "Alta", "andamento", 4],
+          ["Redesenhar fluxo de vendas", "Comercial", "Média", "andamento", 11],
+          ["Auditoria de acessos", "Tecnologia", "Alta", "andamento", 6],
+          ["Revisão contratual anual", "Financeiro", "Alta", "revisao", -5],
+          ["Validar relatório de produtividade", "Pessoas", "Média", "revisao", 2],
+          ["Homologar checklist de segurança", "Tecnologia", "Média", "revisao", 8],
+          ["Fechamento contábil do mês", "Financeiro", "Alta", "concluido", -12],
+          ["Treinamento de segurança da informação", "Pessoas", "Baixa", "concluido", -18],
+          ["Homologação do novo portal interno", "Tecnologia", "Média", "concluido", -25],
+          ["Renegociação de contratos de nuvem", "Tecnologia", "Alta", "concluido", -31]
+        ];
+
+        var TASKS = TEMPLATE.map(function (row, i) {
+          var resp = COLAB[(i * 3 + 1) % COLAB.length];
+          var prazo = addDays(row[4]);
+          return {
+            id: "PROC-" + (100 + i),
+            titulo: row[0],
+            area: row[1],
+            prio: row[2],
+            coluna: row[3],
+            resp: resp.nome,
+            respAvatar: resp.avatar,
+            prazo: prazo,
+            prazoISO: toISO(prazo),
+            prazoStr: dateStr(prazo)
+          };
+        });
+
+        var DOCS = [
+          ["Contrato de prestação de serviços", "Contrato", "Jurídico", "v3.2", "2026-09-12", 2.4, "Aprovado"],
+          ["Planilha de custos operacionais", "Planilha", "Financeiro", "v12", "2026-09-28", 1.1, "Em revisão"],
+          ["Ata da reunião de direção", "Ata", "Diretoria", "v1.0", "2026-09-25", 0.3, "Aprovado"],
+          ["Procedimento de abertura de chamado", "Procedimento", "Tecnologia", "v4.1", "2026-08-30", 0.8, "Aprovado"],
+          ["Relatório de produtividade mensal", "Relatório", "Pessoas", "v2.0", "2026-09-29", 3.7, "Em revisão"],
+          ["Contrato de aluguel de escritório", "Contrato", "Jurídico", "v2.0", "2026-07-14", 1.6, "Aprovado"],
+          ["Inventário de equipamentos", "Planilha", "Tecnologia", "v6.3", "2026-06-08", 4.2, "Vencido"],
+          ["Relatório de satisfação do cliente", "Relatório", "Comercial", "v1.4", "2026-09-20", 2.0, "Aprovado"],
+          ["Ata do comitê de segurança", "Ata", "Tecnologia", "v3.0", "2026-09-22", 0.5, "Aprovado"],
+          ["Contrato de fornecedor de software", "Contrato", "Tecnologia", "v5.1", "2026-05-19", 1.3, "Em revisão"],
+          ["Plano de metas do trimestre", "Planilha", "Diretoria", "v2.3", "2026-09-01", 0.9, "Aprovado"],
+          ["Procedimento de admissão de pessoal", "Procedimento", "Pessoas", "v3.2", "2026-08-11", 1.5, "Aprovado"],
+          ["Relatório de impacto de incidentes", "Relatório", "Tecnologia", "v1.1", "2026-09-27", 1.8, "Rascunho"],
+          ["Contrato de consultoria externa", "Contrato", "Comercial", "v1.0", "2026-04-30", 0.7, "Vencido"]
+        ].map(function (row) {
+          return {
+            nome: row[0], tipo: row[1], area: row[2], versao: row[3],
+            atualizado: row[4].split("-").reverse().join("/"),
+            tamanho: row[5], situacao: row[6],
+            icone: row[1] === "Contrato" ? "bi bi-file-earmark-text" : row[1] === "Planilha" ? "bi bi-file-earmark-spreadsheet" : row[1] === "Ata" ? "bi bi-file-earmark-richtext" : row[1] === "Relatório" ? "bi bi-file-earmark-bar-graph" : "bi bi-journal-text",
+            cor: row[1] === "Contrato" ? "rgba(255,198,26,0.14);color:#ffc61a" : row[1] === "Planilha" ? "rgba(52,211,153,0.14);color:#34d399" : row[1] === "Relatório" ? "rgba(96,165,250,0.14);color:#60a5fa" : row[1] === "Ata" ? "rgba(167,139,250,0.14);color:#a78bfa" : "rgba(248,113,113,0.14);color:#f87171"
+          };
+        });
+
+        var REPORTS = [
+          { icon: "bi bi-kanban", title: "Produtividade por área", desc: "Volume de processos concluídos e tempo médio de atendimento." },
+          { icon: "bi bi-people", title: "Quadro de equipe", desc: "Distribuição de colaboradores, cargos e status por departamento." },
+          { icon: "bi bi-clock-history", title: "Cumprimento de prazos", desc: "Processos dentro e fora do SLA configurado." },
+          { icon: "bi bi-journal-check", title: "Conformidade documental", desc: "Documentos aprovados, em revisão e vencidos." },
+          { icon: "bi bi-cash-coin", title: "Custo por processo", desc: "Custo médio de execução por tipo de atividade." },
+          { icon: "bi bi-graph-up-arrow", title: "Projeção de capacidade", desc: "Estimativa de absorção de equipe para o próximo trimestre." }
+        ];
+
+        var METAS = [
+          { name: "Processos concluídos no prazo", valor: 86, rotulo: "86% de 120" },
+          { name: "Admissões concluídas em 30 dias", valor: 71, rotulo: "71% de 14" },
+          { name: "Documentos dentro do prazo", valor: 94, rotulo: "94% de 48" },
+          { name: "Satisfação das áreas internas", valor: 82, rotulo: "82% de 4,6" }
+        ];
+
+        var QUALIDADE = [
+          { area: "Financeiro", valor: 96, cor: "#ffc61a" },
+          { area: "Operações", valor: 89, cor: "#60a5fa" },
+          { area: "Comercial", valor: 84, cor: "#34d399" },
+          { area: "Tecnologia", valor: 78, cor: "#a78bfa" },
+          { area: "Pessoas", valor: 91, cor: "#f87171" }
+        ];
+
+        var PERIODOS = {
+          7: { label: "Últimos 7 dias", fator: 0.35, colabT: 2.1, ativT: 5.4, concT: 8.7 },
+          30: { label: "Últimos 30 dias", fator: 1, colabT: 4.6, ativT: 12.3, concT: 18.9 },
+          90: { label: "Últimos 90 dias", fator: 2.1, colabT: 7.8, ativT: 21.5, concT: 27.4 }
+        };
+
+        var MESES = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+        var periodoAtual = 30;
+
+        /* =======================================================
+           UTILITÁRIOS
+           ======================================================= */
+        var toastBox = document.getElementById("toastBox");
+        var toastText = document.getElementById("toastText");
+        var toastTimer = null;
+
+        function showToast(message, icon) {
+          toastText.textContent = message;
+          var i = toastBox.querySelector("i");
+          if (i && icon) { i.className = "bi " + icon; }
+          toastBox.classList.add("is-on");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { toastBox.classList.remove("is-on"); }, 3400);
+        }
+
+        function statusBadge(status) {
+          var map = { "Ativo": "badge--ok", "Férias": "badge--warn", "Afastado": "badge--info", "Inativo": "badge--off" };
+          return '<span class="badge ' + (map[status] || "badge--info") + '">' + status + "</span>";
+        }
+
+        function docBadge(sit) {
+          var map = { "Aprovado": "badge--ok", "Em revisão": "badge--warn", "Vencido": "badge--off", "Rascunho": "badge--info" };
+          return '<span class="badge ' + (map[sit] || "badge--info") + '">' + sit + "</span>";
+        }
+
+        function prioClass(p) {
+          return p === "Alta" ? "prio--alta" : p === "Média" ? "prio--media" : "prio--baixa";
+        }
+
+        function isLate(task) {
+          return task.coluna !== "concluido" && task.prazo.getTime() < Date.now();
+        }
+
+        function escapeHtml(text) {
+          return String(text).replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+          });
+        }
+
+        /* =======================================================
+           NAVEGAÇÃO ENTRE SEÇÕES
+           ======================================================= */
+        var TITULOS = {
+          painel: ["Painel", "Visão consolidada da operação"],
+          processos: ["Processos", "Quadro kanban de acompanhamento da carteira"],
+          cadastros: ["Cadastros", "Base de colaboradores da organização"],
+          documentos: ["Documentos", "Arquivo central de arquivos e contratos"],
+          relatorios: ["Relatórios", "Análises geradas a partir dos dados da plataforma"],
+          configuracoes: ["Configurações", "Preferências e regras de operação"]
+        };
+
+        var sidebar = document.getElementById("sidebar");
+        var backdrop = document.getElementById("backdrop");
+        var burger = document.getElementById("burger");
+        var navItems = document.querySelectorAll(".nav-item");
+        var views = document.querySelectorAll(".view");
+
+        function openSidebar() {
+          sidebar.classList.add("is-open");
+          backdrop.classList.add("is-on");
+          backdrop.hidden = false;
+          burger.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeSidebar() {
+          sidebar.classList.remove("is-open");
+          backdrop.classList.remove("is-on");
+          backdrop.hidden = true;
+          burger.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+        }
+
+        burger.addEventListener("click", function () {
+          if (sidebar.classList.contains("is-open")) { closeSidebar(); } else { openSidebar(); }
+        });
+        backdrop.addEventListener("click", closeSidebar);
+        document.getElementById("closeSidebar").addEventListener("click", closeSidebar);
+
+        function goTo(name) {
+          var meta = TITULOS[name];
+          if (!meta) { return; }
+          navItems.forEach(function (item) { item.classList.toggle("is-active", item.getAttribute("data-view") === name); });
+          views.forEach(function (view) { view.classList.toggle("is-active", view.id === "view-" + name); });
+          document.getElementById("pageTitle").textContent = meta[0];
+          document.getElementById("pageSub").textContent = meta[1];
+          if (history.replaceState) { history.replaceState(null, "", "#" + name); }
+          if (window.innerWidth <= 1024) { closeSidebar(); }
+          resizeCharts();
+        }
+
+        navItems.forEach(function (item) {
+          item.addEventListener("click", function () { goTo(item.getAttribute("data-view")); });
+        });
+
+        document.querySelectorAll("[data-jump]").forEach(function (link) {
+          link.addEventListener("click", function () { goTo(link.getAttribute("data-jump")); });
+        });
+
+        /* =======================================================
+           INDICADORES E GRÁFICOS DO PAINEL
+           ======================================================= */
+        var charts = {};
+
+        var CHART_FONT = { family: "Inter, system-ui, sans-serif", size: 11, color: "#9aa4b2" };
+        var GRID = "rgba(255,255,255,0.06)";
+        var ACCENT = "#ffc61a";
+
+        function contarAtivos() {
+          return TASKS.filter(function (t) { return t.coluna !== "concluido"; }).length;
+        }
+
+        function contarConcluidos() {
+          return TASKS.filter(function (t) { return t.coluna === "concluido"; }).length;
+        }
+
+        function contarAtivosEquipe() {
+          return COLAB.filter(function (c) { return c.status !== "Inativo"; }).length;
+        }
+
+        function renderKPIs() {
+          var p = PERIODOS[periodoAtual];
+          var ativos = contarAtivos();
+          var concluidos = contarConcluidos();
+          var sla = Math.max(6, 34 - concluidos * 2.2);
+
+          document.getElementById("kpiColab").textContent = contarAtivosEquipe();
+          document.getElementById("kpiColabTrend").textContent = p.colabT.toFixed(1) + "%";
+          document.getElementById("kpiAtivos").textContent = ativos;
+          document.getElementById("kpiAtivosTrend").textContent = p.ativT.toFixed(1) + "%";
+          document.getElementById("kpiConcluidos").textContent = concluidos;
+          document.getElementById("kpiConcluidosTrend").textContent = p.concT.toFixed(1) + "%";
+          document.getElementById("kpiSla").textContent = sla.toFixed(1).replace(".", ",") + " h";
+          document.getElementById("kpiSlaTrend").textContent = (5 + concluidos * 0.6).toFixed(1) + "%";
+          document.getElementById("periodoLabel").textContent = p.label;
+          document.getElementById("tagProcessos").textContent = TASKS.length;
+          document.getElementById("tagCadastros").textContent = COLAB.length;
+          document.getElementById("tagDocs").textContent = DOCS.length;
+        }
+
+        function cargaPorArea() {
+          var p = PERIODOS[periodoAtual].fator;
+          return DEPTOS.map(function (area) {
+            var base = TASKS.filter(function (t) { return t.area === area && t.coluna !== "concluido"; }).length;
+            return Math.max(1, Math.round(base * p * 1.6));
+          });
+        }
+
+        function processosPorDepto() {
+          return DEPTOS.map(function (area) {
+            return TASKS.filter(function (t) { return t.area === area; }).length;
+          });
+        }
+
+        function initCharts() {
+          if (!window.Chart) { return; }
+
+          charts.carga = new Chart(document.getElementById("chartCarga"), {
+            type: "bar",
+            data: {
+              labels: DEPTOS,
+              datasets: [
+                { label: "Em aberto", data: cargaPorArea(), backgroundColor: ACCENT, borderRadius: 6, maxBarThickness: 34 },
+                { label: "Concluídos", data: [3, 5, 2, 6, 4], backgroundColor: "rgba(255,255,255,0.12)", borderRadius: 6, maxBarThickness: 34 }
+              ]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: "top", align: "end", labels: { usePointStyle: true, pointStyle: "circle", boxWidth: 8, font: CHART_FONT } },
+                tooltip: {
+                  backgroundColor: "#182032", borderColor: "rgba(255,255,255,0.14)", borderWidth: 1, padding: 12,
+                  callbacks: { label: function (c) { return c.dataset.label + ": " + c.parsed.y + " processo(s)"; } }
+                }
+              },
+              scales: {
+                x: { grid: { display: false }, ticks: CHART_FONT },
+                y: { grid: { color: GRID }, ticks: CHART_FONT, border: { display: false }, beginAtZero: true }
+              }
+            }
+          });
+
+          charts.deptos = new Chart(document.getElementById("chartDeptos"), {
+            type: "doughnut",
+            data: {
+              labels: DEPTOS,
+              datasets: [{
+                data: processosPorDepto(),
+                backgroundColor: [ACCENT, "#60a5fa", "#34d399", "#a78bfa", "#f87171"],
+                borderWidth: 0,
+                hoverOffset: 8
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              cutout: "62%",
+              plugins: {
+                legend: { position: "bottom", labels: { usePointStyle: true, pointStyle: "circle", boxWidth: 8, padding: 14, font: CHART_FONT } },
+                tooltip: {
+                  backgroundColor: "#182032", borderColor: "rgba(255,255,255,0.14)", borderWidth: 1, padding: 12,
+                  callbacks: { label: function (c) { return c.label + ": " + c.parsed + " processo(s)"; } }
+                }
+              }
+            }
+          });
+
+          charts.mes = new Chart(document.getElementById("chartMes"), {
+            type: "line",
+            data: {
+              labels: MESES,
+              datasets: [{
+                label: "Concluídos",
+                data: [6, 8, 7, 11, 9, 12, 10, 14, 12, 15, 13, 16],
+                borderColor: ACCENT,
+                backgroundColor: "rgba(255,198,26,0.16)",
+                borderWidth: 2,
+                fill: true,
+                tension: 0.35,
+                pointRadius: 0,
+                pointHoverRadius: 4
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  backgroundColor: "#182032", borderColor: "rgba(255,255,255,0.14)", borderWidth: 1, padding: 12,
+                  callbacks: { label: function (c) { return c.parsed.y + " processo(s)"; } }
+                }
+              },
+              scales: {
+                x: { grid: { display: false }, ticks: CHART_FONT },
+                y: { grid: { color: GRID }, ticks: CHART_FONT, border: { display: false }, beginAtZero: true }
+              }
+            }
+          });
+        }
+
+        function renderCharts() {
+          if (!charts.carga) { return; }
+          charts.carga.data.datasets[0].data = cargaPorArea();
+          charts.carga.update();
+          charts.deptos.data.datasets[0].data = processosPorDepto();
+          charts.deptos.update();
+        }
+
+        function renderMetas() {
+          document.getElementById("metasBox").innerHTML = METAS.map(function (m) {
+            return '<div class="prog"><div class="prog__row"><strong>' + m.name + "</strong><span>" + m.rotulo + "</span></div>" +
+              '<div class="prog__bar"><i style="width:' + m.valor + '%"></i></div></div>';
+          }).join("");
+        }
+
+        function renderEntregas() {
+          var aberto = TASKS.filter(function (t) { return t.coluna !== "concluido"; })
+            .sort(function (a, b) { return a.prazo - b.prazo; })
+            .slice(0, 5);
+
+          document.getElementById("entregasBox").innerHTML = aberto.map(function (t) {
+            var late = isLate(t);
+            return "<div>" +
+              '<i class="bi bi-calendar-event" style="background:' + (late ? "rgba(248,113,113,0.14);color:#f87171" : "rgba(255,198,26,0.14);color:#ffc61a") + '"></i>' +
+              "<div><p>" + escapeHtml(t.titulo) + "</p><small>" +
+              '<span style="color:' + (late ? "#f87171" : "inherit") + '">' + t.prazoStr + "</span> · " +
+              escapeHtml(t.resp) + " · " + t.area + "</small></div></div>";
+          }).join("");
+        }
+
+        /* =======================================================
+           QUADRO KANBAN
+           ======================================================= */
+        var fProcSearch = document.getElementById("fProcSearch");
+        var fProcResp = document.getElementById("fProcResp");
+        var fProcPrio = document.getElementById("fProcPrio");
+        var draggingId = null;
+
+        function tarefasFiltradas() {
+          var term = (fProcSearch.value || "").trim().toLowerCase();
+          var resp = fProcResp.value;
+          var prio = fProcPrio.value;
+          return TASKS.filter(function (t) {
+            var okTerm = !term || t.titulo.toLowerCase().indexOf(term) > -1 || t.id.toLowerCase().indexOf(term) > -1 || t.resp.toLowerCase().indexOf(term) > -1;
+            var okResp = !resp || t.resp === resp;
+            var okPrio = !prio || t.prio === prio;
+            return okTerm && okResp && okPrio;
+          });
+        }
+
+        function cardHtml(task) {
+          var idx = COLUNAS.findIndex(function (c) { return c.key === task.coluna; });
+          var late = isLate(task);
+          return '<article class="task" draggable="true" data-task="' + task.id + '">' +
+            '<p class="task__title">' + escapeHtml(task.titulo) + "</p>" +
+            '<div class="task__meta">' +
+              '<span class="prio ' + prioClass(task.prio) + '">' + task.prio + "</span>" +
+              '<span class="due' + (late ? " is-late" : "") + '"><i class="bi bi-calendar3" aria-hidden="true"></i>' + task.prazoStr + "</span>" +
+            "</div>" +
+            '<div class="task__meta">' +
+              '<span class="task__who"><img src="' + task.respAvatar + '" alt="" width="22" height="22" loading="lazy" />' + escapeHtml(task.resp) + "</span>" +
+              '<span class="due">' + escapeHtml(task.area) + "</span>" +
+            "</div>" +
+            '<div class="task__move">' +
+              '<button type="button" data-move="-1" aria-label="Mover processo para a coluna anterior"' + (idx === 0 ? " disabled" : "") + '><i class="bi bi-arrow-left"></i></button>' +
+              '<button type="button" data-move="1" aria-label="Mover processo para a próxima coluna"' + (idx === COLUNAS.length - 1 ? " disabled" : "") + '><i class="bi bi-arrow-right"></i></button>' +
+            "</div>" +
+            "</article>";
+        }
+
+        function renderBoard() {
+          var lista = tarefasFiltradas();
+
+          COLUNAS.forEach(function (col) {
+            var box = document.querySelector('[data-list="' + col.key + '"]');
+            var itens = lista.filter(function (t) { return t.coluna === col.key; });
+            box.innerHTML = itens.length
+              ? itens.map(cardHtml).join("")
+              : '<p class="col__empty">Nenhum processo nesta coluna.</p>';
+            var counter = document.querySelector('[data-count="' + col.key + '"]');
+            if (counter) { counter.textContent = itens.length; }
+          });
+
+          document.getElementById("procCount").textContent = lista.length;
+          document.getElementById("procTotal").textContent = TASKS.length;
+          bindBoard();
+        }
+
+        function findTask(id) {
+          for (var i = 0; i < TASKS.length; i++) { if (TASKS[i].id === id) { return TASKS[i]; } }
+          return null;
+        }
+
+        function mover(id, destino) {
+          var task = findTask(id);
+          if (!task || task.coluna === destino) { return; }
+          task.coluna = destino;
+          renderBoard();
+          renderKPIs();
+          renderCharts();
+          renderEntregas();
+          var label = COLUNAS.filter(function (c) { return c.key === destino; })[0].label;
+          showToast(
+            task.titulo + " movido para “" + label + "”.",
+            destino === "concluido" ? "bi-check2-circle" : "bi-arrow-left-right"
+          );
+        }
+
+        function bindBoard() {
+          document.querySelectorAll(".task").forEach(function (card) {
+            card.addEventListener("dragstart", function () {
+              draggingId = card.getAttribute("data-task");
+              card.classList.add("is-drag");
+            });
+            card.addEventListener("dragend", function () {
+              card.classList.remove("is-drag");
+              draggingId = null;
+              document.querySelectorAll(".col").forEach(function (c) { c.classList.remove("is-over"); });
+            });
+            card.querySelectorAll("[data-move]").forEach(function (btn) {
+              btn.addEventListener("click", function () {
+                var passo = parseInt(btn.getAttribute("data-move"), 10);
+                var task = findTask(card.getAttribute("data-task"));
+                var idx = COLUNAS.findIndex(function (c) { return c.key === task.coluna; });
+                var alvo = COLUNAS[idx + passo];
+                if (alvo) { mover(task.id, alvo.key); }
+              });
+            });
+          });
+
+          document.querySelectorAll(".col").forEach(function (col) {
+            col.addEventListener("dragover", function (event) {
+              event.preventDefault();
+              col.classList.add("is-over");
+            });
+            col.addEventListener("dragleave", function () { col.classList.remove("is-over"); });
+            col.addEventListener("drop", function (event) {
+              event.preventDefault();
+              col.classList.remove("is-over");
+              if (draggingId) { mover(draggingId, col.getAttribute("data-col")); }
+            });
+          });
+        }
+
+        /* =======================================================
+           CADASTRO DE COLABORADORES (CRUD)
+           ======================================================= */
+        var colState = { page: 1, perPage: 8, key: "nome", dir: "asc" };
+        var fColSearch = document.getElementById("fColSearch");
+        var fColDepto = document.getElementById("fColDepto");
+        var fColStatus = document.getElementById("fColStatus");
+        var colBody = document.getElementById("colBody");
+        var colPages = document.getElementById("colPages");
+        var editingId = null;
+        var deletingId = null;
+
+        var colabModal = new bootstrap.Modal(document.getElementById("colabModal"));
+        var delModal = new bootstrap.Modal(document.getElementById("delModal"));
+        var taskModal = new bootstrap.Modal(document.getElementById("taskModal"));
+
+        function colabFiltrados() {
+          var term = (fColSearch.value || "").trim().toLowerCase();
+          var depto = fColDepto.value;
+          var status = fColStatus.value;
+          var rows = COLAB.filter(function (c) {
+            var okTerm = !term || c.nome.toLowerCase().indexOf(term) > -1 || c.email.toLowerCase().indexOf(term) > -1 || c.cargo.toLowerCase().indexOf(term) > -1;
+            var okDepto = !depto || c.depto === depto;
+            var okStatus = !status || c.status === status;
+            return okTerm && okDepto && okStatus;
+          });
+          var dir = colState.dir === "asc" ? 1 : -1;
+          return rows.sort(function (a, b) {
+            var x = a[colState.key], y = b[colState.key];
+            if (typeof x === "number") { return (x - y) * dir; }
+            return String(x).localeCompare(String(y), "pt-BR") * dir;
+          });
+        }
+
+        function renderColab() {
+          var rows = colabFiltrados();
+          var total = rows.length;
+          var maxPage = Math.max(1, Math.ceil(total / colState.perPage));
+          if (colState.page > maxPage) { colState.page = maxPage; }
+          var start = (colState.page - 1) * colState.perPage;
+          var page = rows.slice(start, start + colState.perPage);
+
+          colBody.innerHTML = page.map(function (c) {
+            return "<tr>" +
+              '<td><div class="who"><img src="' + c.avatar + '" alt="" width="32" height="32" loading="lazy" />' +
+              "<span><strong>" + escapeHtml(c.nome) + "</strong><small>" + escapeHtml(c.email) + "</small></span></div></td>" +
+              "<td>" + escapeHtml(c.depto) + "</td>" +
+              "<td>" + escapeHtml(c.cargo) + "</td>" +
+              "<td>" + c.admissao + "</td>" +
+              "<td>" + statusBadge(c.status) + "</td>" +
+              '<td><div class="row-act">' +
+                '<button class="act-btn" type="button" data-edit="' + c.id + '" aria-label="Editar ' + escapeHtml(c.nome) + '"><i class="bi bi-pencil"></i></button>' +
+                '<button class="act-btn act-btn--danger" type="button" data-del="' + c.id + '" aria-label="Excluir ' + escapeHtml(c.nome) + '"><i class="bi bi-trash3"></i></button>' +
+              "</div></td></tr>";
+          }).join("");
+
+          document.getElementById("colEmpty").hidden = total !== 0;
+          colBody.closest(".table-wrap").hidden = total === 0;
+          document.getElementById("colCount").textContent = total;
+          document.getElementById("colInfo").textContent = total
+            ? "Exibindo " + (start + 1) + "–" + Math.min(start + colState.perPage, total) + " de " + total + " registros"
+            : "0 registros";
+
+          var html = '<button type="button" data-page="prev" aria-label="Página anterior"' + (colState.page === 1 ? " disabled" : "") + '><i class="bi bi-chevron-left"></i></button>';
+          for (var p = 1; p <= maxPage; p++) {
+            html += '<button type="button" data-page="' + p + '"' + (p === colState.page ? ' class="is-on"' : "") + ">" + p + "</button>";
+          }
+          html += '<button type="button" data-page="next" aria-label="Próxima página"' + (colState.page === maxPage ? " disabled" : "") + '><i class="bi bi-chevron-right"></i></button>';
+          colPages.innerHTML = html;
+
+          colPages.querySelectorAll("button[data-page]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var v = btn.getAttribute("data-page");
+              if (v === "prev") { colState.page = Math.max(1, colState.page - 1); }
+              else if (v === "next") { colState.page = Math.min(maxPage, colState.page + 1); }
+              else { colState.page = parseInt(v, 10); }
+              renderColab();
+            });
+          });
+
+          colBody.querySelectorAll("[data-edit]").forEach(function (btn) {
+            btn.addEventListener("click", function () { abrirEdicao(parseInt(btn.getAttribute("data-edit"), 10)); });
+          });
+          colBody.querySelectorAll("[data-del]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              deletingId = parseInt(btn.getAttribute("data-del"), 10);
+              document.getElementById("delName").textContent = COLAB.filter(function (c) { return c.id === deletingId; })[0].nome;
+              delModal.show();
+            });
+          });
+        }
+
+        function setErro(campoId, ativo) {
+          document.getElementById(campoId).classList.toggle("has-error", ativo);
+          return !ativo;
+        }
+
+        function abrirEdicao(id) {
+          var c = COLAB.filter(function (item) { return item.id === id; })[0];
+          if (!c) { return; }
+          editingId = id;
+          document.getElementById("colabModalTitle").textContent = "Editar colaborador";
+          document.getElementById("colabSubmit").innerHTML = '<i class="bi bi-check2" aria-hidden="true"></i> Atualizar cadastro';
+          document.getElementById("cNome").value = c.nome;
+          document.getElementById("cEmail").value = c.email;
+          document.getElementById("cDepto").value = c.depto;
+          document.getElementById("cCargo").value = c.cargo;
+          document.getElementById("cStatus").value = c.status;
+          document.getElementById("cAdmissao").value = c.admissaoISO;
+          ["cfNome", "cfEmail", "cfDepto", "cfCargo", "cfStatus", "cfAdmissao"].forEach(function (id) {
+            document.getElementById(id).classList.remove("has-error");
+          });
+          colabModal.show();
+        }
+
+        function abrirNovo() {
+          editingId = null;
+          document.getElementById("colabForm").reset();
+          document.getElementById("colabModalTitle").textContent = "Novo colaborador";
+          document.getElementById("colabSubmit").innerHTML = '<i class="bi bi-check2" aria-hidden="true"></i> Salvar colaborador';
+          document.getElementById("cAdmissao").value = toISO(new Date());
+          ["cfNome", "cfEmail", "cfDepto", "cfCargo", "cfStatus", "cfAdmissao"].forEach(function (id) {
+            document.getElementById(id).classList.remove("has-error");
+          });
+          colabModal.show();
+        }
+
+        document.getElementById("colabForm").addEventListener("submit", function (event) {
+          event.preventDefault();
+          var nome = document.getElementById("cNome").value.trim();
+          var email = document.getElementById("cEmail").value.trim().toLowerCase();
+          var depto = document.getElementById("cDepto").value;
+          var cargo = document.getElementById("cCargo").value.trim();
+          var status = document.getElementById("cStatus").value;
+          var admissao = document.getElementById("cAdmissao").value;
+
+          var ok = true;
+          ok = setErro("cfNome", nome.length < 3) && ok;
+          var emailValido = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email);
+          var emailLivre = COLAB.every(function (c) { return c.email.toLowerCase() !== email || c.id === editingId; });
+          ok = setErro("cfEmail", !(emailValido && emailLivre)) && ok;
+          ok = setErro("cfDepto", !depto) && ok;
+          ok = setErro("cfCargo", cargo.length < 3) && ok;
+          ok = setErro("cfStatus", !status) && ok;
+          ok = setErro("cfAdmissao", !admissao) && ok;
+
+          if (!ok) {
+            showToast("Revise os campos destacados antes de salvar.", "bi-exclamation-triangle");
+            return;
+          }
+
+          var partes = admissao.split("-");
+          var dataBr = partes[2] + "/" + partes[1] + "/" + partes[0];
+
+          if (editingId) {
+            var alvo = COLAB.filter(function (c) { return c.id === editingId; })[0];
+            alvo.nome = nome;
+            alvo.email = email;
+            alvo.depto = depto;
+            alvo.cargo = cargo;
+            alvo.status = status;
+            alvo.admissaoISO = admissao;
+            alvo.admissao = dataBr;
+            showToast("Cadastro de " + nome + " atualizado.", "bi-check2-circle");
+          } else {
+            var novoId = COLAB.reduce(function (max, c) { return Math.max(max, c.id); }, 0) + 1;
+            COLAB.push({
+              id: novoId,
+              nome: nome,
+              cargo: cargo,
+              depto: depto,
+              email: email,
+              avatar: AVATARS[novoId % AVATARS.length],
+              status: status,
+              admissao: dataBr,
+              admissaoISO: admissao
+            });
+            colState.page = 1;
+            showToast(nome + " cadastrado com sucesso.", "bi-person-plus");
+          }
+
+          colabModal.hide();
+          renderColab();
+          renderKPIs();
+          renderEntregas();
+        });
+
+        document.getElementById("delConfirm").addEventListener("click", function () {
+          var alvo = COLAB.filter(function (c) { return c.id === deletingId; })[0];
+          if (!alvo) { return; }
+          COLAB = COLAB.filter(function (c) { return c.id !== deletingId; });
+          TASKS = TASKS.filter(function (t) { return t.resp !== alvo.nome; });
+          deletingId = null;
+          delModal.hide();
+          renderColab();
+          renderBoard();
+          renderKPIs();
+          renderEntregas();
+          showToast(alvo.nome + " removido do cadastro.", "bi-trash3");
+        });
+
+        document.querySelectorAll(".sortable").forEach(function (th) {
+          th.addEventListener("click", function () {
+            var key = th.getAttribute("data-key");
+            if (colState.key === key) {
+              colState.dir = colState.dir === "asc" ? "desc" : "asc";
+            } else {
+              colState.key = key;
+              colState.dir = "asc";
+            }
+            document.querySelectorAll(".sortable").forEach(function (o) {
+              o.classList.remove("is-sorted");
+              o.querySelector("i").className = "bi bi-arrow-down-up";
+            });
+            th.classList.add("is-sorted");
+            th.querySelector("i").className = colState.dir === "asc" ? "bi bi-arrow-up" : "bi bi-arrow-down";
+            colState.page = 1;
+            renderColab();
+          });
+        });
+
+        [fColSearch, fColDepto, fColStatus].forEach(function (el) {
+          el.addEventListener("input", function () { colState.page = 1; renderColab(); });
+          el.addEventListener("change", function () { colState.page = 1; renderColab(); });
+        });
+
+        document.getElementById("newColabBtn").addEventListener("click", function () { abrirNovo(); });
+
+        document.getElementById("clearCol").addEventListener("click", function () {
+          fColSearch.value = "";
+          fColDepto.value = "";
+          fColStatus.value = "";
+          colState.page = 1;
+          renderColab();
+          showToast("Filtros de colaboradores limpos.", "bi-arrow-counterclockwise");
+        });
+
+        /* =======================================================
+           DOCUMENTOS
+           ======================================================= */
+        var fDocSearch = document.getElementById("fDocSearch");
+        var fDocTipo = document.getElementById("fDocTipo");
+
+        function renderDocs() {
+          var term = (fDocSearch.value || "").trim().toLowerCase();
+          var tipo = fDocTipo.value;
+          var rows = DOCS.filter(function (d) {
+            var okTerm = !term || d.nome.toLowerCase().indexOf(term) > -1 || d.area.toLowerCase().indexOf(term) > -1;
+            return okTerm && (!tipo || d.tipo === tipo);
+          });
+
+          document.getElementById("docBody").innerHTML = rows.map(function (d, i) {
+            return "<tr>" +
+              '<td><div class="file"><i class="' + d.icone + '" style="background:' + d.cor + '"></i>' +
+              "<span><strong>" + escapeHtml(d.nome) + "</strong><small>" + d.tamanho.toFixed(1).replace(".", ",") + " MB</small></span></div></td>" +
+              "<td>" + d.tipo + "</td><td>" + escapeHtml(d.area) + "</td><td>" + d.versao + "</td>" +
+              "<td>" + d.atualizado + "</td><td>" + docBadge(d.situacao) + "</td>" +
+              '<td><div class="row-act">' +
+                '<button class="act-btn" type="button" data-doc-download="' + i + '" aria-label="Baixar ' + escapeHtml(d.nome) + '"><i class="bi bi-download"></i></button>' +
+                '<button class="act-btn" type="button" data-doc-share="' + i + '" aria-label="Compartilhar ' + escapeHtml(d.nome) + '"><i class="bi bi-share"></i></button>' +
+              "</div></td></tr>";
+          }).join("");
+
+          document.getElementById("docEmpty").hidden = rows.length !== 0;
+          document.getElementById("docBody").closest(".table-wrap").hidden = rows.length === 0;
+          document.getElementById("docCount").textContent = rows.length;
+
+          var usado = DOCS.reduce(function (total, d) { return total + d.tamanho; }, 0);
+          var pct = Math.min(100, (usado / 50) * 100);
+          document.getElementById("storageBar").style.width = pct.toFixed(1) + "%";
+          document.getElementById("storageLabel").textContent = usado.toFixed(1).replace(".", ",") + " GB de 50 GB";
+          document.getElementById("storageHint").textContent = pct > 80
+            ? "Atenção: armazenamento próximo do limite contratado."
+            : "Documentos, anexos e backups compartilhados.";
+
+          document.querySelectorAll("[data-doc-download]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var d = rows[parseInt(btn.getAttribute("data-doc-download"), 10)];
+              showToast("Download de “" + d.nome + "” iniciado (demonstração).", "bi-download");
+            });
+          });
+          document.querySelectorAll("[data-doc-share]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var d = rows[parseInt(btn.getAttribute("data-doc-share"), 10)];
+              showToast("Link seguro de “" + d.nome + "” copiado.", "bi-link-45deg");
+            });
+          });
+        }
+
+        [fDocSearch, fDocTipo].forEach(function (el) {
+          el.addEventListener("input", renderDocs);
+          el.addEventListener("change", renderDocs);
+        });
+
+        /* =======================================================
+           RELATÓRIOS
+           ======================================================= */
+        function renderReports() {
+          document.getElementById("reportsBox").innerHTML = REPORTS.map(function (r) {
+            return '<div class="col-12 col-md-6 col-xl-4"><div class="card h-100"><div class="card__body">' +
+              '<i class="' + r.icon + '" style="color: #ffc61a; font-size: 1.4rem"></i>' +
+              '<h3 style="margin: 14px 0 8px; font-size: 1rem">' + r.title + "</h3>" +
+              '<p style="color: var(--muted); font-size: 0.85rem">' + r.desc + "</p>" +
+              '<button class="btn btn--g mt-3 w-100" type="button" data-report="' + r.title + '">' +
+              '<i class="bi bi-download" aria-hidden="true"></i> Gerar relatório</button></div></div></div>';
+          }).join("");
+
+          document.getElementById("qualidadeBox").innerHTML = QUALIDADE.map(function (q) {
+            return '<div class="prog"><div class="prog__row"><strong>' + q.area + "</strong><span>" + q.valor + "%</span></div>" +
+              '<div class="prog__bar"><i style="width:' + q.valor + "%; background:" + q.cor + '"></i></div></div>';
+          }).join("");
+
+          document.querySelectorAll("[data-report]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var original = btn.innerHTML;
+              btn.disabled = true;
+              btn.innerHTML = '<i class="bi bi-arrow-repeat spin" aria-hidden="true"></i> Gerando...';
+              setTimeout(function () {
+                btn.disabled = false;
+                btn.classList.add("is-done");
+                btn.innerHTML = '<i class="bi bi-check2" aria-hidden="true"></i> Gerado';
+                showToast("Relatório “" + btn.getAttribute("data-report") + "” pronto para download.", "bi-file-earmark-check");
+                setTimeout(function () {
+                  btn.classList.remove("is-done");
+                  btn.innerHTML = original;
+                }, 3200);
+              }, 1100);
+            });
+          });
+        }
+
+        /* =======================================================
+           NOVA TAREFA, CONFIGURAÇÕES E EVENTOS GERAIS
+           ======================================================= */
+        document.getElementById("newTaskBtn").addEventListener("click", function () {
+          document.getElementById("taskForm").reset();
+          document.getElementById("tPrazo").value = toISO(addDays(14));
+          ["tfTitulo", "tfResp", "tfArea", "tfPrio", "tfPrazo"].forEach(function (id) {
+            document.getElementById(id).classList.remove("has-error");
+          });
+          taskModal.show();
+        });
+
+        document.getElementById("taskForm").addEventListener("submit", function (event) {
+          event.preventDefault();
+          var titulo = document.getElementById("tTitulo").value.trim();
+          var resp = document.getElementById("tResp").value;
+          var area = document.getElementById("tArea").value;
+          var prio = document.getElementById("tPrio").value;
+          var prazoISO = document.getElementById("tPrazo").value;
+
+          var ok = true;
+          ok = setErro("tfTitulo", titulo.length < 4) && ok;
+          ok = setErro("tfResp", !resp) && ok;
+          ok = setErro("tfArea", !area) && ok;
+          ok = setErro("tfPrio", !prio) && ok;
+          ok = setErro("tfPrazo", !prazoISO) && ok;
+
+          if (!ok) {
+            showToast("Preencha os campos obrigatórios da tarefa.", "bi-exclamation-triangle");
+            return;
+          }
+
+          var responsavel = COLAB.filter(function (c) { return c.nome === resp; })[0] || COLAB[0];
+          var partes = prazoISO.split("-");
+          var data = new Date(parseInt(partes[0], 10), parseInt(partes[1], 10) - 1, parseInt(partes[2], 10));
+          var novoId = "PROC-" + (100 + TASKS.length);
+
+          TASKS.push({
+            id: novoId,
+            titulo: titulo,
+            area: area,
+            prio: prio,
+            coluna: "backlog",
+            resp: responsavel.nome,
+            respAvatar: responsavel.avatar,
+            prazo: data,
+            prazoISO: prazoISO,
+            prazoStr: dateStr(data)
+          });
+
+          taskModal.hide();
+          renderBoard();
+          renderKPIs();
+          renderCharts();
+          renderEntregas();
+          goTo("processos");
+          showToast("Processo " + novoId + " criado no backlog.", "bi-plus-circle");
+        });
+
+        var cfgSla = document.getElementById("cfgSla");
+        cfgSla.addEventListener("input", function () {
+          document.getElementById("cfgSlaOut").textContent = cfgSla.value + " h";
+        });
+
+        document.getElementById("cfgForm").addEventListener("submit", function (event) {
+          event.preventDefault();
+          var btn = document.getElementById("cfgSave");
+          var original = btn.innerHTML;
+          btn.disabled = true;
+          btn.innerHTML = '<i class="bi bi-arrow-repeat spin" aria-hidden="true"></i> Salvando...';
+          setTimeout(function () {
+            btn.disabled = false;
+            btn.classList.add("is-done");
+            btn.innerHTML = '<i class="bi bi-check2" aria-hidden="true"></i> Salvo';
+            showToast("Preferências salvas nesta demonstração.", "bi-check2-circle");
+            setTimeout(function () {
+              btn.classList.remove("is-done");
+              btn.innerHTML = original;
+            }, 3000);
+          }, 800);
+        });
+
+        document.getElementById("cfgReset").addEventListener("click", function () {
+          document.getElementById("cfgEmpresa").value = "Cobalto Tecnologia";
+          document.getElementById("cfgRazao").value = "Cobalto Tecnologia Ltda.";
+          document.getElementById("cfgAno").value = "2026";
+          document.getElementById("cfgFuso").value = "America/Sao_Paulo";
+          cfgSla.value = 24;
+          document.getElementById("cfgSlaOut").textContent = "24 h";
+          document.getElementById("cfgAprov").checked = true;
+          document.getElementById("cfgEmail").checked = true;
+          document.getElementById("cfgAlerta").checked = true;
+          document.getElementById("cfgSigilo").checked = false;
+          showToast("Preferências restauradas para o padrão.", "bi-arrow-counterclockwise");
+        });
+
+        document.querySelectorAll("[data-period]").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            document.querySelectorAll("[data-period]").forEach(function (c) { c.classList.remove("is-on"); });
+            chip.classList.add("is-on");
+            periodoAtual = parseInt(chip.getAttribute("data-period"), 10);
+            renderKPIs();
+            renderCharts();
+            showToast("Período atualizado: " + PERIODOS[periodoAtual].label.toLowerCase() + ".", "bi-calendar3");
+          });
+        });
+
+        [fProcSearch, fProcResp, fProcPrio].forEach(function (el) {
+          el.addEventListener("input", renderBoard);
+          el.addEventListener("change", renderBoard);
+        });
+
+        document.getElementById("clearProc").addEventListener("click", function () {
+          fProcSearch.value = "";
+          fProcResp.value = "";
+          fProcPrio.value = "";
+          renderBoard();
+          showToast("Filtros de processos limpos.", "bi-arrow-counterclockwise");
+        });
+
+        document.getElementById("refreshBtn").addEventListener("click", function () {
+          var icon = this.querySelector("i");
+          icon.classList.add("spin");
+          renderKPIs();
+          renderCharts();
+          renderBoard();
+          renderEntregas();
+          setTimeout(function () { icon.classList.remove("spin"); }, 900);
+          showToast("Dados atualizados há instantes.", "bi-arrow-clockwise");
+        });
+
+        document.getElementById("exportBtn").addEventListener("click", function () {
+          var btn = this;
+          var original = btn.innerHTML;
+          btn.disabled = true;
+          btn.innerHTML = '<i class="bi bi-arrow-repeat spin" aria-hidden="true"></i> Gerando...';
+          setTimeout(function () {
+            btn.disabled = false;
+            btn.innerHTML = original;
+            showToast("Relatório consolidado exportado em CSV (demonstração).", "bi-file-earmark-spreadsheet");
+          }, 1000);
+        });
+
+        document.getElementById("markRead").addEventListener("click", function () {
+          var dot = document.querySelector("#notifBtn .dot");
+          if (dot) { dot.style.display = "none"; }
+          showToast("Todas as notificações foram marcadas como lidas.", "bi-check2-all");
+        });
+
+        document.getElementById("goCadastros").addEventListener("click", function () { goTo("cadastros"); });
+
+        var globalSearch = document.getElementById("globalSearch");
+        globalSearch.addEventListener("keydown", function (event) {
+          if (event.key !== "Enter") { return; }
+          var termo = (globalSearch.value || "").trim();
+          if (!termo) { return; }
+          fColSearch.value = termo;
+          colState.page = 1;
+          goTo("cadastros");
+          renderColab();
+          var achados = colabFiltrados().length;
+          showToast(
+            achados > 0 ? achados + " colaborador(es) encontrado(s) para “" + termo + "”." : "Nenhum colaborador encontrado para “" + termo + "”.",
+            achados > 0 ? "bi-search" : "bi-emoji-neutral"
+          );
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (!(event.ctrlKey || event.metaKey)) { return; }
+          var key = event.key.toLowerCase();
+          if (key === "k") { event.preventDefault(); globalSearch.focus(); }
+          if (key === "n") { event.preventDefault(); document.getElementById("newTaskBtn").click(); }
+        });
+
+        function resizeCharts() {
+          ["carga", "deptos", "mes"].forEach(function (key) {
+            var c = charts[key];
+            if (c && c.canvas && c.canvas.offsetParent !== null) { c.resize(); }
+          });
+        }
+
+        window.addEventListener("resize", resizeCharts);
+
+        /* =======================================================
+           INICIALIZAÇÃO
+           ======================================================= */
+        function preencherSelects() {
+          var resp = document.getElementById("tResp");
+          resp.innerHTML = COLAB.map(function (c) {
+            return '<option value="' + escapeHtml(c.nome) + '">' + escapeHtml(c.nome) + " — " + escapeHtml(c.depto) + "</option>";
+          }).join("");
+
+          var area = document.getElementById("tArea");
+          area.innerHTML = DEPTOS.map(function (d) { return '<option value="' + d + '">' + d + "</option>"; }).join("");
+
+          var respFilter = document.getElementById("fProcResp");
+          var nomes = TASKS.map(function (t) { return t.resp; }).filter(function (v, i, arr) { return arr.indexOf(v) === i; });
+          respFilter.innerHTML = '<option value="">Todos os responsáveis</option>' + nomes.map(function (n) {
+            return '<option value="' + escapeHtml(n) + '">' + escapeHtml(n) + "</option>";
+          }).join("");
+
+          var depto = document.getElementById("fColDepto");
+          depto.innerHTML = '<option value="">Todos os departamentos</option>' + DEPTOS.map(function (d) {
+            return '<option value="' + d + '">' + d + "</option>";
+          }).join("");
+
+          var colDepto = document.getElementById("cDepto");
+          colDepto.innerHTML = DEPTOS.map(function (d) { return '<option value="' + d + '">' + d + "</option>"; }).join("");
+        }
+
+        function iniciar() {
+          preencherSelects();
+          initCharts();
+          renderKPIs();
+          renderCharts();
+          renderMetas();
+          renderEntregas();
+          renderBoard();
+          renderColab();
+          renderDocs();
+          renderReports();
+
+          var hash = (location.hash || "").replace("#", "");
+          if (TITULOS[hash]) { goTo(hash); }
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", iniciar);
+        } else {
+          iniciar();
+        }
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3695 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO -->
+    <title>
+      Victor Eduardo | Desenvolvedor Full Stack | Sites e Soluções Web
+    </title>
+    <meta
+      name="description"
+      content="Desenvolvedor Full Stack especializado em sites profissionais, landing pages, sistemas web, integrações e soluções digitais sob medida."
+    />
+    <meta
+      name="keywords"
+      content="desenvolvedor full stack, criação de sites, landing page, sistema web, laravel, php, node.js, integrações, api, automação, freelancer, desenvolvimento web"
+    />
+    <meta name="author" content="Victor Eduardo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0B0F19" />
+    <link rel="canonical" href="https://SEU-DOMINIO.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Victor Eduardo" />
+    <meta
+      property="og:title"
+      content="Victor Eduardo | Desenvolvedor Full Stack | Sites e Soluções Web"
+    />
+    <meta
+      property="og:description"
+      content="Desenvolvedor Full Stack especializado em sites profissionais, landing pages, sistemas web, integrações e soluções digitais sob medida."
+    />
+    <meta property="og:url" content="https://SEU-DOMINIO.com/" />
+    <!-- Substitua a linha abaixo por uma imagem 1200x630 publicada junto ao site -->
+    <!-- <meta property="og:image" content="https://SEU-DOMINIO.com/og-image.png"> -->
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Victor Eduardo | Desenvolvedor Full Stack"
+    />
+    <meta
+      name="twitter:description"
+      content="Sites profissionais, landing pages e sistemas web sob medida."
+    />
+
+    <!-- Favicon SVG inline (data URI) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F19'/%3E%3Cpath d='M25 19L13 32l12 13M39 19l12 13-12 13' fill='none' stroke='%23FFC61A' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
+    />
+
+    <style>
+      /* ============================================================
+   1. VARIÁVEIS GLOBAIS
+   ============================================================ */
+      :root {
+        --bg: #0b0f19;
+        --bg-2: #111827;
+        --bg-3: #0e1424;
+        --text: #f9fafb;
+        --muted: #9ca3af;
+        --accent: #ffc61a;
+        --accent-soft: rgba(255, 198, 26, 0.1);
+        --accent-line: rgba(255, 198, 26, 0.32);
+        --border: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(255, 255, 255, 0.16);
+        --radius: 18px;
+        --radius-sm: 12px;
+        --container: 1200px;
+        --header-h: 74px;
+        --shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.85);
+        --font:
+          "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+          sans-serif;
+        --mono:
+          ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New",
+          monospace;
+      }
+
+      /* ============================================================
+   2. RESET E BASE
+   ============================================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        overflow-x: clip;
+      }
+      body {
+        margin: 0;
+        overflow-x: clip;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      body::before {
+        /* gradientes de fundo globais */
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            900px 520px at 12% -8%,
+            rgba(255, 198, 26, 0.07),
+            transparent 62%
+          ),
+          radial-gradient(
+            760px 520px at 96% 6%,
+            rgba(56, 189, 248, 0.06),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #0b0f19 0%, #0a0e17 100%);
+      }
+      img,
+      svg,
+      video {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        font-weight: 700;
+      }
+      p {
+        margin: 0;
+      }
+      strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+      ::selection {
+        background: var(--accent);
+        color: #0b0f19;
+      }
+
+      /* ============================================================
+   3. UTILITÁRIOS E LAYOUT
+   ============================================================ */
+      .container {
+        width: 100%;
+        max-width: var(--container);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .section {
+        position: relative;
+        padding: 104px 0;
+        scroll-margin-top: calc(var(--header-h) + 8px);
+      }
+      .section--alt {
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 0.55) 0%,
+          rgba(11, 15, 25, 0) 100%
+        );
+      }
+      .section-head {
+        max-width: 760px;
+        margin: 0 auto 56px;
+        text-align: center;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding: 6px 14px;
+        border: 1px solid var(--accent-line);
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .section-head h2 {
+        font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.6rem);
+      }
+      .section-head .lead {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+      .skip-link {
+        position: fixed;
+        left: 16px;
+        top: -70px;
+        z-index: 120;
+        padding: 10px 18px;
+        border-radius: 0 0 12px 12px;
+        background: var(--accent);
+        color: #0b0f19;
+        font-weight: 600;
+        transition: top 0.2s ease;
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+
+      /* Botões */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 50px;
+        padding: 14px 26px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        font-size: 0.97rem;
+        font-weight: 600;
+        text-align: center;
+        transition:
+          transform 0.22s ease,
+          box-shadow 0.22s ease,
+          background 0.22s ease,
+          border-color 0.22s ease,
+          color 0.22s ease;
+      }
+      .btn svg {
+        flex: none;
+      }
+      .btn--primary {
+        background: linear-gradient(180deg, #ffd766 0%, #ffc61a 100%);
+        color: #0b0f19;
+        box-shadow: 0 14px 30px -14px rgba(255, 198, 26, 0.6);
+      }
+      .btn--primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px -16px rgba(255, 198, 26, 0.75);
+      }
+      .btn--ghost {
+        border-color: var(--border-strong);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+      }
+      .btn--ghost:hover {
+        border-color: var(--accent-line);
+        background: var(--accent-soft);
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .btn--block {
+        width: 100%;
+      }
+      .btn[disabled],
+      .btn[aria-disabled="true"] {
+        cursor: not-allowed;
+        opacity: 0.62;
+        transform: none !important;
+      }
+
+      /* Selo de conteúdo demonstrativo */
+      .wip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 10px;
+        border: 1px solid var(--border-strong);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .wip--live {
+        border-color: var(--accent-line);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .wip--live::before {
+        background: var(--accent);
+        box-shadow: 0 0 0 3px rgba(255, 198, 26, 0.22);
+      }
+      .wip::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      /* ============================================================
+   4. ANIMAÇÕES DE ENTRADA
+   ============================================================ */
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+        transition-delay: var(--delay, 0ms);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+      /* ============================================================
+   5. HEADER
+   ============================================================ */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        height: var(--header-h);
+        border-bottom: 1px solid transparent;
+        transition:
+          background 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .site-header.is-scrolled {
+        border-bottom-color: var(--border);
+        background: rgba(11, 15, 25, 0.85);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 12px 30px -22px rgba(0, 0, 0, 0.9);
+      }
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        height: var(--header-h);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--accent-line);
+        border-radius: 12px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-family: var(--mono);
+        font-size: 15px;
+        font-weight: 700;
+      }
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.15;
+      }
+      .brand-text small {
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .brand-text span {
+        font-size: 1.02rem;
+      }
+
+      .site-nav ul {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .nav-link {
+        position: relative;
+        display: inline-block;
+        padding: 9px 14px;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.92rem;
+        font-weight: 500;
+        transition:
+          color 0.2s ease,
+          background 0.2s ease;
+      }
+      .nav-link:hover {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .nav-link.is-active {
+        color: var(--accent);
+      }
+      .nav-link.is-active::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 2px;
+        width: 16px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--accent);
+        transform: translateX(-50%);
+      }
+      .header-cta {
+        padding: 11px 20px;
+        min-height: 44px;
+        font-size: 0.9rem;
+      }
+
+      .nav-toggle {
+        display: none;
+        width: 46px;
+        height: 46px;
+        padding: 0;
+        border: 1px solid var(--border-strong);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .nav-toggle-box {
+        position: relative;
+        display: block;
+        width: 22px;
+        height: 14px;
+        margin: 0 auto;
+      }
+      .nav-toggle-box span {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--text);
+        transition:
+          transform 0.25s ease,
+          opacity 0.2s ease,
+          top 0.25s ease;
+      }
+      .nav-toggle-box span:nth-child(1) {
+        top: 0;
+      }
+      .nav-toggle-box span:nth-child(2) {
+        top: 6px;
+      }
+      .nav-toggle-box span:nth-child(3) {
+        top: 12px;
+      }
+      .nav-toggle[aria-expanded="true"] .nav-toggle-box span:nth-child(1) {
+        top: 6px;
+        transform: rotate(45deg);
+      }
+      .nav-toggle[aria-expanded="true"] .nav-toggle-box span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle[aria-expanded="true"] .nav-toggle-box span:nth-child(3) {
+        top: 6px;
+        transform: rotate(-45deg);
+      }
+      /* ============================================================
+   6. HERO
+   ============================================================ */
+      .hero {
+        position: relative;
+        padding: calc(var(--header-h) + 80px) 0 96px;
+        scroll-margin-top: var(--header-h);
+        overflow: hidden;
+      }
+      .hero::after {
+        /* grade técnica de fundo */
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+          );
+        background-size: 64px 64px;
+        mask-image: radial-gradient(
+          circle at 60% 35%,
+          #000 0%,
+          transparent 72%
+        );
+        -webkit-mask-image: radial-gradient(
+          circle at 60% 35%,
+          #000 0%,
+          transparent 72%
+        );
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .hero-copy {
+        max-width: 620px;
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 1.1rem + 3.4vw, 3.5rem);
+        letter-spacing: -0.03em;
+      }
+      .hero h1 .highlight {
+        background: linear-gradient(120deg, #ffc61a 0%, #ffe9a8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hero-sub {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: clamp(1rem, 0.96rem + 0.3vw, 1.12rem);
+        max-width: 560px;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+      .hero-authority {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        padding: 9px 16px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(17, 24, 39, 0.6);
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+      .hero-authority b {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .hero-authority .pulse {
+        position: relative;
+        width: 8px;
+        height: 8px;
+        flex: none;
+        border-radius: 50%;
+        background: #34d399;
+      }
+      .hero-authority .pulse::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1px solid rgba(52, 211, 153, 0.5);
+        animation: pulse 2.4s ease-out infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(0.6);
+          opacity: 0.9;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      /* Composição visual do hero (100% HTML/CSS) */
+      .hero-visual {
+        position: relative;
+        min-width: 0;
+        padding: 16px 0 16px 12px;
+      }
+      .hero-visual::before {
+        content: "";
+        position: absolute;
+        inset: 6% 0 4% 4%;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 55% 45%,
+          rgba(255, 198, 26, 0.2),
+          transparent 62%
+        );
+        filter: blur(28px);
+      }
+      .window {
+        position: relative;
+        border: 1px solid var(--border-strong);
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, #131b2c 0%, #0e1424 100%);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .window-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex: none;
+      }
+      .dot--red {
+        background: #ff5f57;
+      }
+      .dot--yellow {
+        background: #febc2e;
+      }
+      .dot--green {
+        background: #28c840;
+      }
+      .window-title {
+        margin-left: auto;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+      }
+      .code {
+        margin: 0;
+        padding: 20px 18px 24px;
+        overflow: hidden;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        line-height: 1.9;
+        color: #d5dbe6;
+        white-space: pre;
+      }
+      .code .ln {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .code .ind {
+        padding-left: 18px;
+      }
+      .c-tag {
+        color: #7dd3fc;
+      }
+      .c-attr {
+        color: #fde68a;
+      }
+      .c-str {
+        color: #fca5a5;
+      }
+      .c-fn {
+        color: #ffc61a;
+      }
+      .c-com {
+        color: #6b7280;
+      }
+      .c-key {
+        color: #c4b5fd;
+      }
+      .c-ok {
+        color: #34d399;
+      }
+
+      .float-card {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        border: 1px solid var(--border-strong);
+        border-radius: 14px;
+        background: rgba(17, 24, 39, 0.92);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 20px 40px -26px rgba(0, 0, 0, 0.95);
+        animation: float 6s ease-in-out infinite;
+      }
+      .float-card strong {
+        display: block;
+        font-size: 0.86rem;
+        line-height: 1.3;
+      }
+      .float-card small {
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+      .float-card--1 {
+        left: -6px;
+        bottom: 38px;
+      }
+      .float-card--2 {
+        right: -4px;
+        top: 34px;
+        animation-delay: -3s;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-9px);
+        }
+      }
+      .float-icon {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        flex: none;
+        border: 1px solid var(--accent-line);
+        border-radius: 10px;
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      /* ============================================================
+   7. SOBRE
+   ============================================================ */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 56px;
+        align-items: start;
+      }
+      .about-text p + p {
+        margin-top: 18px;
+      }
+      .about-text p {
+        color: var(--muted);
+      }
+      .about-text .section-head {
+        margin: 0 0 26px;
+        text-align: left;
+        max-width: none;
+      }
+      .about-list {
+        margin-top: 26px;
+        display: grid;
+        gap: 12px;
+      }
+      .about-list li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .about-list svg {
+        flex: none;
+        margin-top: 4px;
+        color: var(--accent);
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .stat {
+        padding: 22px 20px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 0.85) 0%,
+          rgba(11, 15, 25, 0.5) 100%
+        );
+        transition:
+          border-color 0.25s ease,
+          transform 0.25s ease,
+          background 0.25s ease;
+      }
+      .stat:hover {
+        border-color: var(--accent-line);
+        transform: translateY(-4px);
+      }
+      .stat strong {
+        display: block;
+        font-family: var(--mono);
+        font-size: 1.45rem;
+        color: var(--accent);
+        letter-spacing: -0.02em;
+      }
+      .stat span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.85rem;
+        line-height: 1.45;
+      }
+
+      /* ============================================================
+   8. SERVIÇOS
+   ============================================================ */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+        gap: 20px;
+      }
+      .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 26px 24px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 0.72) 0%,
+          rgba(11, 15, 25, 0.55) 100%
+        );
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .card::before {
+        /* brilho no topo ao passar o mouse */
+        content: "";
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        top: -1px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow);
+      }
+      .card:hover::before {
+        opacity: 1;
+      }
+      .card-icon {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border: 1px solid var(--accent-line);
+        border-radius: 14px;
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .card h3 {
+        font-size: 1.08rem;
+      }
+      .card p {
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+      .card-tag {
+        margin-top: auto;
+        padding-top: 6px;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      /* ============================================================
+   9. HABILIDADES
+   ============================================================ */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: 20px;
+      }
+      .skill-group {
+        padding: 26px 24px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 0.7) 0%,
+          rgba(11, 15, 25, 0.45) 100%
+        );
+        transition:
+          border-color 0.3s ease,
+          transform 0.3s ease;
+      }
+      .skill-group:hover {
+        border-color: var(--accent-line);
+        transform: translateY(-4px);
+      }
+      .skill-group header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .skill-group h3 {
+        font-size: 0.82rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .skill-group header svg {
+        color: var(--accent);
+        flex: none;
+      }
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .badge {
+        padding: 7px 13px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+        font-size: 0.83rem;
+        font-weight: 500;
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .badge:hover {
+        border-color: var(--accent-line);
+        background: var(--accent-soft);
+        color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .badge--mono {
+        font-family: var(--mono);
+        font-size: 0.79rem;
+      }
+      .skills-note {
+        margin-top: 26px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+      /* ============================================================
+   10. PORTFÓLIO
+   ============================================================ */
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 40px;
+      }
+      .filter-btn {
+        padding: 10px 20px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 600;
+        transition:
+          border-color 0.22s ease,
+          background 0.22s ease,
+          color 0.22s ease,
+          transform 0.22s ease;
+      }
+      .filter-btn:hover {
+        border-color: var(--border-strong);
+        color: var(--text);
+        transform: translateY(-2px);
+      }
+      .filter-btn[aria-pressed="true"] {
+        border-color: var(--accent-line);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+        gap: 20px;
+      }
+      .project {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 0.72) 0%,
+          rgba(11, 15, 25, 0.5) 100%
+        );
+        overflow: hidden;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease,
+          opacity 0.3s ease;
+      }
+      .project:hover {
+        transform: translateY(-6px);
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow);
+      }
+      .project.is-hidden {
+        display: none;
+      }
+      .project-preview {
+        position: relative;
+        height: 150px;
+        border-bottom: 1px solid var(--border);
+        background:
+          radial-gradient(
+            320px 140px at 78% 12%,
+            rgba(255, 198, 26, 0.16),
+            transparent 66%
+          ),
+          linear-gradient(160deg, #151e31 0%, #0d1322 100%);
+        overflow: hidden;
+      }
+      .project-preview::before {
+        /* barras de "interface" desenhadas em CSS */
+        content: "";
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 20px;
+        height: 10px;
+        border-radius: 4px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.22) 0 34%,
+          transparent 34% 100%
+        );
+      }
+      .project-preview::after {
+        content: "";
+        position: absolute;
+        left: 20px;
+        right: 56px;
+        bottom: 22px;
+        height: 54px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(255, 198, 26, 0.28) 0 28%,
+            transparent 28% 100%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.01)
+          );
+      }
+      .project-category {
+        position: absolute;
+        left: 18px;
+        top: 44px;
+        padding: 4px 11px;
+        border: 1px solid var(--accent-line);
+        border-radius: 999px;
+        background: rgba(11, 15, 25, 0.8);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        z-index: 1;
+      }
+      .project-body {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 22px 22px 24px;
+        flex: 1;
+      }
+      .project h3 {
+        font-size: 1.05rem;
+      }
+      .project p {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 2px;
+      }
+      .tech {
+        padding: 5px 11px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.74rem;
+      }
+      .project footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: auto;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+      }
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-size: 0.86rem;
+        font-weight: 600;
+      }
+      .project-link svg {
+        transition: transform 0.22s ease;
+      }
+      .project-link:hover svg {
+        transform: translateX(3px);
+      }
+      .projects-empty {
+        grid-column: 1 / -1;
+        padding: 40px 24px;
+        border: 1px dashed var(--border-strong);
+        border-radius: var(--radius);
+        text-align: center;
+        color: var(--muted);
+      }
+
+      /* ============================================================
+   11. DIFERENCIAIS
+   ============================================================ */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+        gap: 20px;
+      }
+      .feature {
+        display: flex;
+        gap: 16px;
+        padding: 24px 22px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: rgba(17, 24, 39, 0.5);
+        transition:
+          border-color 0.28s ease,
+          transform 0.28s ease,
+          background 0.28s ease;
+      }
+      .feature:hover {
+        border-color: var(--accent-line);
+        background: rgba(17, 24, 39, 0.8);
+        transform: translateY(-4px);
+      }
+      .feature-icon {
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        flex: none;
+        border: 1px solid var(--border-strong);
+        border-radius: 12px;
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .feature h3 {
+        font-size: 1rem;
+        margin-bottom: 6px;
+      }
+      .feature p {
+        color: var(--muted);
+        font-size: 0.89rem;
+      }
+      /* ============================================================
+   12. PROCESSO (TIMELINE)
+   ============================================================ */
+      .timeline {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 20px;
+        padding-top: 34px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 6%;
+        right: 6%;
+        top: 8px;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-line) 12%,
+          var(--accent-line) 88%,
+          transparent
+        );
+      }
+      .step {
+        position: relative;
+        padding-top: 26px;
+      }
+      .step::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: -34px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid var(--accent);
+        background: var(--bg);
+        box-shadow: 0 0 0 5px rgba(255, 198, 26, 0.1);
+      }
+      .step-num {
+        display: block;
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        color: var(--accent);
+        letter-spacing: 0.14em;
+      }
+      .step h3 {
+        margin-top: 10px;
+        font-size: 1rem;
+      }
+      .step p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.89rem;
+      }
+
+      /* ============================================================
+   13. CTA
+   ============================================================ */
+      .cta {
+        padding: 96px 0;
+      }
+      .cta-box {
+        position: relative;
+        padding: 64px 48px;
+        border: 1px solid var(--accent-line);
+        border-radius: 26px;
+        background:
+          radial-gradient(
+            600px 300px at 12% 0%,
+            rgba(255, 198, 26, 0.16),
+            transparent 62%
+          ),
+          linear-gradient(150deg, #141d30 0%, #0d1322 100%);
+        box-shadow: var(--shadow);
+        text-align: center;
+        overflow: hidden;
+      }
+      .cta-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(
+          circle at 50% 50%,
+          #000 0%,
+          transparent 70%
+        );
+        -webkit-mask-image: radial-gradient(
+          circle at 50% 50%,
+          #000 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .cta-box h2 {
+        position: relative;
+        font-size: clamp(1.6rem, 1.1rem + 2vw, 2.4rem);
+      }
+      .cta-box p {
+        position: relative;
+        margin: 18px auto 0;
+        max-width: 620px;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+      .cta-box .btn {
+        position: relative;
+        margin-top: 34px;
+      }
+
+      /* ============================================================
+   14. CONTATO
+   ============================================================ */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      .contact-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: rgba(17, 24, 39, 0.55);
+        transition:
+          border-color 0.25s ease,
+          transform 0.25s ease,
+          background 0.25s ease;
+      }
+      .contact-card:hover {
+        border-color: var(--accent-line);
+        background: rgba(17, 24, 39, 0.85);
+        transform: translateY(-4px);
+      }
+      .contact-card .card-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+      }
+      .contact-card strong {
+        display: block;
+        font-size: 0.95rem;
+      }
+      .contact-card small {
+        color: var(--muted);
+        font-size: 0.83rem;
+        word-break: break-word;
+      }
+      .contact-panel {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 20px;
+        align-items: center;
+        padding: 32px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 0.8) 0%,
+          rgba(11, 15, 25, 0.5) 100%
+        );
+      }
+      .contact-panel h3 {
+        font-size: 1.15rem;
+      }
+      .contact-panel p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+      .contact-panel .actions {
+        display: grid;
+        gap: 12px;
+      }
+      .contact-note {
+        margin-top: 26px;
+        padding: 22px 24px;
+        border: 1px dashed var(--border-strong);
+        border-radius: var(--radius-sm);
+        text-align: center;
+      }
+      .contact-note strong {
+        display: block;
+        font-size: 1.02rem;
+      }
+      .contact-note span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* ============================================================
+   15. FOOTER
+   ============================================================ */
+      .site-footer {
+        border-top: 1px solid var(--border);
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 0.5) 0%,
+          rgba(11, 15, 25, 0.9) 100%
+        );
+        padding: 56px 0 28px;
+      }
+      .footer-top {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 32px;
+        padding-bottom: 32px;
+        border-bottom: 1px solid var(--border);
+      }
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .footer-brand strong {
+        display: block;
+        font-size: 1.05rem;
+      }
+      .footer-brand small {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .footer-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 22px;
+      }
+      .footer-nav a {
+        color: var(--muted);
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+      }
+      .footer-nav a:hover {
+        color: var(--accent);
+      }
+      .footer-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        padding-top: 24px;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .footer-bottom a {
+        color: var(--accent);
+      }
+      /* ============================================================
+   16. DETALHES DE COMPONENTES
+   ============================================================ */
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .project-link[aria-disabled="true"] {
+        color: var(--muted);
+        cursor: not-allowed;
+      }
+      .project-link[aria-disabled="true"]:hover svg {
+        transform: none;
+      }
+      .delay-1 {
+        --delay: 90ms;
+      }
+      .delay-2 {
+        --delay: 180ms;
+      }
+      .delay-3 {
+        --delay: 270ms;
+      }
+      .delay-4 {
+        --delay: 360ms;
+      }
+
+      /* ============================================================
+   17. RESPONSIVIDADE
+   ============================================================ */
+      .nav-cta-mobile {
+        display: none;
+      }
+
+      @media (max-width: 1100px) {
+        .hero-grid {
+          gap: 40px;
+        }
+        .nav-link {
+          padding: 9px 11px;
+          font-size: 0.89rem;
+        }
+      }
+
+      /* Tablet horizontal / início do mobile */
+      @media (max-width: 980px) {
+        :root {
+          --header-h: 66px;
+        }
+        .nav-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .header-cta {
+          display: none;
+        }
+        .nav-cta-mobile {
+          display: block;
+        }
+        .site-nav {
+          position: fixed;
+          top: var(--header-h);
+          left: 0;
+          right: 0;
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          border-bottom: 1px solid transparent;
+          background: rgba(11, 15, 25, 0.98);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          transition:
+            max-height 0.32s ease,
+            opacity 0.25s ease,
+            border-color 0.25s ease;
+        }
+        .site-nav.is-open {
+          max-height: 78vh;
+          overflow-y: auto;
+          opacity: 1;
+          border-bottom-color: var(--border);
+        }
+        .site-nav ul {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 2px;
+          padding: 14px 20px 22px;
+        }
+        .nav-link {
+          display: block;
+          padding: 14px 12px;
+          border-radius: 12px;
+          font-size: 1rem;
+        }
+        .nav-link.is-active {
+          background: var(--accent-soft);
+        }
+        .nav-link.is-active::after {
+          display: none;
+        }
+        .nav-cta-mobile .btn {
+          margin-top: 12px;
+        }
+        .hero {
+          padding: calc(var(--header-h) + 56px) 0 80px;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 52px;
+        }
+        .hero-copy {
+          max-width: none;
+        }
+        .hero-visual {
+          max-width: 620px;
+          padding: 12px 8px;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .timeline {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+          padding-top: 0;
+        }
+        .timeline::before {
+          display: none;
+        }
+        .step {
+          padding: 22px 20px;
+          border: 1px solid var(--border);
+          border-left: 2px solid var(--accent-line);
+          border-radius: var(--radius-sm);
+          background: rgba(17, 24, 39, 0.5);
+        }
+        .step::before {
+          display: none;
+        }
+        .step h3 {
+          margin-top: 6px;
+        }
+        .contact-panel {
+          grid-template-columns: 1fr;
+          padding: 26px;
+        }
+      }
+
+      /* Tablet vertical / mobile grande */
+      @media (max-width: 760px) {
+        .container {
+          padding: 0 18px;
+        }
+        .section {
+          padding: 76px 0;
+        }
+        .section-head {
+          margin-bottom: 42px;
+        }
+        .timeline {
+          grid-template-columns: 1fr;
+        }
+        .cta {
+          padding: 72px 0;
+        }
+        .cta-box {
+          padding: 48px 24px;
+          border-radius: 20px;
+        }
+        .float-card {
+          padding: 10px 14px;
+        }
+        .float-card--1 {
+          left: 0;
+          bottom: 4px;
+        }
+        .float-card--2 {
+          right: 0;
+          top: 4px;
+        }
+        .code {
+          font-size: 11.5px;
+        }
+        .footer-top {
+          flex-direction: column;
+          gap: 26px;
+          align-items: flex-start;
+        }
+      }
+
+      /* Celulares */
+      @media (max-width: 560px) {
+        body {
+          font-size: 15.5px;
+        }
+        .hero-actions {
+          gap: 12px;
+        }
+        .hero-actions .btn {
+          width: 100%;
+        }
+        .hero-authority {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+        }
+        .float-card {
+          position: static;
+          margin-top: 14px;
+          width: 100%;
+        }
+        .hero-visual {
+          padding: 0;
+        }
+        .window {
+          margin-bottom: 0;
+        }
+        .stats {
+          grid-template-columns: 1fr;
+        }
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        .project footer {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+        }
+        .contact-panel {
+          padding: 22px 18px;
+        }
+        .cta-box h2 {
+          font-size: 1.5rem;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          gap: 8px;
+        }
+        .footer-nav ul {
+          gap: 6px 16px;
+        }
+        .card,
+        .skill-group,
+        .feature,
+        .contact-card {
+          padding: 20px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#inicio">Ir para o conteúdo principal</a>
+
+    <!-- ==========================================================
+       HEADER
+       ========================================================== -->
+    <header class="site-header" id="site-header">
+      <div class="container header-inner">
+        <a
+          class="brand"
+          href="#inicio"
+          aria-label="Victor Eduardo — ir para o início"
+        >
+          <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+          <span class="brand-text">
+            <span>Victor Eduardo</span>
+            <small>Desenvolvedor Full Stack</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+          <ul>
+            <li><a class="nav-link" href="#inicio">Início</a></li>
+            <li><a class="nav-link" href="#sobre">Sobre</a></li>
+            <li><a class="nav-link" href="#servicos">Serviços</a></li>
+            <li><a class="nav-link" href="#habilidades">Habilidades</a></li>
+            <li><a class="nav-link" href="#portfolio">Portfólio</a></li>
+            <li><a class="nav-link" href="#processo">Processo</a></li>
+            <li><a class="nav-link" href="#contato">Contato</a></li>
+            <li class="nav-cta-mobile">
+              <a class="btn btn--primary btn--block" href="#contato"
+                >Solicitar orçamento</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <a class="btn btn--primary header-cta" href="#contato"
+            >Solicitar orçamento</a
+          >
+          <button
+            class="nav-toggle"
+            id="nav-toggle"
+            type="button"
+            aria-label="Abrir menu de navegação"
+            aria-expanded="false"
+            aria-controls="site-nav"
+          >
+            <span class="nav-toggle-box" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <!-- ==========================================================
+         HERO
+         ========================================================== -->
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Disponível para novos projetos</span>
+            <h1 id="hero-title">
+              Sites profissionais que
+              <span class="highlight">transformam visitantes em clientes</span>.
+            </h1>
+            <p class="hero-sub">
+              Desenvolvimento de sites, landing pages e soluções web sob medida
+              para empresas e profissionais que querem fortalecer sua presença
+              digital.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn--primary" href="#contato">
+                Solicitar orçamento
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+              <a class="btn btn--ghost" href="#portfolio">Ver portfólio</a>
+            </div>
+
+            <p class="hero-authority">
+              <span class="pulse" aria-hidden="true"></span>
+              Desenvolvedor Full Stack &bull; <b>8+ anos de experiência</b>
+            </p>
+          </div>
+
+          <!-- Composição visual criada somente com HTML/CSS -->
+          <div class="hero-visual" aria-hidden="true">
+            <div class="window">
+              <div class="window-bar">
+                <span class="dot dot--red"></span>
+                <span class="dot dot--yellow"></span>
+                <span class="dot dot--green"></span>
+                <span class="window-title">projeto/index.html</span>
+              </div>
+              <pre
+                class="code"
+              ><code><span class="ln"><span class="c-com">// Interface pensada para converter</span></span><span class="ln"><span class="c-tag">&lt;section</span> <span class="c-attr">class</span>=<span class="c-str">"hero"</span><span class="c-tag">&gt;</span></span><span class="ln ind"><span class="c-tag">&lt;h1&gt;</span>Sites que geram clientes<span class="c-tag">&lt;/h1&gt;</span></span><span class="ln ind"><span class="c-tag">&lt;a</span> <span class="c-attr">href</span>=<span class="c-str">"#contato"</span><span class="c-tag">&gt;</span>Solicitar orçamento<span class="c-tag">&lt;/a&gt;</span></span><span class="ln"><span class="c-tag">&lt;/section&gt;</span></span><span class="ln"> </span><span class="ln"><span class="c-com">// Backend: Laravel &middot; Node.js &middot; APIs</span></span><span class="ln"><span class="c-key">const</span> <span class="c-fn">projeto</span> = <span class="c-key">await</span> deploy({</span><span class="ln ind">performance: <span class="c-ok">true</span>,</span><span class="ln ind">integrado: <span class="c-ok">true</span>,</span><span class="ln ind">foco: <span class="c-str">'resultado do cliente'</span></span><span class="ln">});</span></code></pre>
+            </div>
+
+            <div class="float-card float-card--1">
+              <span class="float-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M2 9h20" />
+                </svg>
+              </span>
+              <span>
+                <strong>Sites &amp; Landing Pages</strong>
+                <small>Estrutura clara e objetiva</small>
+              </span>
+            </div>
+
+            <div class="float-card float-card--2">
+              <span class="float-icon">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5" />
+                </svg>
+              </span>
+              <span>
+                <strong>Full Stack</strong>
+                <small>Frontend + Backend + Integrações</small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ==========================================================
+         SOBRE
+         ========================================================== -->
+      <section
+        class="section section--alt"
+        id="sobre"
+        aria-labelledby="sobre-title"
+      >
+        <div class="container about-grid">
+          <div class="about-text reveal">
+            <div class="section-head">
+              <span class="eyebrow">Sobre mim</span>
+              <h2 id="sobre-title">
+                Desenvolvimento web com foco em resultado
+              </h2>
+            </div>
+
+            <p>
+              Sou Victor Eduardo, desenvolvedor Full Stack especializado na
+              criação de soluções web modernas, escaláveis e orientadas a
+              resultados.
+            </p>
+            <p>
+              Ao longo da minha carreira, participei do desenvolvimento de
+              diferentes tipos de sistemas, sites, APIs, integrações e
+              automações. Minha experiência combina desenvolvimento frontend e
+              backend, permitindo entender o projeto como um todo e construir
+              soluções que realmente atendam às necessidades do negócio.
+            </p>
+            <p>
+              Hoje também trabalho com ferramentas de inteligência artificial
+              aplicadas ao desenvolvimento, como Cursor e GitHub Copilot,
+              utilizando tecnologia para aumentar produtividade sem abrir mão de
+              qualidade, organização e boas práticas.
+            </p>
+
+            <ul class="about-list">
+              <li>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Do planejamento à publicação, acompanhando cada etapa do
+                projeto.
+              </li>
+              <li>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Código organizado, responsivo e preparado para crescer com o
+                negócio.
+              </li>
+              <li>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+                Comunicação direta, sem termos técnicos desnecessários.
+              </li>
+            </ul>
+          </div>
+
+          <div class="stats reveal delay-2">
+            <div class="stat">
+              <strong>8+ anos</strong>
+              <span>Experiência com PHP/Laravel</span>
+            </div>
+            <div class="stat">
+              <strong>4+ anos</strong>
+              <span>Experiência com Node.js</span>
+            </div>
+            <div class="stat">
+              <strong>Full Stack</strong>
+              <span>Frontend + Backend</span>
+            </div>
+            <div class="stat">
+              <strong>Projetos Web</strong>
+              <span>Sites, sistemas e integrações</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- ==========================================================
+         SERVIÇOS
+         ========================================================== -->
+      <section class="section" id="servicos" aria-labelledby="servicos-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Serviços</span>
+            <h2 id="servicos-title">O que posso criar para você</h2>
+            <p class="lead">
+              Soluções sob medida para empresas, profissionais e projetos que
+              precisam de presença digital com qualidade técnica e foco em
+              resultado.
+            </p>
+          </div>
+
+          <div class="cards-grid">
+            <article class="card reveal">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M2 9h20M6 22h12" />
+                </svg>
+              </span>
+              <h3>Sites Institucionais</h3>
+              <p>
+                Sites profissionais para empresas que querem apresentar seus
+                serviços, fortalecer sua marca e gerar novas oportunidades.
+              </p>
+              <span class="card-tag">Presença digital</span>
+            </article>
+
+            <article class="card reveal delay-1">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 11l18-7-7 18-2.5-8.5L3 11z" />
+                </svg>
+              </span>
+              <h3>Landing Pages</h3>
+              <p>
+                Páginas focadas em campanhas, produtos, serviços e geração de
+                leads.
+              </p>
+              <span class="card-tag">Conversão</span>
+            </article>
+
+            <article class="card reveal delay-2">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="8" r="4" />
+                  <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+                </svg>
+              </span>
+              <h3>Sites para Profissionais</h3>
+              <p>
+                Presença digital profissional para médicos, advogados,
+                arquitetos, consultores, prestadores de serviços e outros
+                profissionais.
+              </p>
+              <span class="card-tag">Autoridade</span>
+            </article>
+
+            <article class="card reveal">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                  <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                  <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                  <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                </svg>
+              </span>
+              <h3>Sistemas Web</h3>
+              <p>
+                Sistemas personalizados para automatizar processos e centralizar
+                informações do seu negócio.
+              </p>
+              <span class="card-tag">Gestão e operação</span>
+            </article>
+
+            <article class="card reveal delay-1">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M9 7H6a5 5 0 000 10h3M15 7h3a5 5 0 010 10h-3M8 12h8"
+                  />
+                </svg>
+              </span>
+              <h3>Integrações e APIs</h3>
+              <p>
+                Integração entre sistemas, APIs, plataformas, ferramentas de
+                atendimento e serviços externos.
+              </p>
+              <span class="card-tag">Sistemas conectados</span>
+            </article>
+
+            <article class="card reveal delay-2">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 3v4M12 17v4M3 12h4M17 12h4M6.5 6.5l2.8 2.8M14.7 14.7l2.8 2.8M17.5 6.5l-2.8 2.8M9.3 14.7l-2.8 2.8"
+                  />
+                </svg>
+              </span>
+              <h3>Automação</h3>
+              <p>
+                Automação de processos repetitivos para reduzir trabalho manual
+                e aumentar produtividade.
+              </p>
+              <span class="card-tag">Eficiência</span>
+            </article>
+
+            <article class="card reveal">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M3 6h18l-1.6 12.4A2 2 0 0117.4 20H6.6a2 2 0 01-2-1.6L3 6z"
+                  />
+                  <path d="M8.5 10.5a3.5 3.5 0 007 0" />
+                </svg>
+              </span>
+              <h3>E-commerce</h3>
+              <p>
+                Soluções para lojas virtuais e integração com plataformas de
+                vendas.
+              </p>
+              <span class="card-tag">Vendas online</span>
+            </article>
+
+            <article class="card reveal delay-1">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14.6 6.4a4 4 0 105.2 5.2l-2.6 2.6 3.6 3.6-1.4 1.4-3.6-3.6-2.6 2.6a4 4 0 01-5.2-5.2l2.6-2.6L6.4 6.6 7.8 5.2l3.6 3.6 2.6-2.6z"
+                  />
+                </svg>
+              </span>
+              <h3>Manutenção e Evolução</h3>
+              <p>
+                Correções, melhorias, novas funcionalidades e modernização de
+                sistemas existentes.
+              </p>
+              <span class="card-tag">Continuidade</span>
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- ==========================================================
+         HABILIDADES
+         ========================================================== -->
+      <section
+        class="section section--alt"
+        id="habilidades"
+        aria-labelledby="habilidades-title"
+      >
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Tecnologias</span>
+            <h2 id="habilidades-title">Tecnologias e habilidades</h2>
+            <p class="lead">
+              Ferramentas e tecnologias que uso no dia a dia para construir
+              sites, sistemas, integrações e automações.
+            </p>
+          </div>
+
+          <div class="skills-grid">
+            <article class="skill-group reveal">
+              <header>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M4 7h16v12H4zM8 4h8v3M9 12h6M9 15.5h4" />
+                </svg>
+                <h3>Backend</h3>
+              </header>
+              <ul class="badges">
+                <li class="badge">PHP</li>
+                <li class="badge">Laravel</li>
+                <li class="badge">Node.js</li>
+                <li class="badge">Python</li>
+                <li class="badge">Django</li>
+              </ul>
+            </article>
+
+            <article class="skill-group reveal delay-1">
+              <header>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M8 6l-5 6 5 6M16 6l5 6-5 6M13.5 4l-3 16" />
+                </svg>
+                <h3>Frontend</h3>
+              </header>
+              <ul class="badges">
+                <li class="badge">HTML</li>
+                <li class="badge">CSS</li>
+                <li class="badge">JavaScript</li>
+                <li class="badge">Vue.js</li>
+                <li class="badge">React.js</li>
+                <li class="badge">Angular</li>
+                <li class="badge">Next.js</li>
+                <li class="badge">jQuery</li>
+                <li class="badge">Livewire</li>
+                <li class="badge">Blade</li>
+              </ul>
+            </article>
+
+            <article class="skill-group reveal delay-2">
+              <header>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <ellipse cx="12" cy="6" rx="8" ry="3" />
+                  <path
+                    d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"
+                  />
+                </svg>
+                <h3>Banco de dados</h3>
+              </header>
+              <ul class="badges">
+                <li class="badge">MySQL</li>
+                <li class="badge">MariaDB</li>
+                <li class="badge">PostgreSQL</li>
+                <li class="badge">MongoDB</li>
+              </ul>
+            </article>
+
+            <article class="skill-group reveal">
+              <header>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 3l9 5v8l-9 5-9-5V8l9-5zM12 12l9-4M12 12v9M12 12L3 8"
+                  />
+                </svg>
+                <h3>Infraestrutura</h3>
+              </header>
+              <ul class="badges">
+                <li class="badge">Docker</li>
+                <li class="badge">Kubernetes</li>
+                <li class="badge">AWS</li>
+                <li class="badge">Google Cloud</li>
+                <li class="badge">Git</li>
+              </ul>
+            </article>
+
+            <article class="skill-group reveal delay-1">
+              <header>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M10 14a4 4 0 005.7 0l3-3a4 4 0 10-5.7-5.7L11.7 6.7"
+                  />
+                  <path
+                    d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 105.7 5.7l1.3-1.4"
+                  />
+                </svg>
+                <h3>Integrações</h3>
+              </header>
+              <ul class="badges">
+                <li class="badge">REST APIs</li>
+                <li class="badge">APIs de WhatsApp</li>
+                <li class="badge">WebSockets</li>
+                <li class="badge">Microserviços</li>
+                <li class="badge">Filas e processamento assíncrono</li>
+                <li class="badge">Automações</li>
+              </ul>
+            </article>
+
+            <article class="skill-group reveal delay-2">
+              <header>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"
+                  />
+                </svg>
+                <h3>Outros conhecimentos</h3>
+              </header>
+              <ul class="badges">
+                <li class="badge">GIS e mapas</li>
+                <li class="badge">Inteligência Artificial</li>
+                <li class="badge">Data Pipelines</li>
+                <li class="badge">Cursor</li>
+                <li class="badge">GitHub Copilot</li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="skills-note reveal">
+            Sempre em atualização: novas tecnologias são incorporadas conforme a
+            necessidade de cada projeto.
+          </p>
+        </div>
+      </section>
+      <!-- ==========================================================
+         PORTFÓLIO
+         ========================================================== -->
+      <section class="section" id="portfolio" aria-labelledby="portfolio-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Portfólio</span>
+            <h2 id="portfolio-title">Projetos e experiências</h2>
+            <p class="lead">
+              Cada projeto abaixo é uma demonstração funcional que pode ser
+              explorada no navegador. Os cases com nome do cliente, métricas
+              reais e depoimentos serão publicados aqui em breve.
+            </p>
+          </div>
+
+          <div
+            class="filters reveal"
+            role="group"
+            aria-label="Filtrar projetos por categoria"
+          >
+            <button
+              class="filter-btn"
+              type="button"
+              data-filter="all"
+              aria-pressed="true"
+            >
+              Todos
+            </button>
+            <button
+              class="filter-btn"
+              type="button"
+              data-filter="sites"
+              aria-pressed="false"
+            >
+              Sites
+            </button>
+            <button
+              class="filter-btn"
+              type="button"
+              data-filter="landing"
+              aria-pressed="false"
+            >
+              Landing Pages
+            </button>
+            <button
+              class="filter-btn"
+              type="button"
+              data-filter="sistemas"
+              aria-pressed="false"
+            >
+              Sistemas
+            </button>
+            <button
+              class="filter-btn"
+              type="button"
+              data-filter="integracoes"
+              aria-pressed="false"
+            >
+              Integrações
+            </button>
+          </div>
+
+          <div class="projects-grid" id="projects-grid" aria-live="polite">
+            <!-- Para publicar um case real: adicione href="URL-DO-PROJETO" target="_blank" rel="noopener"
+               no elemento <a class="project-link"> e remova o atributo aria-disabled. -->
+            <article class="project reveal" data-category="sistemas">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Sistema Web</span>
+              </div>
+              <div class="project-body">
+                <h3>Plataforma de Gestão</h3>
+                <p>
+                  Plataforma web desenvolvida para centralizar processos,
+                  informações e operações de uma empresa.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">Laravel</li>
+                  <li class="tech">MySQL</li>
+                  <li class="tech">JavaScript</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/gestao.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+
+            <article class="project reveal delay-1" data-category="integracoes">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Integrações</span>
+              </div>
+              <div class="project-body">
+                <h3>Sistema de Mensageria</h3>
+                <p>
+                  Solução para integração e automação de comunicação através de
+                  APIs e sistemas de mensageria.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">Node.js</li>
+                  <li class="tech">APIs</li>
+                  <li class="tech">WebSockets</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/mensageria.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+
+            <article class="project reveal delay-2" data-category="sistemas">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Dashboard</span>
+              </div>
+              <div class="project-body">
+                <h3>Dashboard Administrativo</h3>
+                <p>
+                  Interface administrativa para acompanhamento de indicadores,
+                  dados e operações.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">Laravel</li>
+                  <li class="tech">Vue.js</li>
+                  <li class="tech">MySQL</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/dashboard.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+            <article class="project reveal" data-category="landing">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Marketing</span>
+              </div>
+              <div class="project-body">
+                <h3>Landing Page</h3>
+                <p>
+                  Landing page responsiva desenvolvida com foco em apresentação
+                  de serviços e geração de leads.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">HTML</li>
+                  <li class="tech">CSS</li>
+                  <li class="tech">JavaScript</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/saas.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+
+            <article class="project reveal delay-1" data-category="sistemas">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Sistema Web</span>
+              </div>
+              <div class="project-body">
+                <h3>Sistema Financeiro</h3>
+                <p>
+                  Solução web para organização, processamento e visualização de
+                  informações financeiras.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">Laravel</li>
+                  <li class="tech">MySQL</li>
+                  <li class="tech">APIs</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/financeiro.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+
+            <article class="project reveal delay-2" data-category="integracoes">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Integrações</span>
+              </div>
+              <div class="project-body">
+                <h3>Integração de APIs</h3>
+                <p>
+                  Desenvolvimento de integrações entre diferentes plataformas
+                  para automatizar processos e sincronizar informações.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">Node.js</li>
+                  <li class="tech">REST APIs</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/apis.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+
+            <article class="project reveal" data-category="sites">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Site</span>
+              </div>
+              <div class="project-body">
+                <h3>Site Institucional</h3>
+                <p>
+                  Site para apresentação de serviços da empresa, com páginas de
+                  conteúdo, contato e estrutura otimizada para buscas.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">HTML</li>
+                  <li class="tech">CSS</li>
+                  <li class="tech">JavaScript</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/construtora.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+
+            <article class="project reveal delay-1" data-category="sites">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">Site</span>
+              </div>
+              <div class="project-body">
+                <h3>Site para Profissional</h3>
+                <p>
+                  Site de presença profissional para divulgação de serviços,
+                  especialidades, atendimento e canais de contato.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">HTML</li>
+                  <li class="tech">CSS</li>
+                  <li class="tech">JavaScript</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/arquitetura.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+
+            <article class="project reveal delay-2" data-category="sites">
+              <div class="project-preview" aria-hidden="true">
+                <span class="project-category">E-commerce</span>
+              </div>
+              <div class="project-body">
+                <h3>Loja Virtual</h3>
+                <p>
+                  Loja online completa com vitrine de produtos, busca, filtros,
+                  ordenação e carrinho lateral com cálculo de
+                  subtotal e frete.
+                </p>
+                <ul class="tech-list">
+                  <li class="tech">HTML</li>
+                  <li class="tech">CSS</li>
+                  <li class="tech">JavaScript</li>
+                </ul>
+                <footer>
+                  <span class="wip wip--live">Demo ao vivo</span>
+                  <a class="project-link" href="projetos/ecommerce.html"
+                    >Ver demonstração
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </footer>
+              </div>
+            </article>
+            <p class="projects-empty" id="projects-empty" hidden>
+              Nenhum projeto encontrado nesta categoria.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- ==========================================================
+         DIFERENCIAIS
+         ========================================================== -->
+      <section
+        class="section section--alt"
+        id="diferenciais"
+        aria-labelledby="diferenciais-title"
+      >
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Diferenciais</span>
+            <h2 id="diferenciais-title">Por que trabalhar comigo?</h2>
+            <p class="lead">
+              Mais do que entregar páginas, meu objetivo é que o projeto
+              funcione bem para o seu negócio.
+            </p>
+          </div>
+
+          <div class="features-grid">
+            <article class="feature reveal">
+              <span class="feature-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3l9 5v8l-9 5-9-5V8l9-5z" />
+                  <path d="M12 12v9M12 12L3 8M12 12l9-4" />
+                </svg>
+              </span>
+              <div>
+                <h3>Visão Full Stack</h3>
+                <p>Entendo o projeto do frontend ao backend.</p>
+              </div>
+            </article>
+
+            <article class="feature reveal delay-1">
+              <span class="feature-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 3l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.8-5.1 2.8 1-5.7-4.1-4 5.7-.8L12 3z"
+                  />
+                </svg>
+              </span>
+              <div>
+                <h3>Experiência prática</h3>
+                <p>
+                  Anos de experiência desenvolvendo aplicações e soluções web.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature reveal delay-2">
+              <span class="feature-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M4 20l4-1 10-10a2.5 2.5 0 10-3.5-3.5L4.5 15.5 4 20z"
+                  />
+                  <path d="M13.5 6.5l4 4" />
+                </svg>
+              </span>
+              <div>
+                <h3>Desenvolvimento sob medida</h3>
+                <p>
+                  Cada projeto é pensado de acordo com a necessidade do negócio.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature reveal">
+              <span class="feature-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 12a8 8 0 01-8 8H8l-5 3 1.4-4.2A8 8 0 0121 12z" />
+                </svg>
+              </span>
+              <div>
+                <h3>Comunicação clara</h3>
+                <p>
+                  Procuro explicar soluções técnicas de forma simples e
+                  objetiva.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature reveal delay-1">
+              <span class="feature-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" />
+                </svg>
+              </span>
+              <div>
+                <h3>Performance e responsividade</h3>
+                <p>
+                  Sites pensados para funcionar bem em computadores, tablets e
+                  celulares.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature reveal delay-2">
+              <span class="feature-icon" aria-hidden="true">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="12" cy="12" r="1" />
+                </svg>
+              </span>
+              <div>
+                <h3>Foco no negócio</h3>
+                <p>
+                  Mais do que criar páginas, busco entender o objetivo do
+                  projeto.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+         PROCESSO
+         ========================================================== -->
+      <section class="section" id="processo" aria-labelledby="processo-title">
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Processo</span>
+            <h2 id="processo-title">Como funciona o projeto</h2>
+            <p class="lead">
+              Um processo simples e transparente, do primeiro contato até a
+              publicação.
+            </p>
+          </div>
+
+          <ol class="timeline">
+            <li class="step reveal">
+              <span class="step-num">01</span>
+              <h3>Conversa inicial</h3>
+              <p>Entendo sua necessidade, objetivo e público.</p>
+            </li>
+            <li class="step reveal delay-1">
+              <span class="step-num">02</span>
+              <h3>Planejamento</h3>
+              <p>Definimos estrutura, funcionalidades e prioridades.</p>
+            </li>
+            <li class="step reveal delay-2">
+              <span class="step-num">03</span>
+              <h3>Desenvolvimento</h3>
+              <p>
+                Construo a solução seguindo boas práticas e foco em qualidade.
+              </p>
+            </li>
+            <li class="step reveal delay-3">
+              <span class="step-num">04</span>
+              <h3>Ajustes</h3>
+              <p>Validamos o resultado e realizamos os ajustes necessários.</p>
+            </li>
+            <li class="step reveal delay-4">
+              <span class="step-num">05</span>
+              <h3>Publicação</h3>
+              <p>
+                Colocamos o projeto no ar e deixamos tudo preparado para sua
+                utilização.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <!-- ==========================================================
+         CTA
+         ========================================================== -->
+      <section class="cta" aria-labelledby="cta-title">
+        <div class="container">
+          <div class="cta-box reveal">
+            <h2 id="cta-title">Tem uma ideia ou precisa melhorar seu site?</h2>
+            <p>
+              Vamos conversar sobre seu projeto e entender como transformar sua
+              ideia em uma solução digital profissional.
+            </p>
+            <a class="btn btn--primary" href="#contato">
+              Falar sobre meu projeto
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================
+         CONTATO
+         Observação: os endereços de contato (WhatsApp, e-mail, LinkedIn e GitHub)
+         ficam no bloco "CONFIGURAÇÃO DE CONTATO" no final deste arquivo,
+         nas constantes WHATSAPP_URL, EMAIL_URL, LINKEDIN_URL e GITHUB_URL.
+         ========================================================== -->
+      <section
+        class="section section--alt"
+        id="contato"
+        aria-labelledby="contato-title"
+      >
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Contato</span>
+            <h2 id="contato-title">Vamos conversar?</h2>
+            <p class="lead">
+              Conte um pouco sobre o que você precisa. Podemos conversar sem
+              compromisso e avaliar a melhor solução para o seu projeto.
+            </p>
+          </div>
+
+          <div class="contact-grid reveal">
+            <a
+              class="contact-card"
+              data-contact="whatsapp"
+              href="#contato"
+              aria-label="Conversar pelo WhatsApp"
+            >
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 11.5A8.5 8.5 0 1112.5 3 8.5 8.5 0 0121 11.5z" />
+                  <path
+                    d="M8.5 9.5c0 3 2.5 5.5 5.5 5.5l1-1.6-2-1-.9.6a4.4 4.4 0 01-2.2-2.2l.6-.9-1-2L8.5 9.5z"
+                  />
+                </svg>
+              </span>
+              <span>
+                <strong>WhatsApp</strong>
+                <small data-contact-text="whatsapp">+55 (00) 00000-0000</small>
+              </span>
+            </a>
+
+            <a
+              class="contact-card"
+              data-contact="email"
+              href="#contato"
+              aria-label="Enviar e-mail"
+            >
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2.5" y="5" width="19" height="14" rx="2" />
+                  <path d="M3 7l9 6 9-6" />
+                </svg>
+              </span>
+              <span>
+                <strong>E-mail</strong>
+                <small data-contact-text="email">seu-email@exemplo.com</small>
+              </span>
+            </a>
+
+            <a
+              class="contact-card"
+              data-contact="linkedin"
+              href="#contato"
+              aria-label="Abrir meu perfil no LinkedIn"
+            >
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="3" />
+                  <path d="M7.5 10v7M7.5 7.2v.1M11.5 17v-4a2 2 0 014 0v4" />
+                </svg>
+              </span>
+              <span>
+                <strong>LinkedIn</strong>
+                <small data-contact-text="linkedin"
+                  >linkedin.com/in/seu-usuario</small
+                >
+              </span>
+            </a>
+
+            <a
+              class="contact-card"
+              data-contact="github"
+              href="#contato"
+              aria-label="Abrir meu perfil no GitHub"
+            >
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M9 21v-3c-3 .6-3.6-1.4-3.6-1.4-.5-1.2-1.2-1.5-1.2-1.5-1-.6 0-.6 0-.6 1.1.1 1.7 1.2 1.7 1.2 1 1.6 2.5 1.1 3.2.9.1-.8.4-1.2.7-1.5-2.4-.3-4.1-1.2-4.1-4.3 0-1 .3-1.8.9-2.4-.1-.3-.4-1.2.1-2.4 0 0 .8-.3 2.7 1a6.4 6.4 0 013.2 0c1.9-1.3 2.7-1 2.7-1 .5 1.2.2 2.1.1 2.4.6.6.9 1.4.9 2.4 0 3.1-1.7 4-4.2 4.2.5.4.9 1.2.9 2.3V21"
+                  />
+                </svg>
+              </span>
+              <span>
+                <strong>GitHub</strong>
+                <small data-contact-text="github">github.com/seu-usuario</small>
+              </span>
+            </a>
+          </div>
+          <div class="contact-panel reveal delay-1">
+            <div>
+              <h3>Enviar mensagem pelo WhatsApp</h3>
+              <p>
+                Abra a conversa com uma mensagem já pronta e conte o que você
+                precisa.
+              </p>
+            </div>
+            <div class="actions">
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-message"
+                href="#contato"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 11.5A8.5 8.5 0 1112.5 3 8.5 8.5 0 0121 11.5z" />
+                  <path
+                    d="M8.5 9.5c0 3 2.5 5.5 5.5 5.5l1-1.6-2-1-.9.6a4.4 4.4 0 01-2.2-2.2l.6-.9-1-2L8.5 9.5z"
+                  />
+                </svg>
+                Enviar mensagem pelo WhatsApp
+              </a>
+              <a
+                class="btn btn--ghost btn--block"
+                data-contact="email"
+                href="#contato"
+                >Prefiro enviar e-mail</a
+              >
+            </div>
+          </div>
+
+          <div class="contact-note reveal delay-2">
+            <strong>Prefere explicar por mensagem?</strong>
+            <span
+              >Envie os detalhes do seu projeto e retornarei assim que
+              possível.</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- ==========================================================
+       FOOTER
+       ========================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+            <span>
+              <strong>Victor Eduardo</strong>
+              <small>Desenvolvedor Full Stack</small>
+            </span>
+          </div>
+
+          <nav class="footer-nav" aria-label="Navegação do rodapé">
+            <ul>
+              <li><a href="#inicio">Início</a></li>
+              <li><a href="#servicos">Serviços</a></li>
+              <li><a href="#portfolio">Portfólio</a></li>
+              <li><a href="#contato">Contato</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="footer-bottom">
+          <span
+            >&copy; <span id="current-year">2026</span> Victor Eduardo. Todos os
+            direitos reservados.</span
+          >
+          <span>Site desenvolvido em HTML, CSS e JavaScript.</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Dados estruturados para buscadores (substitua a URL e os perfis) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Victor Eduardo",
+        "jobTitle": "Desenvolvedor Full Stack",
+        "description": "Desenvolvedor Full Stack especializado em sites profissionais, landing pages, sistemas web, integrações e soluções digitais sob medida.",
+        "url": "https://SEU-DOMINIO.com/",
+        "knowsAbout": [
+          "PHP",
+          "Laravel",
+          "Node.js",
+          "JavaScript",
+          "Vue.js",
+          "React.js",
+          "Docker",
+          "AWS",
+          "REST APIs",
+          "Integrações"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/seu-usuario",
+          "https://github.com/seu-usuario"
+        ]
+      }
+    </script>
+
+    <script>
+      (function () {
+        "use strict";
+
+        /* ==========================================================
+       CONFIGURAÇÃO DE CONTATO — SUBSTITUA OS VALORES ABAIXO
+       ----------------------------------------------------------
+       WHATSAPP_NUMBER: somente números, com código do país + DDD.
+       Exemplo: "5511998765432"
+       ========================================================== */
+        var WHATSAPP_NUMBER = "5500000000000";
+        var WHATSAPP_URL = "https://wa.me/" + WHATSAPP_NUMBER;
+        var EMAIL_URL = "mailto:seu-email@exemplo.com";
+        var LINKEDIN_URL = "https://www.linkedin.com/in/seu-usuario";
+        var GITHUB_URL = "https://github.com/seu-usuario";
+
+        var WHATSAPP_MESSAGE =
+          "Olá Victor! Vi seu portfólio e gostaria de conversar sobre um projeto.";
+        var WHATSAPP_MESSAGE_URL =
+          WHATSAPP_URL + "?text=" + encodeURIComponent(WHATSAPP_MESSAGE);
+
+        var CONTACT_LINKS = {
+          whatsapp: WHATSAPP_URL,
+          "whatsapp-message": WHATSAPP_MESSAGE_URL,
+          email: EMAIL_URL,
+          linkedin: LINKEDIN_URL,
+          github: GITHUB_URL,
+        };
+
+        /* Texto exibido nos cards de contato */
+        var CONTACT_LABELS = {
+          whatsapp: "+55 (00) 00000-0000",
+          email: "seu-email@exemplo.com",
+          linkedin: "linkedin.com/in/seu-usuario",
+          github: "github.com/seu-usuario",
+        };
+
+        /* ==========================================================
+       1. LINKS DE CONTATO
+       ========================================================== */
+        function applyContactLinks() {
+          var key;
+
+          for (key in CONTACT_LINKS) {
+            if (!Object.prototype.hasOwnProperty.call(CONTACT_LINKS, key)) {
+              continue;
+            }
+
+            var url = CONTACT_LINKS[key];
+            var elements = document.querySelectorAll(
+              '[data-contact="' + key + '"]',
+            );
+            var i;
+
+            for (i = 0; i < elements.length; i++) {
+              elements[i].setAttribute("href", url);
+              if (key !== "email") {
+                elements[i].setAttribute("target", "_blank");
+                elements[i].setAttribute("rel", "noopener");
+              }
+            }
+
+            var labels = document.querySelectorAll(
+              '[data-contact-text="' + key + '"]',
+            );
+            for (i = 0; i < labels.length; i++) {
+              if (CONTACT_LABELS[key]) {
+                labels[i].textContent = CONTACT_LABELS[key];
+              }
+            }
+          }
+        }
+        /* ==========================================================
+       2. MENU MOBILE
+       ========================================================== */
+        function initMobileMenu() {
+          var toggle = document.getElementById("nav-toggle");
+          var nav = document.getElementById("site-nav");
+
+          if (!toggle || !nav) {
+            return;
+          }
+
+          function closeMenu() {
+            nav.classList.remove("is-open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "Abrir menu de navegação");
+          }
+
+          function openMenu() {
+            nav.classList.add("is-open");
+            toggle.setAttribute("aria-expanded", "true");
+            toggle.setAttribute("aria-label", "Fechar menu de navegação");
+          }
+
+          toggle.addEventListener("click", function () {
+            if (nav.classList.contains("is-open")) {
+              closeMenu();
+            } else {
+              openMenu();
+            }
+          });
+
+          var links = nav.querySelectorAll("a");
+          var i;
+          for (i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", closeMenu);
+          }
+
+          document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && nav.classList.contains("is-open")) {
+              closeMenu();
+              toggle.focus();
+            }
+          });
+
+          document.addEventListener("click", function (event) {
+            if (!nav.classList.contains("is-open")) {
+              return;
+            }
+            if (nav.contains(event.target) || toggle.contains(event.target)) {
+              return;
+            }
+            closeMenu();
+          });
+
+          window.addEventListener("resize", function () {
+            if (window.innerWidth > 980 && nav.classList.contains("is-open")) {
+              closeMenu();
+            }
+          });
+        }
+
+        /* ==========================================================
+       3. SCROLL SUAVE COM COMPENSAÇÃO DO HEADER
+       ========================================================== */
+        function initSmoothScroll() {
+          var reduceMotion = window.matchMedia
+            ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            : false;
+          var header = document.getElementById("site-header");
+          var anchors = document.querySelectorAll('a[href^="#"]');
+          var i;
+
+          for (i = 0; i < anchors.length; i++) {
+            anchors[i].addEventListener("click", function (event) {
+              var href = this.getAttribute("href");
+              if (!href || href.length < 2) {
+                return;
+              }
+
+              var target = document.getElementById(href.slice(1));
+              if (!target) {
+                return;
+              }
+
+              event.preventDefault();
+
+              var offset = header ? header.offsetHeight + 8 : 0;
+              var top =
+                target.getBoundingClientRect().top +
+                window.pageYOffset -
+                offset;
+
+              if (typeof window.scrollTo === "function") {
+                if (reduceMotion) {
+                  window.scrollTo(0, top);
+                } else {
+                  window.scrollTo({ top: top, behavior: "smooth" });
+                }
+              }
+
+              if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, "", href);
+              }
+
+              if (typeof target.focus === "function") {
+                target.setAttribute("tabindex", "-1");
+                target.focus({ preventScroll: true });
+              }
+            });
+          }
+        }
+        /* ==========================================================
+       4. FILTRO DO PORTFÓLIO
+       ========================================================== */
+        function initPortfolioFilters() {
+          var buttons = document.querySelectorAll(".filter-btn");
+          var projects = document.querySelectorAll(".project");
+          var empty = document.getElementById("projects-empty");
+
+          if (!buttons.length || !projects.length) {
+            return;
+          }
+
+          function applyFilter(filter) {
+            var visible = 0;
+            var i;
+
+            for (i = 0; i < projects.length; i++) {
+              var match =
+                filter === "all" ||
+                projects[i].getAttribute("data-category") === filter;
+              projects[i].classList.toggle("is-hidden", !match);
+              if (match) {
+                visible++;
+              }
+            }
+
+            if (empty) {
+              empty.hidden = visible !== 0;
+            }
+          }
+
+          function setActiveButton(active) {
+            var i;
+            for (i = 0; i < buttons.length; i++) {
+              buttons[i].setAttribute(
+                "aria-pressed",
+                buttons[i] === active ? "true" : "false",
+              );
+            }
+          }
+
+          var i;
+          for (i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("click", function () {
+              setActiveButton(this);
+              applyFilter(this.getAttribute("data-filter"));
+            });
+          }
+        }
+
+        /* ==========================================================
+       5. ANIMAÇÕES DE ENTRADA (IntersectionObserver)
+       ========================================================== */
+        function initRevealAnimations() {
+          var items = document.querySelectorAll(".reveal");
+          var i;
+
+          if (!items.length) {
+            return;
+          }
+
+          if (!("IntersectionObserver" in window)) {
+            for (i = 0; i < items.length; i++) {
+              items[i].classList.add("is-visible");
+            }
+            return;
+          }
+
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px -60px 0px", threshold: 0.1 },
+          );
+
+          for (i = 0; i < items.length; i++) {
+            observer.observe(items[i]);
+          }
+        }
+
+        /* ==========================================================
+       6. ESTADO DO HEADER E LINK ATIVO NO MENU
+       ========================================================== */
+        function initHeaderState() {
+          var header = document.getElementById("site-header");
+          if (!header) {
+            return;
+          }
+
+          function update() {
+            header.classList.toggle("is-scrolled", window.pageYOffset > 12);
+          }
+
+          window.addEventListener("scroll", update, { passive: true });
+          update();
+        }
+
+        function initActiveNav() {
+          var links = document.querySelectorAll(".nav-link");
+          if (!links.length || !("IntersectionObserver" in window)) {
+            return;
+          }
+
+          var linksBySection = {};
+          var sections = [];
+          var i;
+
+          for (i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute("href") || "";
+            if (href.charAt(0) !== "#") {
+              continue;
+            }
+
+            var section = document.getElementById(href.slice(1));
+            if (!section) {
+              continue;
+            }
+
+            linksBySection[section.id] = links[i];
+            sections.push(section);
+          }
+
+          if (!sections.length) {
+            return;
+          }
+
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                var link = linksBySection[entry.target.id];
+                if (!link || !entry.isIntersecting) {
+                  return;
+                }
+
+                var id;
+                for (id in linksBySection) {
+                  if (
+                    Object.prototype.hasOwnProperty.call(linksBySection, id)
+                  ) {
+                    linksBySection[id].classList.remove("is-active");
+                  }
+                }
+                link.classList.add("is-active");
+              });
+            },
+            { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+          );
+
+          for (i = 0; i < sections.length; i++) {
+            observer.observe(sections[i]);
+          }
+        }
+
+        /* ==========================================================
+       7. ANO ATUAL NO FOOTER
+       ========================================================== */
+        function initFooterYear() {
+          var year = document.getElementById("current-year");
+          if (year) {
+            year.textContent = String(new Date().getFullYear());
+          }
+        }
+
+        /* ==========================================================
+       INICIALIZAÇÃO
+       ========================================================== */
+        applyContactLinks();
+        initMobileMenu();
+        initSmoothScroll();
+        initPortfolioFilters();
+        initRevealAnimations();
+        initHeaderState();
+        initActiveNav();
+        initFooterYear();
+      })();
+    </script>
+  </body>
+</html>

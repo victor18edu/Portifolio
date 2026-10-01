@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FlowDesk | Organize sua operação e ganhe tempo para crescer</title>
+    <meta name="description" content="FlowDesk é a plataforma fictícia de gestão que centraliza tarefas, clientes e indicadores em um só lugar. Landing page demonstrativa." />
+    <meta name="author" content="Victor Eduardo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0B0F19" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F19'/%3E%3Cpath d='M18 40c6 0 8-16 14-16s8 16 14 16' fill='none' stroke='%23FFC61A' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0b0f19;
+        --bg-2: #111827;
+        --bg-3: #0e1424;
+        --panel: rgba(17, 24, 39, 0.72);
+        --text: #f9fafb;
+        --muted: #9ca3af;
+        --accent: #ffc61a;
+        --accent-soft: rgba(255, 198, 26, 0.12);
+        --indigo: #6366f1;
+        --violet: #8b5cf6;
+        --teal: #2dd4bf;
+        --border: rgba(255, 255, 255, 0.09);
+        --border-strong: rgba(255, 255, 255, 0.18);
+        --radius: 20px;
+        --radius-sm: 14px;
+        --display: "Sora", system-ui, sans-serif;
+        --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        --wrap: 1180px;
+        --header-h: 76px;
+        --shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.95);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+          radial-gradient(760px 420px at 12% -6%, rgba(99, 102, 241, 0.22), transparent 62%),
+          radial-gradient(680px 420px at 88% 4%, rgba(255, 198, 26, 0.14), transparent 60%),
+          radial-gradient(700px 500px at 50% 110%, rgba(139, 92, 246, 0.16), transparent 66%);
+        pointer-events: none;
+      }
+
+      img { max-width: 100%; display: block; }
+      a { text-decoration: none; color: inherit; }
+      h1, h2, h3, h4 { font-family: var(--display); font-weight: 600; letter-spacing: -0.025em; margin: 0; line-height: 1.15; }
+      p { margin: 0; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+      ::selection { background: var(--accent); color: #0b0f19; }
+
+      .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+      .band { padding: 104px 0; position: relative; }
+      .head { max-width: 720px; margin-bottom: 58px; }
+      .head--center { margin-left: auto; margin-right: auto; text-align: center; }
+      .pill { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; padding: 6px 14px; border: 1px solid var(--border-strong); border-radius: 999px; background: rgba(255,255,255,0.03); color: var(--accent); font-size: 11.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+      .pill i { font-size: 13px; }
+      h2.xl { font-size: clamp(1.8rem, 1.15rem + 2.4vw, 2.8rem); }
+      .sub { margin-top: 18px; color: var(--muted); font-size: 1.03rem; }
+      .mono { font-family: var(--mono); }
+    </style>
+    <style>
+      /* ---------------- Header ---------------- */
+      .nav {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 1040;
+        height: var(--header-h);
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid transparent;
+        transition: background 0.3s ease, border-color 0.3s ease, height 0.3s ease;
+      }
+      .nav.is-solid {
+        height: 68px;
+        background: rgba(11, 15, 25, 0.86);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-bottom-color: var(--border);
+      }
+      .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; }
+      .brand { display: inline-flex; align-items: center; gap: 11px; }
+      .brand__mark {
+        width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center;
+        background: linear-gradient(140deg, var(--accent) 0%, #ffdf85 100%);
+        color: #0b0f19; font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+        box-shadow: 0 10px 26px -12px rgba(255, 198, 26, 0.9);
+      }
+      .brand strong { font-family: var(--display); font-size: 1.12rem; font-weight: 700; letter-spacing: -0.02em; }
+      .brand small { display: block; color: var(--muted); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+      .nav__links { display: flex; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
+      .nav__links a { display: block; padding: 9px 14px; border-radius: 10px; color: rgba(249, 250, 251, 0.76); font-size: 0.9rem; font-weight: 500; transition: color 0.2s ease, background 0.2s ease; }
+      .nav__links a:hover { color: var(--text); background: rgba(255, 255, 255, 0.05); }
+      .nav__actions { display: flex; align-items: center; gap: 12px; }
+      .backlink { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.84rem; font-weight: 500; transition: color 0.2s ease; }
+      .backlink:hover { color: var(--accent); }
+      .burger { display: none; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border-strong); background: rgba(255,255,255,0.03); color: var(--text); font-size: 1.2rem; cursor: pointer; }
+      .offcanvas-s { background: #0d1220; color: var(--text); border-left: 1px solid var(--border) !important; width: min(330px, 88vw); }
+      .offcanvas-s a.m-link { display: flex; justify-content: space-between; align-items: center; padding: 15px 2px; border-bottom: 1px solid var(--border); font-family: var(--display); font-size: 1.05rem; }
+      .offcanvas-s a.m-link i { color: var(--accent); }
+
+      /* ---------------- Botões ---------------- */
+      .btn-f {
+        display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+        min-height: 48px; padding: 13px 24px; border: 1px solid transparent; border-radius: 12px;
+        font-family: var(--sans); font-size: 0.93rem; font-weight: 600; cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+      .btn-f--primary { background: linear-gradient(180deg, #ffd766 0%, #ffc61a 100%); color: #0b0f19; box-shadow: 0 16px 34px -18px rgba(255, 198, 26, 0.8); }
+      .btn-f--primary:hover { transform: translateY(-2px); box-shadow: 0 22px 44px -18px rgba(255, 198, 26, 0.95); }
+      .btn-f--ghost { border-color: var(--border-strong); background: rgba(255, 255, 255, 0.03); color: var(--text); }
+      .btn-f--ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+      .btn-f--lg { min-height: 54px; padding: 15px 30px; font-size: 1rem; }
+      .btn-f.is-done { background: #1f7a4d !important; color: #fff !important; border-color: transparent !important; }
+    </style>
+    <style>
+      /* ---------------- Hero ---------------- */
+      .hero-s {
+        position: relative;
+        padding: calc(var(--header-h) + 76px) 0 40px;
+        text-align: center;
+      }
+      .hero-s h1 {
+        font-size: clamp(2.2rem, 1.15rem + 4vw, 4rem);
+        line-height: 1.05;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .hero-s h1 span {
+        background: linear-gradient(92deg, #ffc61a 0%, #ffdf85 45%, #ffc61a 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hero-s__sub { max-width: 620px; margin: 24px auto 0; color: var(--muted); font-size: 1.08rem; }
+      .hero-s__form { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 36px; }
+      .hero-s__form input {
+        min-width: min(320px, 100%); padding: 15px 18px; border-radius: 12px;
+        border: 1px solid var(--border-strong); background: rgba(255, 255, 255, 0.04);
+        color: var(--text); font-family: var(--sans); font-size: 0.95rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .hero-s__form input::placeholder { color: #6b7280; }
+      .hero-s__form input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255, 198, 26, 0.16); }
+      .hero-s__note { margin-top: 18px; color: #6b7280; font-size: 0.85rem; }
+
+      .logos { margin-top: 58px; padding-top: 30px; border-top: 1px solid var(--border); }
+      .logos p { color: #6b7280; font-size: 11.5px; letter-spacing: 0.22em; text-transform: uppercase; }
+      .logos ul { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 40px; margin: 22px 0 0; padding: 0; list-style: none; }
+      .logos li { display: inline-flex; align-items: center; gap: 9px; color: rgba(249, 250, 251, 0.42); font-family: var(--display); font-size: 1.02rem; font-weight: 600; }
+
+      /* ---------------- Mockup do produto ---------------- */
+      .app-wrap { position: relative; margin-top: 62px; }
+      .app-wrap::before {
+        content: ""; position: absolute; left: 50%; top: -30px; width: 76%; height: 120px;
+        transform: translateX(-50%); background: radial-gradient(60% 100% at 50% 0%, rgba(99, 102, 241, 0.28), transparent 70%);
+        filter: blur(6px); pointer-events: none;
+      }
+      .app {
+        position: relative; border: 1px solid var(--border-strong); border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(17, 24, 39, 0.96) 0%, rgba(11, 15, 25, 0.92) 100%);
+        box-shadow: var(--shadow); overflow: hidden;
+      }
+      .app__bar { display: flex; align-items: center; gap: 8px; padding: 13px 16px; border-bottom: 1px solid var(--border); background: rgba(255, 255, 255, 0.02); }
+      .app__dots { display: flex; gap: 6px; }
+      .app__dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.16); }
+      .app__dots span:first-child { background: #f87171; }
+      .app__dots span:nth-child(2) { background: var(--accent); }
+      .app__dots span:last-child { background: #4ade80; }
+      .app__url { flex: 1; margin-left: 10px; padding: 6px 12px; border-radius: 8px; background: rgba(255, 255, 255, 0.04); color: #6b7280; font-family: var(--mono); font-size: 11.5px; text-align: left; }
+      .app__body { display: grid; grid-template-columns: 194px minmax(0, 1fr); }
+      .app__side { padding: 18px 13px; border-right: 1px solid var(--border); display: grid; gap: 5px; align-content: start; }
+      .app__side span.side-label { padding: 0 11px 8px; color: #4b5563; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; }
+      .app__side a { display: flex; align-items: center; gap: 10px; padding: 9px 11px; border-radius: 10px; color: #9ca3af; font-size: 12.5px; }
+      .app__side a i { font-size: 14px; }
+      .app__side a.is-on { background: var(--accent-soft); color: var(--accent); }
+      .app__main { padding: 20px; display: grid; gap: 16px; }
+      .app__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+      .app__head h3 { font-size: 1rem; }
+      .app__head small { color: #6b7280; font-size: 11.5px; }
+      .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .kpi { padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.02); text-align: left; }
+      .kpi span { display: block; color: #6b7280; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; }
+      .kpi strong { display: block; margin-top: 7px; font-family: var(--display); font-size: 1.35rem; }
+      .kpi em { font-style: normal; font-size: 11px; color: #4ade80; }
+      .kpi em.down { color: #f87171; }
+      .kpi .bars { display: flex; align-items: flex-end; gap: 3px; height: 22px; margin-top: 10px; }
+      .kpi .bars i { flex: 1; border-radius: 2px 2px 0 0; background: linear-gradient(180deg, rgba(255, 198, 26, 0.85), rgba(255, 198, 26, 0.25)); }
+      .kanban { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .col { display: grid; gap: 9px; align-content: start; }
+      .col__head { display: flex; align-items: center; justify-content: space-between; padding: 0 2px 4px; color: #6b7280; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+      .col__head b { color: #9ca3af; font-weight: 600; }
+      .task { padding: 11px 12px; border: 1px solid var(--border); border-radius: 11px; background: rgba(255, 255, 255, 0.03); text-align: left; }
+      .task b { display: block; font-size: 12.5px; font-weight: 600; }
+      .task span { display: block; margin-top: 3px; color: #6b7280; font-size: 11px; }
+      .task__meta { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+      .chip { padding: 2px 8px; border-radius: 999px; font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+      .chip--a { background: rgba(99, 102, 241, 0.18); color: #a5b4fc; }
+      .chip--b { background: rgba(45, 212, 191, 0.16); color: #5eead4; }
+      .chip--c { background: var(--accent-soft); color: var(--accent); }
+      .av { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--border-strong); object-fit: cover; }
+      .float-note {
+        position: absolute; right: -18px; bottom: 64px; width: 232px; padding: 14px 16px;
+        border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+        background: rgba(13, 18, 32, 0.96); box-shadow: var(--shadow); text-align: left;
+      }
+      .float-note strong { display: flex; align-items: center; gap: 8px; font-size: 12.5px; }
+      .float-note strong i { color: var(--accent); }
+      .float-note span { display: block; margin-top: 6px; color: #6b7280; font-size: 11px; }
+    </style>
+    <style>
+      /* ---------------- Benefícios ---------------- */
+      .benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
+      .benefit {
+        padding: 30px 26px; border: 1px solid var(--border); border-radius: var(--radius);
+        background: var(--panel); transition: transform 0.3s ease, border-color 0.3s ease;
+      }
+      .benefit:hover { transform: translateY(-6px); border-color: var(--border-strong); }
+      .benefit i { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); font-size: 1.2rem; }
+      .benefit h3 { margin-top: 20px; font-size: 1.1rem; }
+      .benefit p { margin-top: 10px; color: var(--muted); font-size: 0.93rem; }
+      .benefit strong { display: block; margin-top: 18px; color: var(--accent); font-family: var(--display); font-size: 1.6rem; }
+      .benefit strong small { color: #6b7280; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+
+      /* ---------------- Funcionalidades ---------------- */
+      .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 18px; }
+      .feature {
+        padding: 28px 26px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.01));
+        transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+      }
+      .feature:hover { transform: translateY(-4px); border-color: var(--accent); background: rgba(255, 198, 26, 0.05); }
+      .feature i { color: var(--accent); font-size: 1.35rem; }
+      .feature h3 { margin-top: 16px; font-size: 1.02rem; }
+      .feature p { margin-top: 9px; color: var(--muted); font-size: 0.9rem; }
+
+      /* ---------------- Como funciona ---------------- */
+      .steps-s { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+      .step-s { position: relative; padding: 30px 26px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel); overflow: hidden; }
+      .step-s em { position: absolute; right: 20px; top: 12px; font-family: var(--display); font-style: normal; font-size: 3.4rem; font-weight: 700; color: rgba(255, 255, 255, 0.05); }
+      .step-s h3 { font-size: 1.08rem; }
+      .step-s p { margin-top: 12px; color: var(--muted); font-size: 0.92rem; }
+      .step-s .step-ui { margin-top: 20px; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: rgba(11, 15, 25, 0.6); display: grid; gap: 7px; }
+      .step-s .step-ui i { height: 7px; border-radius: 4px; background: rgba(255, 255, 255, 0.08); }
+      .step-s .step-ui i.on { background: linear-gradient(90deg, var(--accent), rgba(255, 198, 26, 0.3)); }
+
+      /* ---------------- Integrações ---------------- */
+      .integr { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 14px; }
+      .integr__item {
+        display: flex; align-items: center; gap: 12px; padding: 18px 18px;
+        border: 1px solid var(--border); border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.025);
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+      .integr__item:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+      .integr__item i { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; background: rgba(255, 255, 255, 0.06); color: var(--accent); font-size: 1.05rem; }
+      .integr__item span { font-size: 0.9rem; font-weight: 600; }
+      .integr__item small { display: block; color: #6b7280; font-size: 11px; font-weight: 400; }
+
+      /* ---------------- Depoimentos ---------------- */
+      .tst { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; }
+      .tst article { padding: 28px 26px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel); display: flex; flex-direction: column; }
+      .tst__stars { color: var(--accent); font-size: 0.9rem; letter-spacing: 2px; }
+      .tst blockquote { margin: 16px 0 0; color: rgba(249, 250, 251, 0.88); font-size: 0.96rem; }
+      .tst__who { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 24px; }
+      .tst__who img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-strong); }
+      .tst__who strong { display: block; font-size: 0.9rem; }
+      .tst__who span { color: #6b7280; font-size: 0.8rem; }
+      .demo-tag { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 3px 9px; border: 1px dashed var(--border-strong); border-radius: 999px; color: #6b7280; font-size: 9.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+    </style>
+    <style>
+      /* ---------------- Planos ---------------- */
+      .switch-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 44px; }
+      .switch-row span { color: var(--muted); font-size: 0.92rem; font-weight: 500; }
+      .switch-row span.is-on { color: var(--text); font-weight: 600; }
+      .switch { position: relative; width: 62px; height: 34px; border-radius: 999px; border: 1px solid var(--border-strong); background: rgba(255, 255, 255, 0.05); cursor: pointer; transition: background 0.25s ease; }
+      .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); transition: transform 0.28s ease; }
+      .switch[aria-checked="true"]::after { transform: translateX(28px); }
+      .badge-off { padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+      .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 20px; align-items: stretch; }
+      .plan {
+        position: relative; display: flex; flex-direction: column; padding: 34px 30px;
+        border: 1px solid var(--border); border-radius: var(--radius); background: var(--panel);
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .plan:hover { transform: translateY(-6px); border-color: var(--border-strong); }
+      .plan--best { border-color: var(--accent); box-shadow: 0 40px 80px -50px rgba(255, 198, 26, 0.85); background: linear-gradient(180deg, rgba(255, 198, 26, 0.08), rgba(17, 24, 39, 0.75)); }
+      .plan__flag { position: absolute; top: -13px; left: 30px; padding: 5px 13px; border-radius: 999px; background: var(--accent); color: #0b0f19; font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+      .plan h3 { font-size: 1.15rem; }
+      .plan > p { margin-top: 8px; color: var(--muted); font-size: 0.88rem; }
+      .plan__price { display: flex; align-items: flex-end; gap: 6px; margin: 22px 0 4px; }
+      .plan__price strong { font-family: var(--display); font-size: 2.5rem; font-weight: 700; line-height: 1; }
+      .plan__price span { color: var(--muted); font-size: 0.86rem; }
+      .plan__cycle { color: #6b7280; font-size: 0.8rem; }
+      .plan ul { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 11px; }
+      .plan li { display: flex; gap: 10px; align-items: flex-start; color: var(--muted); font-size: 0.9rem; }
+      .plan li i { color: var(--accent); margin-top: 2px; }
+      .plan li.off { color: #4b5563; }
+      .plan li.off i { color: #374151; }
+      .plan .btn-f { margin-top: 28px; width: 100%; }
+
+      /* ---------------- FAQ ---------------- */
+      .accordion-s .accordion-item { background: transparent; border: 1px solid var(--border); border-radius: var(--radius-sm) !important; margin-bottom: 12px; overflow: hidden; }
+      .accordion-s .accordion-button { padding: 20px 22px; background: rgba(255, 255, 255, 0.025); color: var(--text); font-family: var(--display); font-size: 1rem; font-weight: 500; box-shadow: none; }
+      .accordion-s .accordion-button:not(.collapsed) { background: rgba(255, 198, 26, 0.07); color: var(--accent); }
+      .accordion-s .accordion-button::after { filter: invert(1) sepia(1) saturate(6) hue-rotate(1deg); }
+      .accordion-s .accordion-button:focus { box-shadow: none; border-color: transparent; }
+      .accordion-s .accordion-body { padding: 0 22px 22px; color: var(--muted); font-size: 0.94rem; background: rgba(255, 198, 26, 0.03); }
+
+      /* ---------------- CTA final + Footer ---------------- */
+      .cta-s { position: relative; padding: 96px 0; text-align: center; }
+      .cta-s__box { position: relative; padding: 64px 40px; border: 1px solid var(--border-strong); border-radius: 26px; background: linear-gradient(140deg, rgba(99, 102, 241, 0.16) 0%, rgba(11, 15, 25, 0.9) 45%, rgba(255, 198, 26, 0.12) 100%); overflow: hidden; }
+      .cta-s__box::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px); background-size: 46px 46px; opacity: 0.5; pointer-events: none; }
+      .cta-s__box h2, .cta-s__box p, .cta-s__box div { position: relative; }
+      .foot-s { border-top: 1px solid var(--border); padding: 66px 0 0; background: rgba(9, 12, 20, 0.7); }
+      .foot-s__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 34px; padding-bottom: 46px; }
+      .foot-s h4 { font-size: 11.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); margin-bottom: 18px; }
+      .foot-s ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+      .foot-s ul a, .foot-s p { color: var(--muted); font-size: 0.89rem; }
+      .foot-s ul a:hover { color: var(--accent); }
+      .foot-s__bottom { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding: 22px 0; border-top: 1px solid var(--border); color: #6b7280; font-size: 0.82rem; }
+      .foot-s__bottom a { color: var(--muted); }
+      .foot-s__bottom a:hover { color: var(--accent); }
+
+      /* ---------------- Reveal + toast ---------------- */
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; transition-delay: var(--delay, 0ms); }
+      .reveal.is-visible { opacity: 1; transform: none; }
+      .toast-s { position: fixed; left: 50%; bottom: 26px; z-index: 1095; display: flex; align-items: center; gap: 12px; padding: 15px 22px; border: 1px solid var(--border-strong); border-radius: 12px; background: rgba(11, 15, 25, 0.97); color: var(--text); font-size: 0.9rem; transform: translate(-50%, 22px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
+      .toast-s.is-on { opacity: 1; transform: translate(-50%, 0); }
+      .toast-s i { color: var(--accent); }
+      .skip-link { position: fixed; left: 16px; top: -80px; z-index: 1100; padding: 10px 18px; border-radius: 0 0 12px 12px; background: var(--accent); color: #0b0f19; font-weight: 600; font-size: 0.86rem; transition: top 0.2s ease; }
+      .skip-link:focus { top: 0; }
+    </style>
+    <style>
+      @media (max-width: 1080px) {
+        .nav__links, .nav__actions .btn-f { display: none; }
+        .burger { display: grid; place-items: center; }
+        .app__body { grid-template-columns: 1fr; }
+        .app__side { display: none; }
+        .foot-s__grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 900px) {
+        .steps-s { grid-template-columns: 1fr; }
+        .float-note { position: static; width: 100%; margin-top: 14px; }
+        .band { padding: 84px 0; }
+      }
+      @media (max-width: 700px) {
+        .kpis { grid-template-columns: 1fr; }
+        .kanban { grid-template-columns: 1fr; gap: 16px; }
+        .app__main { padding: 15px; }
+        .hero-s { padding-top: calc(var(--header-h) + 50px); }
+        .hero-s__form input, .hero-s__form .btn-f { width: 100%; }
+        .cta-s__box { padding: 44px 22px; }
+        .foot-s__grid { grid-template-columns: 1fr; }
+        .foot-s__bottom { flex-direction: column; align-items: flex-start; }
+        .logos ul { gap: 12px 22px; }
+      }
+      @media (max-width: 480px) {
+        body { font-size: 15.5px; }
+        .band { padding: 68px 0; }
+        .plan { padding: 28px 22px; }
+        .app__url { display: none; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#topo">Ir para o conteudo principal</a>
+
+    <header class="nav" id="nav">
+      <div class="wrap nav__inner">
+        <a class="brand" href="#topo" aria-label="FlowDesk — inicio">
+          <span class="brand__mark" aria-hidden="true">F</span>
+          <span>
+            <strong>FlowDesk</strong>
+            <small>Gestão de operações</small>
+          </span>
+        </a>
+
+        <nav aria-label="Navegação principal">
+          <ul class="nav__links">
+            <li><a href="#produto">Produto</a></li>
+            <li><a href="#beneficios">Benefícios</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#integracoes">Integrações</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#faq">Dúvidas</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav__actions">
+          <a class="backlink" href="../index.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio</a>
+          <a class="btn-f btn-f--primary" href="#planos">Começar agora</a>
+          <button class="burger" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuS" aria-controls="menuS" aria-label="Abrir menu de navegação">
+            <i class="bi bi-list" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="offcanvas offcanvas-end offcanvas-s" tabindex="-1" id="menuS" aria-labelledby="menuSLabel">
+      <div class="offcanvas-header border-bottom" style="border-color: rgba(255,255,255,0.09) !important">
+        <span class="brand" id="menuSLabel"><span class="brand__mark" aria-hidden="true">F</span><strong>FlowDesk</strong></span>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
+      </div>
+      <div class="offcanvas-body">
+        <a class="m-link" href="#produto" data-bs-dismiss="offcanvas">Produto <i class="bi bi-arrow-right"></i></a>
+        <a class="m-link" href="#beneficios" data-bs-dismiss="offcanvas">Benefícios <i class="bi bi-arrow-right"></i></a>
+        <a class="m-link" href="#recursos" data-bs-dismiss="offcanvas">Recursos <i class="bi bi-arrow-right"></i></a>
+        <a class="m-link" href="#integracoes" data-bs-dismiss="offcanvas">Integrações <i class="bi bi-arrow-right"></i></a>
+        <a class="m-link" href="#planos" data-bs-dismiss="offcanvas">Planos <i class="bi bi-arrow-right"></i></a>
+        <a class="m-link" href="#faq" data-bs-dismiss="offcanvas">Dúvidas <i class="bi bi-arrow-right"></i></a>
+        <a class="btn-f btn-f--primary w-100 mt-4" href="#planos" data-bs-dismiss="offcanvas">Começar agora</a>
+        <a class="backlink mt-4" href="../index.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio</a>
+      </div>
+    </div>
+
+    <main id="conteudo">
+      <section class="hero-s" id="topo" aria-labelledby="hero-title">
+        <div class="wrap">
+          <span class="pill reveal"><i class="bi bi-stars" aria-hidden="true"></i> Plataforma de gestão operacional</span>
+          <h1 id="hero-title" class="reveal">
+            Organize sua operação.<br />
+            <span>Ganhe tempo para crescer.</span>
+          </h1>
+          <p class="hero-s__sub reveal">
+            O FlowDesk reúne tarefas, clientes, prazos e indicadores em um único
+            painel. Sua equipe sabe o que fazer e você sabe onde o negócio está.
+          </p>
+
+          <form class="hero-s__form reveal" id="formHero" novalidate>
+            <label class="visually-hidden" for="emailHero">Seu e-mail profissional</label>
+            <input type="email" id="emailHero" name="email" placeholder="seu@email.com.br" required />
+            <button class="btn-f btn-f--primary btn-f--lg" type="submit">
+              Criar conta grátis
+              <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </button>
+          </form>
+          <p class="hero-s__note reveal">
+            14 dias de teste demonstrativo · sem cartão de crédito · cancele quando quiser
+          </p>
+
+          <div class="logos reveal">
+            <p>Equipes que já organizam o dia a dia com o FlowDesk</p>
+            <ul>
+              <li><i class="bi bi-hexagon" aria-hidden="true"></i> Norvale</li>
+              <li><i class="bi bi-triangle" aria-hidden="true"></i> Capitel</li>
+              <li><i class="bi bi-circle-half" aria-hidden="true"></i> Lumina</li>
+              <li><i class="bi bi-diamond" aria-hidden="true"></i> Vertexo</li>
+              <li><i class="bi bi-octagon" aria-hidden="true"></i> Prado</li>
+            </ul>
+            <p class="mt-3" style="letter-spacing: 0; text-transform: none; font-size: 11px">
+              Marcas fictícias utilizadas apenas nesta demonstração.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="band" id="produto" style="padding-top: 20px" aria-labelledby="produto-title">
+        <div class="wrap">
+          <div class="head head--center reveal">
+            <span class="pill"><i class="bi bi-layout-three-columns" aria-hidden="true"></i> O produto por dentro</span>
+            <h2 class="xl" id="produto-title">Uma visão só, para toda a operação</h2>
+            <p class="sub">
+              Alterne entre as telas abaixo para ver como o FlowDesk organiza o
+              dia da sua equipe. Interface demonstrativa, construída apenas com
+              HTML e CSS.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-2 mt-4" role="tablist" aria-label="Telas da plataforma">
+              <button class="btn-f btn-f--primary" type="button" role="tab" aria-selected="true" data-view="painel"><i class="bi bi-speedometer2" aria-hidden="true"></i> Painel</button>
+              <button class="btn-f btn-f--ghost" type="button" role="tab" aria-selected="false" data-view="tarefas"><i class="bi bi-kanban" aria-hidden="true"></i> Tarefas</button>
+              <button class="btn-f btn-f--ghost" type="button" role="tab" aria-selected="false" data-view="clientes"><i class="bi bi-people" aria-hidden="true"></i> Clientes</button>
+            </div>
+          </div>
+
+          <div class="app-wrap reveal">
+            <div class="app">
+              <div class="app__bar">
+                <span class="app__dots" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="app__url">app.flowdesk.exemplo/painel</span>
+              </div>
+
+              <div class="app__body">
+                <aside class="app__side" aria-hidden="true">
+                  <span class="side-label">Workspace</span>
+                  <a class="is-on"><i class="bi bi-grid-1x2"></i> Painel</a>
+                  <a><i class="bi bi-kanban"></i> Tarefas</a>
+                  <a><i class="bi bi-people"></i> Clientes</a>
+                  <a><i class="bi bi-bar-chart"></i> Relatórios</a>
+                  <a><i class="bi bi-lightning-charge"></i> Automações</a>
+                  <span class="side-label mt-3">Conta</span>
+                  <a><i class="bi bi-gear"></i> Configurações</a>
+                </aside>
+
+                <div class="app__main">
+                  <div class="app__head">
+                    <div>
+                      <h3 id="viewTitle">Visão geral da operação</h3>
+                      <small id="viewSub">Dados atualizados há 2 minutos</small>
+                    </div>
+                    <span class="chip chip--c">Tempo real</span>
+                  </div>
+
+                  <div class="view" id="view-painel">
+                    <div class="kpis">
+                      <div class="kpi">
+                        <span>Tarefas concluídas</span>
+                        <strong>184</strong>
+                        <em>+12% no mês</em>
+                        <div class="bars" aria-hidden="true"><i style="height: 40%"></i><i style="height: 62%"></i><i style="height: 48%"></i><i style="height: 78%"></i><i style="height: 96%"></i></div>
+                      </div>
+                      <div class="kpi">
+                        <span>Tempo médio de resposta</span>
+                        <strong>2h 14min</strong>
+                        <em>−18% no mês</em>
+                        <div class="bars" aria-hidden="true"><i style="height: 88%"></i><i style="height: 66%"></i><i style="height: 52%"></i><i style="height: 44%"></i><i style="height: 30%"></i></div>
+                      </div>
+                      <div class="kpi">
+                        <span>Projetos ativos</span>
+                        <strong>27</strong>
+                        <em>3 em risco</em>
+                        <div class="bars" aria-hidden="true"><i style="height: 60%"></i><i style="height: 54%"></i><i style="height: 72%"></i><i style="height: 58%"></i><i style="height: 84%"></i></div>
+                      </div>
+                    </div>
+                    <div class="kanban">
+                      <div class="col">
+                        <div class="col__head"><span>A fazer</span><b>6</b></div>
+                        <div class="task"><b>Revisar proposta comercial</b><span>Cliente: Norvale</span><div class="task__meta"><span class="chip chip--a">Alta</span><span class="mono" style="font-size:10px;color:#6b7280">hoje</span></div></div>
+                        <div class="task"><b>Atualizar planilha de custos</b><span>Financeiro</span><div class="task__meta"><span class="chip chip--b">Média</span><span class="mono" style="font-size:10px;color:#6b7280">amanhã</span></div></div>
+                      </div>
+                      <div class="col">
+                        <div class="col__head"><span>Em andamento</span><b>4</b></div>
+                        <div class="task"><b>Implantação do cliente Capitel</b><span>Onboarding</span><div class="task__meta"><span class="chip chip--c">Prioridade</span><img class="av" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=70" alt="" width="40" height="40" loading="lazy" /></div></div>
+                        <div class="task"><b>Integração de formulários</b><span>Produto</span><div class="task__meta"><span class="chip chip--b">Média</span><img class="av" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=70" alt="" width="40" height="40" loading="lazy" /></div></div>
+                      </div>
+                      <div class="col">
+                        <div class="col__head"><span>Concluído</span><b>18</b></div>
+                        <div class="task"><b>Relatório mensal enviado</b><span>Diretoria</span><div class="task__meta"><span class="chip chip--b">Feito</span><span class="mono" style="font-size:10px;color:#6b7280">ontem</span></div></div>
+                        <div class="task"><b>Pipeline revisado</b><span>Comercial</span><div class="task__meta"><span class="chip chip--b">Feito</span><span class="mono" style="font-size:10px;color:#6b7280">seg</span></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <aside class="float-note">
+              <strong><i class="bi bi-bell" aria-hidden="true"></i> Resumo do dia</strong>
+              <span>3 tarefas vencem hoje e 2 propostas aguardam aprovação.</span>
+            </aside>
+          </div>
+        </div>
+      </section>
+      <section class="band" id="beneficios" aria-labelledby="ben-title">
+        <div class="wrap">
+          <div class="head reveal">
+            <span class="pill"><i class="bi bi-graph-up-arrow" aria-hidden="true"></i> Benefícios</span>
+            <h2 class="xl" id="ben-title">Menos planilhas, menos reuniões, mais entrega</h2>
+            <p class="sub">
+              O FlowDesk foi desenhado para equipes que precisam de clareza — não
+              de mais uma ferramenta para aprender.
+            </p>
+          </div>
+
+          <div class="benefits">
+            <article class="benefit reveal">
+              <i class="bi bi-clock-history" aria-hidden="true"></i>
+              <h3>Até 6 horas por semana</h3>
+              <p>Tarefas, prazos e responsáveis organizados automaticamente em um só painel.</p>
+              <strong>6h <small>economizadas por pessoa/mês*</small></strong>
+            </article>
+            <article class="benefit reveal" style="--delay: 90ms">
+              <i class="bi bi-eye" aria-hidden="true"></i>
+              <h3>Visibilidade total</h3>
+              <p>Cada etapa do projeto com status claro, histórico e registro de decisões.</p>
+              <strong>100% <small>das tarefas rastreadas*</small></strong>
+            </article>
+            <article class="benefit reveal" style="--delay: 180ms">
+              <i class="bi bi-people" aria-hidden="true"></i>
+              <h3>Equipe alinhada</h3>
+              <p>Comentários, menções e notificações dentro do contexto de cada entrega.</p>
+              <strong>+34% <small>de aderência ao processo*</small></strong>
+            </article>
+            <article class="benefit reveal" style="--delay: 270ms">
+              <i class="bi bi-shield-lock" aria-hidden="true"></i>
+              <h3>Operação segura</h3>
+              <p>Perfis de acesso, trilha de auditoria e exportação de dados a qualquer momento.</p>
+              <strong>LGPD <small>boas práticas aplicadas*</small></strong>
+            </article>
+          </div>
+          <p class="mt-3" style="color:#4b5563;font-size:0.8rem">
+            * Indicadores ilustrativos desta demonstração, sem origem em dados reais.
+          </p>
+        </div>
+      </section>
+
+      <section class="band" id="recursos" aria-labelledby="rec-title">
+        <div class="wrap">
+          <div class="head reveal">
+            <span class="pill"><i class="bi bi-grid-3x3-gap" aria-hidden="true"></i> Funcionalidades</span>
+            <h2 class="xl" id="rec-title">Tudo que a operação precisa, no mesmo lugar</h2>
+          </div>
+
+          <div class="features">
+            <article class="feature reveal"><i class="bi bi-kanban" aria-hidden="true"></i><h3>Quadros personalizáveis</h3><p>Crie fluxos por equipe, projeto ou cliente, com colunas e regras próprias.</p></article>
+            <article class="feature reveal"><i class="bi bi-calendar4-week" aria-hidden="true"></i><h3>Prazos e dependências</h3><p>Vencimentos, bloqueios e sequências de tarefas calculados automaticamente.</p></article>
+            <article class="feature reveal"><i class="bi bi-bar-chart-line" aria-hidden="true"></i><h3>Relatórios em tempo real</h3><p>Dashboard com produtividade, gargalos e volume por período.</p></article>
+            <article class="feature reveal"><i class="bi bi-chat-dots" aria-hidden="true"></i><h3>Comunicação centralizada</h3><p>Discussões vinculadas à tarefa, com histórico completo e menções.</p></article>
+            <article class="feature reveal"><i class="bi bi-lightning-charge" aria-hidden="true"></i><h3>Automações simples</h3><p>Regras do tipo "quando isso acontecer, faça aquilo" configuradas em minutos.</p></article>
+            <article class="feature reveal"><i class="bi bi-phone" aria-hidden="true"></i><h3>Experiência mobile</h3><p>Interface responsiva para aprovar, comentar e acompanhar de qualquer lugar.</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="band" id="como-funciona" aria-labelledby="cf-title">
+        <div class="wrap">
+          <div class="head head--center reveal">
+            <span class="pill"><i class="bi bi-signpost-split" aria-hidden="true"></i> Como funciona</span>
+            <h2 class="xl" id="cf-title">Do caos ao processo em três passos</h2>
+          </div>
+
+          <div class="steps-s">
+            <article class="step-s reveal">
+              <em>01</em>
+              <h3>Conecte sua operação</h3>
+              <p>Importe projetos, clientes e tarefas existentes ou comece do zero com modelos prontos por segmento.</p>
+              <div class="step-ui" aria-hidden="true"><i class="on"></i><i class="on"></i><i style="width:70%"></i><i style="width:45%"></i></div>
+            </article>
+            <article class="step-s reveal" style="--delay: 90ms">
+              <em>02</em>
+              <h3>Defina o fluxo</h3>
+              <p>Monte as etapas, responsáveis e prazos. As automações cuidam do resto em segundo plano.</p>
+              <div class="step-ui" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i style="width:55%"></i></div>
+            </article>
+            <article class="step-s reveal" style="--delay: 180ms">
+              <em>03</em>
+              <h3>Acompanhe com dados</h3>
+              <p>Saiba o que está travando, quem está sobrecarregado e onde agir antes que vire problema.</p>
+              <div class="step-ui" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="integracoes" aria-labelledby="int-title">
+        <div class="wrap">
+          <div class="head head--center reveal">
+            <span class="pill"><i class="bi bi-plug" aria-hidden="true"></i> Integrações</span>
+            <h2 class="xl" id="int-title">Conversa bem com o que você já usa</h2>
+            <p class="sub">
+              O FlowDesk troca dados com as ferramentas do seu time por meio de
+              conexões nativas e API aberta. Nomes genéricos ilustrativos.
+            </p>
+          </div>
+
+          <div class="integr">
+            <div class="integr__item reveal"><i class="bi bi-calendar-check" aria-hidden="true"></i><span>Agenda corporativa<small>Sincronização de eventos</small></span></div>
+            <div class="integr__item reveal"><i class="bi bi-envelope-at" aria-hidden="true"></i><span>E-mail e campanhas<small>Envio e rastreio</small></span></div>
+            <div class="integr__item reveal"><i class="bi bi-chat-square-text" aria-hidden="true"></i><span>Mensageria<small>Conversas no fluxo</small></span></div>
+            <div class="integr__item reveal"><i class="bi bi-credit-card" aria-hidden="true"></i><span>Faturamento<small>Cobranças e recibos</small></span></div>
+            <div class="integr__item reveal"><i class="bi bi-cloud-arrow-up" aria-hidden="true"></i><span>Armazenamento<small>Documentos e anexos</small></span></div>
+            <div class="integr__item reveal"><i class="bi bi-braces" aria-hidden="true"></i><span>API aberta<small>Webhooks e REST</small></span></div>
+            <div class="integr__item reveal"><i class="bi bi-diagram-3" aria-hidden="true"></i><span>BI e planilhas<small>Exportação de dados</small></span></div>
+            <div class="integr__item reveal"><i class="bi bi-fingerprint" aria-hidden="true"></i><span>Login único<small>SSO corporativo</small></span></div>
+          </div>
+        </div>
+      </section>
+      <section class="band" id="depoimentos" aria-labelledby="dep-title">
+        <div class="wrap">
+          <div class="head head--center reveal">
+            <span class="pill"><i class="bi bi-chat-quote" aria-hidden="true"></i> Depoimentos</span>
+            <h2 class="xl" id="dep-title">Quem usa, sente a diferença no dia a dia</h2>
+            <p class="sub">Depoimentos fictícios, criados exclusivamente para esta demonstração.</p>
+          </div>
+
+          <div class="tst">
+            <article class="reveal">
+              <span class="tst__stars" aria-label="5 de 5 estrelas">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <blockquote>
+                Antes eu descobria um atraso na reunião de sexta. Agora vejo no
+                painel na segunda de manhã e ajo na hora.
+              </blockquote>
+              <span class="demo-tag">Depoimento demonstrativo</span>
+              <div class="tst__who">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=70" alt="Retrato de homem de suéter cinza" width="120" height="120" loading="lazy" />
+                <span><strong>Gestor fictício A</strong><span>Operações · Empresa fictícia</span></span>
+              </div>
+            </article>
+
+            <article class="reveal" style="--delay: 90ms">
+              <span class="tst__stars" aria-label="5 de 5 estrelas">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <blockquote>
+                A equipe parou de perguntar "qual é a prioridade de hoje?".
+                Isso sozinho já valeu a implantação.
+              </blockquote>
+              <span class="demo-tag">Depoimento demonstrativo</span>
+              <div class="tst__who">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=70" alt="Retrato de mulher sorrindo" width="120" height="120" loading="lazy" />
+                <span><strong>Gestora fictícia B</strong><span>Atendimento · Empresa fictícia</span></span>
+              </div>
+            </article>
+
+            <article class="reveal" style="--delay: 180ms">
+              <span class="tst__stars" aria-label="4 de 5 estrelas">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+              <blockquote>
+                Levei menos de uma semana para migrar tudo. O time adotou rápido
+                porque a interface é direta.
+              </blockquote>
+              <span class="demo-tag">Depoimento demonstrativo</span>
+              <div class="tst__who">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=70" alt="Retrato de mulher de camisa listrada" width="120" height="120" loading="lazy" />
+                <span><strong>Gestora fictícia C</strong><span>Projetos · Empresa fictícia</span></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="band" id="planos" aria-labelledby="plan-title">
+        <div class="wrap">
+          <div class="head head--center reveal">
+            <span class="pill"><i class="bi bi-tags" aria-hidden="true"></i> Planos e preços</span>
+            <h2 class="xl" id="plan-title">Escolha o tamanho da sua operação</h2>
+            <p class="sub">Valores fictícios, exibidos apenas para demonstrar a interação de alternância entre ciclos.</p>
+          </div>
+
+          <div class="switch-row">
+            <span id="labelMensal" class="is-on">Mensal</span>
+            <button class="switch" type="button" role="switch" aria-checked="false" id="billingSwitch" aria-label="Alternar entre cobrança mensal e anual"></button>
+            <span id="labelAnual">Anual</span>
+            <span class="badge-off">economize 20%</span>
+          </div>
+
+          <div class="plans">
+            <article class="plan reveal">
+              <h3>Essencial</h3>
+              <p>Para times pequenos organizando a primeira rotina.</p>
+              <div class="plan__price"><strong data-price="29" data-cycle="mensal">R$ 29</strong><span>/ usuário</span></div>
+              <span class="plan__cycle">cobrança mensal · cancele quando quiser</span>
+              <ul>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Até 5 usuários</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Quadros e tarefas ilimitadas</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Relatórios essenciais</li>
+                <li class="off"><i class="bi bi-dash-lg" aria-hidden="true"></i> Automações avançadas</li>
+                <li class="off"><i class="bi bi-dash-lg" aria-hidden="true"></i> SSO corporativo</li>
+              </ul>
+              <button class="btn-f btn-f--ghost" type="button" data-plan="Essencial">Começar grátis</button>
+            </article>
+
+            <article class="plan plan--best reveal" style="--delay: 90ms">
+              <span class="plan__flag">Mais escolhido</span>
+              <h3>Profissional</h3>
+              <p>Para operações que já têm volume e precisam de controle.</p>
+              <div class="plan__price"><strong data-price="79" data-cycle="mensal">R$ 79</strong><span>/ usuário</span></div>
+              <span class="plan__cycle">cobrança mensal · cancele quando quiser</span>
+              <ul>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Usuários ilimitados</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Automações e gatilhos</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Relatórios personalizados</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> API e webhooks</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Suporte prioritário</li>
+              </ul>
+              <button class="btn-f btn-f--primary" type="button" data-plan="Profissional">Escolher Profissional</button>
+            </article>
+
+            <article class="plan reveal" style="--delay: 180ms">
+              <h3>Corporativo</h3>
+              <p>Para empresas com múltiplos times, áreas e exigências de TI.</p>
+              <div class="plan__price"><strong data-price="149" data-cycle="mensal">R$ 149</strong><span>/ usuário</span></div>
+              <span class="plan__cycle">contrato anual · implantação assistida</span>
+              <ul>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Tudo do Profissional</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> SSO e políticas de acesso</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Trilha de auditoria</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Ambiente dedicado</li>
+                <li><i class="bi bi-check2" aria-hidden="true"></i> Gerente de sucesso</li>
+              </ul>
+              <button class="btn-f btn-f--ghost" type="button" data-plan="Corporativo">Falar com vendas</button>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="band" id="faq" aria-labelledby="faq-title">
+        <div class="wrap">
+          <div class="head head--center reveal">
+            <span class="pill"><i class="bi bi-question-circle" aria-hidden="true"></i> Perguntas frequentes</span>
+            <h2 class="xl" id="faq-title">Dúvidas que aparecem sempre</h2>
+            <p class="sub">Respostas escritas para esta demonstração do produto.</p>
+          </div>
+
+          <div class="accordion accordion-s reveal" id="faqList">
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqH1">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                  Quanto tempo leva para colocar a equipe em andamento?
+                </button>
+              </h3>
+              <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faqH1" data-bs-parent="#faqList">
+                <div class="accordion-body">
+                  A maioria das equipes coloca a primeira operação funcionando em
+                  até cinco dias úteis: criação do espaço, convite dos
+                  colaboradores e importação das tarefas existentes.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqH2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                  Existe limite de usuários ou de projetos?
+                </button>
+              </h3>
+              <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faqH2" data-bs-parent="#faqList">
+                <div class="accordion-body">
+                  No plano Essencial há limite de cinco usuários. Nos planos
+                  Profissional e Corporativo os usuários são ilimitados, assim
+                  como a quantidade de projetos e quadros.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqH3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                  Posso integrar com as ferramentas que já uso?
+                </button>
+              </h3>
+              <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faqH3" data-bs-parent="#faqList">
+                <div class="accordion-body">
+                  Sim. Há conectores prontos para agendas, mensageria,
+                  faturamento e armazenamento, além de uma API REST aberta e
+                  webhooks para casos específicos.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqH4">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                  Como funcionam os preços e a cobrança anual?
+                </button>
+              </h3>
+              <div id="faq4" class="accordion-collapse collapse" aria-labelledby="faqH4" data-bs-parent="#faqList">
+                <div class="accordion-body">
+                  O valor é por usuário, cobrado mensalmente. Na cobrança anual o
+                  preço por usuário cai 20% e o pagamento é feito em uma única
+                  parcela. Não há taxa de adesão.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqH5">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5" aria-expanded="false" aria-controls="faq5">
+                  Meus dados ficam seguros?
+                </button>
+              </h3>
+              <div id="faq5" class="accordion-collapse collapse" aria-labelledby="faqH5" data-bs-parent="#faqList">
+                <div class="accordion-body">
+                  O produto adota práticas alinhadas à LGPD: controle de acesso
+                  por perfil, trilha de auditoria, criptografia em trânsito e
+                  exportação de dados a qualquer momento.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header" id="faqH6">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6" aria-expanded="false" aria-controls="faq6">
+                  Posso cancelar quando quiser?
+                </button>
+              </h3>
+              <div id="faq6" class="accordion-collapse collapse" aria-labelledby="faqH6" data-bs-parent="#faqList">
+                <div class="accordion-body">
+                  Sim. O cancelamento é feito na própria tela de cobrança e o
+                  acesso continua ativo até o fim do período já pago.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="cta-s" aria-labelledby="cta-title">
+        <div class="wrap">
+          <div class="cta-s__box reveal">
+            <h2 class="xl" id="cta-title">Sua operação merece funcionar em um só lugar</h2>
+            <p class="sub mx-auto" style="max-width: 560px">
+              Comece o teste demonstrativo hoje e veja sua equipe trabalhando
+              com clareza desde a primeira semana.
+            </p>
+            <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+              <button class="btn-f btn-f--primary btn-f--lg" type="button" data-cta="FlowDesk">
+                Começar agora grátis
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+              <a class="btn-f btn-f--ghost btn-f--lg" href="#planos">Comparar planos</a>
+            </div>
+            <p class="mt-3 mb-0" style="color:#6b7280;font-size:0.84rem">
+              Configuração em minutos · sem cartão de crédito
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot-s">
+      <div class="wrap">
+        <div class="foot-s__grid">
+          <div>
+            <a class="brand" href="#topo" aria-label="FlowDesk — inicio">
+              <span class="brand__mark" aria-hidden="true">F</span>
+              <span>
+                <strong>FlowDesk</strong>
+                <small>Gestão de operações</small>
+              </span>
+            </a>
+            <p class="mt-3" style="max-width: 290px">
+              Plataforma de gestão operacional para equipes que precisam de
+              clareza, ritmo e previsibilidade no dia a dia.
+            </p>
+          </div>
+
+          <div>
+            <h4>Produto</h4>
+            <ul>
+              <li><a href="#produto">Visão geral</a></li>
+              <li><a href="#recursos">Funcionalidades</a></li>
+              <li><a href="#integracoes">Integrações</a></li>
+              <li><a href="#planos">Preços</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Empresa</h4>
+            <ul>
+              <li><a href="#beneficios">Benefícios</a></li>
+              <li><a href="#como-funciona">Como funciona</a></li>
+              <li><a href="#depoimentos">Depoimentos</a></li>
+              <li><a href="#faq">Perguntas frequentes</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="#cta-title">Falar com vendas</a></li>
+              <li><a href="#cta-title">Suporte</a></li>
+              <li><a href="#cta-title">Status do serviço</a></li>
+              <li><a href="../index.html">Ver portfólio do autor</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="foot-s__bottom">
+          <span>&copy; <span id="year">2026</span> FlowDesk. Todos os direitos reservados.</span>
+          <span>
+            Projeto demonstrativo criado por
+            <a href="../index.html">Victor Eduardo</a> · marca, planos e números fictícios
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast-s" id="toast" role="status" aria-live="polite">
+      <i class="bi bi-info-circle" aria-hidden="true"></i>
+      <span id="toastText"></span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        var nav = document.getElementById("nav");
+
+        /* ---------- 1. Header ---------- */
+        function onScroll() {
+          if (nav) {
+            nav.classList.toggle("is-solid", window.pageYOffset > 20);
+          }
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        /* ---------- 2. Scroll suave ---------- */
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            var href = this.getAttribute("href");
+            if (!href || href.length < 2) { return; }
+            var target = document.getElementById(href.slice(1));
+            if (!target) { return; }
+            event.preventDefault();
+            var offset = (nav ? nav.offsetHeight : 0) + 10;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, "", href);
+            }
+          });
+        });
+
+        /* ---------- 3. Reveal ---------- */
+        function initReveal() {
+          var items = document.querySelectorAll(".reveal");
+          if (!items.length) { return; }
+          if (!("IntersectionObserver" in window)) {
+            items.forEach(function (el) { el.classList.add("is-visible"); });
+            return;
+          }
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: "0px 0px -60px 0px", threshold: 0.1 });
+          items.forEach(function (el) { observer.observe(el); });
+        }
+
+        /* ---------- 4. Toast ---------- */
+        var toast = document.getElementById("toast");
+        var toastText = document.getElementById("toastText");
+        var toastTimer = null;
+
+        function showToast(message, icon) {
+          if (!toast) { return; }
+          toastText.textContent = message;
+          var i = toast.querySelector("i");
+          if (i && icon) { i.className = "bi " + icon; }
+          toast.classList.add("is-on");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { toast.classList.remove("is-on"); }, 3600);
+        }
+        /* ---------- 5. Telas do produto ---------- */
+        var VIEWS = {
+          painel: {
+            title: "Visão geral da operação",
+            sub: "Dados atualizados há 2 minutos"
+          },
+          tarefas: {
+            title: "Quadro de tarefas da semana",
+            sub: "Filtro: todas as equipes"
+          },
+          clientes: {
+            title: "Carteira de clientes",
+            sub: "28 cadastros ativos"
+          }
+        };
+
+        var AVATARS = [
+          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=70",
+          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=70",
+          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=70",
+          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&q=70"
+        ];
+
+        function taskCard(title, tag, chip, person) {
+          return '<div class="task"><b>' + title + '</b><span>' + tag + '</span>' +
+            '<div class="task__meta"><span class="chip ' + chip + '">' + person.chip + '</span>' +
+            '<img class="av" src="' + AVATARS[person.idx] + '" alt="" width="40" height="40" loading="lazy" /></div></div>';
+        }
+
+        function buildTarefas() {
+          var col = function (name, count, cards) {
+            return '<div class="col"><div class="col__head"><span>' + name + '</span><b>' + count + '</b></div>' + cards + '</div>';
+          };
+          return '<div class="kanban">' +
+            col("A fazer", 3,
+              taskCard("Enviar proposta revisada", "Comercial", "chip--a", { idx: 0, chip: "Alta" }) +
+              taskCard("Checklist de onboarding", "Operações", "chip--b", { idx: 1, chip: "Média" })
+            ) +
+            col("Em andamento", 2,
+              taskCard("Automação de follow-up", "Produto", "chip--c", { idx: 2, chip: "Prioridade" }) +
+              taskCard("Migração de contratos", "Administrativo", "chip--b", { idx: 3, chip: "Média" })
+            ) +
+            col("Revisão", 2,
+              taskCard("Relatório semanal", "Diretoria", "chip--a", { idx: 0, chip: "Alta" })
+            ) +
+            col("Concluído", 4,
+              taskCard("Treinamento da equipe", "Pessoas", "chip--b", { idx: 1, chip: "Feito" })
+            ) +
+            '</div>';
+        }
+
+        function buildClientes() {
+          var rows = [
+            ["Norvale Logistica", "Em implantação", "chip--c", 0],
+            ["Capitel Servicos", "Ativo", "chip--b", 1],
+            ["Lumina Comercio", "Ativo", "chip--b", 2],
+            ["Vertexo Engenharia", "Em negociacao", "chip--a", 3],
+            ["Prado Varejo", "Ativo", "chip--b", 1]
+          ];
+          var html = '<div class="kpis"><div class="kpi"><span>Clientes ativos</span><strong>28</strong><em>+4 no trimestre</em></div>' +
+            '<div class="kpi"><span>Ticket medio</span><strong>R$ 4.280</strong><em>+9% no trimestre</em></div>' +
+            '<div class="kpi"><span>Retencao</span><strong>96%</strong><em>estavel</em></div></div>';
+          html += '<div class="col" style="gap:8px">';
+          rows.forEach(function (row) {
+            html += '<div class="task" style="display:flex;align-items:center;gap:12px;padding:12px 14px">' +
+              '<img class="av" style="width:34px;height:34px" src="' + AVATARS[row[3]] + '" alt="" width="68" height="68" loading="lazy" />' +
+              '<div style="flex:1;min-width:0"><b>' + row[0] + '</b><span>Conta demo · contrato anual</span></div>' +
+              '<span class="chip ' + row[2] + '">' + row[1] + '</span></div>';
+          });
+          html += '</div>';
+          return html;
+        }
+
+        function initViews() {
+          var main = document.querySelector(".app__main");
+          var titleEl = document.getElementById("viewTitle");
+          var subEl = document.getElementById("viewSub");
+          var panel = document.getElementById("view-painel");
+          var tabs = document.querySelectorAll("[data-view]");
+          if (!main || !panel || !tabs.length) { return; }
+
+          var extra = document.createElement("div");
+          extra.className = "view";
+          extra.id = "view-tarefas";
+          extra.innerHTML = buildTarefas();
+          extra.hidden = true;
+          main.appendChild(extra);
+
+          var extra2 = document.createElement("div");
+          extra2.className = "view";
+          extra2.id = "view-clientes";
+          extra2.innerHTML = buildClientes();
+          extra2.hidden = true;
+          main.appendChild(extra2);
+
+          tabs.forEach(function (tab) {
+            tab.addEventListener("click", function () {
+              var key = tab.getAttribute("data-view");
+              var config = VIEWS[key];
+              if (!config) { return; }
+
+              tabs.forEach(function (t) {
+                var on = t === tab;
+                t.setAttribute("aria-selected", on ? "true" : "false");
+                t.classList.toggle("btn-f--primary", on);
+                t.classList.toggle("btn-f--ghost", !on);
+              });
+
+              ["painel", "tarefas", "clientes"].forEach(function (name) {
+                var el = document.getElementById("view-" + name);
+                if (el) { el.hidden = name !== key; }
+              });
+
+              if (titleEl) { titleEl.textContent = config.title; }
+              if (subEl) { subEl.textContent = config.sub; }
+            });
+          });
+        }
+        /* ---------- 6. Alternância mensal / anual ---------- */
+        function initBilling() {
+          var sw = document.getElementById("billingSwitch");
+          var labelM = document.getElementById("labelMensal");
+          var labelA = document.getElementById("labelAnual");
+          var prices = document.querySelectorAll("[data-price]");
+          var cycles = document.querySelectorAll(".plan__cycle");
+          if (!sw || !prices.length) { return; }
+
+          function format(value) {
+            return "R$ " + value.toLocaleString("pt-BR");
+          }
+
+          function apply(annual) {
+            sw.setAttribute("aria-checked", annual ? "true" : "false");
+            if (labelM) { labelM.classList.toggle("is-on", !annual); }
+            if (labelA) { labelA.classList.toggle("is-on", annual); }
+
+            prices.forEach(function (el) {
+              var base = parseFloat(el.getAttribute("data-price"));
+              if (isNaN(base)) { return; }
+              el.textContent = format(annual ? Math.round(base * 0.8) : base);
+            });
+
+            cycles.forEach(function (el) {
+              el.textContent = annual
+                ? "cobrança anual · economize 20%"
+                : "cobrança mensal · cancele quando quiser";
+            });
+          }
+
+          sw.addEventListener("click", function () {
+            var next = sw.getAttribute("aria-checked") !== "true";
+            apply(next);
+            showToast(
+              next ? "Preços atualizados para o ciclo anual (valores fictícios)." : "Preços atualizados para o ciclo mensal.",
+              "bi-arrow-repeat"
+            );
+          });
+
+          apply(false);
+        }
+
+        /* ---------- 7. Botoes de conversao ---------- */
+        document.querySelectorAll("[data-plan]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var plan = btn.getAttribute("data-plan");
+            var label = btn.textContent.trim();
+            btn.classList.add("is-done");
+            btn.textContent = "Selecionado";
+            showToast("Plano " + plan + " selecionado. Checkout não implementado nesta demonstração.", "bi-check2-circle");
+            setTimeout(function () {
+              btn.classList.remove("is-done");
+              btn.textContent = label;
+            }, 3600);
+          });
+        });
+
+        document.querySelectorAll("[data-cta]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            showToast("Cadastro demonstrativo: nenhum dado é enviado a servidores.", "bi-shield-check");
+          });
+        });
+
+        /* ---------- 8. Formulario do hero ---------- */
+        function initHeroForm() {
+          var form = document.getElementById("formHero");
+          if (!form) { return; }
+          var input = document.getElementById("emailHero");
+          var button = form.querySelector("button[type=submit]");
+
+          form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var value = (input.value || "").trim();
+            var valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+
+            if (!valid) {
+              input.style.borderColor = "#f87171";
+              showToast("Digite um e-mail válido para continuar.", "bi-exclamation-triangle");
+              return;
+            }
+
+            input.style.borderColor = "";
+            var original = button.innerHTML;
+            button.classList.add("is-done");
+            button.innerHTML = 'Conta criada <i class="bi bi-check2"></i>';
+            showToast("Tudo certo! Bem-vindo ao FlowDesk (demonstracao).", "bi-stars");
+            form.reset();
+
+            setTimeout(function () {
+              button.classList.remove("is-done");
+              button.innerHTML = original;
+            }, 4000);
+          });
+        }
+
+        /* ---------- 9. Ano ---------- */
+        var year = document.getElementById("year");
+        if (year) { year.textContent = String(new Date().getFullYear()); }
+
+        initReveal();
+        initViews();
+        initBilling();
+        initHeroForm();
+      })();
+    </script>
+  </body>
+</html>

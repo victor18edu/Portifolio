@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Traço Arquitetura | Projetos residenciais e comerciais de alto padrão</title>
+    <meta name="description" content="Traço Arquitetura é um escritório de projetos de arquitetura e interiores de alto padrão. Site demonstrativo com portfólio, categorias e processo criativo." />
+    <meta name="author" content="Victor Eduardo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0B0F19" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F6F4F0'/%3E%3Cpath d='M20 20h24M32 20v26' fill='none' stroke='%230B0F19' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+      :root {
+        --dark: #0b0f19;
+        --dark-2: #111827;
+        --light: #f6f4f0;
+        --light-2: #ffffff;
+        --sand: #e7e2d8;
+        --ink: #10131a;
+        --grey: #6b7280;
+        --grey-2: #9ca3af;
+        --accent: #ffc61a;
+        --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+        --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+        --wrap: 1280px;
+        --header-h: 92px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        background: var(--light);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.7;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      img { max-width: 100%; display: block; }
+      a { text-decoration: none; color: inherit; }
+      h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; line-height: 1.1; margin: 0; }
+      p { margin: 0; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      ::selection { background: var(--accent); color: var(--ink); }
+
+      .wrap { width: 100%; max-width: var(--wrap); margin: 0 auto; padding: 0 32px; }
+      .sec { padding: 120px 0; }
+      .sec--dark { background: var(--dark); color: #f9fafb; }
+      .sec--dark p { color: var(--grey-2); }
+      .eyebrow { display: block; margin-bottom: 22px; font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #8a6a00; }
+      .sec--dark .eyebrow { color: var(--accent); }
+      .eyebrow::after { content: ""; display: block; width: 40px; height: 1px; margin-top: 14px; background: currentColor; opacity: 0.55; }
+      .h-display { font-size: clamp(2.1rem, 1.2rem + 3.4vw, 4rem); }
+      .h-2 { font-size: clamp(1.8rem, 1.3rem + 2.2vw, 2.9rem); }
+      .lead { margin-top: 24px; font-size: 1.05rem; color: #4b5563; max-width: 580px; }
+      .sec--dark .lead { color: var(--grey-2); }
+      .num { font-family: var(--serif); font-size: 1.1rem; letter-spacing: 0.2em; }
+
+      .btn-t {
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+        min-height: 52px; padding: 15px 32px; border: 1px solid transparent; border-radius: 0;
+        font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em;
+        text-transform: uppercase; cursor: pointer;
+        transition: transform 0.28s ease, background 0.28s ease, color 0.28s ease, border-color 0.28s ease;
+      }
+      .btn-t--ink { background: var(--ink); color: #f6f4f0; }
+      .btn-t--ink:hover { transform: translateY(-2px); background: #000; }
+      .btn-t--out { border-color: rgba(16, 19, 26, 0.28); color: var(--ink); }
+      .btn-t--out:hover { transform: translateY(-2px); background: var(--ink); color: #f6f4f0; }
+      .btn-t--light { background: #f6f4f0; color: var(--ink); }
+      .btn-t--light:hover { transform: translateY(-2px); background: #fff; }
+      .btn-t--line { border-color: rgba(255, 255, 255, 0.26); color: #f9fafb; }
+      .btn-t--line:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--accent); }
+    </style>
+    <style>
+      /* ---------------- Header ---------------- */
+      .hdr {
+        position: fixed; inset: 0 0 auto 0; z-index: 1040; height: var(--header-h);
+        display: flex; align-items: center; transition: background 0.35s ease, height 0.35s ease, border-color 0.35s ease;
+        border-bottom: 1px solid transparent;
+      }
+      .hdr.is-solid { height: 74px; background: rgba(246, 244, 240, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-color: rgba(16, 19, 26, 0.1); }
+      .hdr.is-dark { color: #f9fafb; }
+      .hdr.is-dark.is-solid { background: rgba(11, 15, 25, 0.92); border-bottom-color: rgba(255, 255, 255, 0.1); }
+      .hdr__in { display: flex; align-items: center; justify-content: space-between; gap: 24px; width: 100%; }
+      .mark { display: inline-flex; align-items: center; gap: 14px; }
+      .mark__glyph {
+        width: 42px; height: 42px; border: 1px solid currentColor; display: grid; place-items: center;
+        font-family: var(--serif); font-size: 1.35rem; line-height: 1;
+      }
+      .mark__txt strong { display: block; font-family: var(--serif); font-size: 1.3rem; font-weight: 500; letter-spacing: 0.1em; }
+      .mark__txt small { display: block; font-size: 8.5px; letter-spacing: 0.34em; text-transform: uppercase; opacity: 0.62; }
+      .nav-t { display: flex; align-items: center; gap: 2px; list-style: none; margin: 0; padding: 0; }
+      .nav-t a { display: block; padding: 10px 15px; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.78; transition: opacity 0.25s ease; }
+      .nav-t a:hover { opacity: 1; }
+      .hdr__act { display: flex; align-items: center; gap: 16px; }
+      .back-t { display: inline-flex; align-items: center; gap: 8px; font-size: 0.74rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; transition: opacity 0.25s ease, color 0.25s ease; }
+      .back-t:hover { opacity: 1; color: var(--accent); }
+      .burger-t { display: none; width: 46px; height: 46px; border: 1px solid currentColor; background: transparent; color: inherit; font-size: 1.15rem; cursor: pointer; }
+      .offcanvas-t { background: var(--light); color: var(--ink); width: min(340px, 88vw); }
+      .offcanvas-t a.mt-link { display: flex; justify-content: space-between; align-items: center; padding: 17px 2px; border-bottom: 1px solid rgba(16, 19, 26, 0.12); font-family: var(--serif); font-size: 1.5rem; }
+
+      /* ---------------- Hero ---------------- */
+      .hero-t { position: relative; min-height: 100vh; display: flex; align-items: flex-end; padding: calc(var(--header-h) + 90px) 0 72px; overflow: hidden; color: #f9fafb; }
+      .hero-t__bg { position: absolute; inset: 0; }
+      .hero-t__bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+      .hero-t__bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11, 15, 25, 0.82) 0%, rgba(11, 15, 25, 0.22) 45%, rgba(11, 15, 25, 0.9) 100%); }
+      .hero-t__in { position: relative; width: 100%; }
+      .hero-t h1 { font-size: clamp(2.7rem, 1.4rem + 5vw, 5.6rem); line-height: 0.98; letter-spacing: -0.02em; max-width: 15ch; }
+      .hero-t h1 em { font-style: italic; color: var(--accent); }
+      .hero-t__row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 34px; margin-top: 34px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.18); }
+      .hero-t__row p { max-width: 480px; color: rgba(249, 250, 251, 0.78); }
+      .hero-t__tags { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 16px; color: rgba(249, 250, 251, 0.6); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; }
+
+      /* ---------------- Sobre ---------------- */
+      .about-t { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 76px; align-items: center; }
+      .about-t__txt p + p { margin-top: 20px; }
+      .about-t__img { position: relative; }
+      .about-t__img img { width: 100%; height: 560px; object-fit: cover; }
+      .about-t__img figcaption { margin-top: 14px; font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: #6b7280; }
+      .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 46px; padding-top: 38px; border-top: 1px solid rgba(16, 19, 26, 0.14); }
+      .facts strong { display: block; font-family: var(--serif); font-size: 2.5rem; line-height: 1; }
+      .facts span { display: block; margin-top: 8px; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6b7280; }
+
+      /* ---------------- Filtros e portfólio ---------------- */
+      .filters-t { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
+      .f-t {
+        padding: 11px 22px; border: 1px solid rgba(16, 19, 26, 0.2); border-radius: 999px;
+        background: transparent; color: var(--ink);
+        font-family: var(--sans); font-size: 0.76rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+        cursor: pointer; transition: all 0.25s ease;
+      }
+      .f-t:hover { border-color: var(--ink); }
+      .f-t[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #f6f4f0; }
+      .grid-t { display: grid; grid-template-columns: repeat(12, 1fr); gap: 26px; }
+      .work { position: relative; grid-column: span 6; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left; }
+      .work--tall { grid-column: span 7; }
+      .work--big { grid-column: span 12; }
+      .work__img { overflow: hidden; background: var(--sand); }
+      .work__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1); }
+      .work--tall .work__img { height: 520px; }
+      .work--big .work__img { height: 620px; }
+      .work:hover .work__img img { transform: scale(1.045); }
+      .work__cap { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(16, 19, 26, 0.16); }
+      .work__cap h3 { font-size: 1.45rem; }
+      .work__cap span { font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase; color: #6b7280; }
+      .work.is-hidden { display: none; }
+      .empty-t { grid-column: span 12; padding: 60px 20px; text-align: center; border: 1px dashed rgba(16, 19, 26, 0.22); color: #6b7280; }
+
+      /* ---------------- Lightbox ---------------- */
+      .lbx { position: fixed; inset: 0; z-index: 1090; display: none; align-items: center; justify-content: center; padding: 30px; background: rgba(11, 15, 25, 0.96); }
+      .lbx.is-open { display: flex; }
+      .lbx__box { position: relative; width: min(1100px, 100%); }
+      .lbx__box img { width: 100%; max-height: 74vh; object-fit: cover; }
+      .lbx__cap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 18px; color: #f9fafb; }
+      .lbx__cap strong { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; }
+      .lbx__cap span { font-size: 0.76rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey-2); }
+      .lbx__close { position: absolute; top: -50px; right: 0; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, 0.3); background: transparent; color: #f9fafb; font-size: 1.15rem; cursor: pointer; transition: 0.25s ease; }
+      .lbx__close:hover { background: var(--accent); color: var(--ink); }
+    </style>
+    <style>
+      /* ---------------- Categorias ---------------- */
+      .cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1px; background: rgba(255, 255, 255, 0.12); }
+      .cat { padding: 40px 32px; background: var(--dark); transition: background 0.3s ease; }
+      .cat:hover { background: #121a2b; }
+      .cat em { display: block; font-family: var(--serif); font-style: normal; font-size: 2.6rem; color: rgba(255, 255, 255, 0.16); }
+      .cat h3 { margin-top: 18px; font-size: 1.45rem; color: #f9fafb; }
+      .cat p { margin-top: 10px; font-size: 0.9rem; }
+      .cat a { display: inline-flex; align-items: center; gap: 9px; margin-top: 20px; color: var(--accent); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; }
+      .cat a i { transition: transform 0.25s ease; }
+      .cat a:hover i { transform: translateX(4px); }
+
+      /* ---------------- Serviços ---------------- */
+      .svcs { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 70px; align-items: start; }
+      .svc-list { border-top: 1px solid rgba(16, 19, 26, 0.16); }
+      .svc { display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; padding: 26px 0; border-bottom: 1px solid rgba(16, 19, 26, 0.16); transition: padding-left 0.3s ease, background 0.3s ease; }
+      .svc:hover { padding-left: 14px; }
+      .svc em { font-family: var(--serif); font-style: normal; font-size: 1rem; letter-spacing: 0.16em; color: #8a6a00; }
+      .svc h3 { font-size: 1.35rem; }
+      .svc p { margin-top: 6px; font-size: 0.9rem; color: #4b5563; }
+      .svc i { font-size: 1.3rem; color: #9ca3af; }
+      .svc__img img { width: 100%; height: 620px; object-fit: cover; }
+
+      /* ---------------- Processo ---------------- */
+      .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 24px; }
+      .flow article { padding-top: 28px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+      .flow em { font-family: var(--serif); font-style: normal; font-size: 1rem; letter-spacing: 0.2em; color: var(--accent); }
+      .flow h3 { margin: 16px 0 10px; font-size: 1.35rem; color: #f9fafb; }
+      .flow p { font-size: 0.9rem; }
+
+      /* ---------------- Profissional ---------------- */
+      .pro { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 66px; align-items: center; }
+      .pro__img img { width: 100%; height: 540px; object-fit: cover; }
+      .pro__txt p + p { margin-top: 20px; }
+      .pro__list { display: grid; gap: 0; margin-top: 34px; border-top: 1px solid rgba(16, 19, 26, 0.16); }
+      .pro__list div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 17px 0; border-bottom: 1px solid rgba(16, 19, 26, 0.16); }
+      .pro__list dt { font-size: 0.76rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #6b7280; }
+      .pro__list dd { margin: 0; font-size: 0.95rem; }
+
+      /* ---------------- CTA / Formulário / Footer ---------------- */
+      .cta-t { position: relative; padding: 116px 0; text-align: center; background: var(--sand); }
+      .cta-t h2 { font-size: clamp(2rem, 1.3rem + 2.8vw, 3.4rem); max-width: 20ch; margin: 0 auto; }
+      .cta-t p { max-width: 520px; margin: 22px auto 0; color: #4b5563; }
+      .cta-t .btn-t { margin-top: 34px; }
+      .form-t { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.75fr); gap: 64px; align-items: start; }
+      .fld { margin-bottom: 22px; }
+      .fld label { display: block; margin-bottom: 8px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b7280; }
+      .fld input, .fld select, .fld textarea { width: 100%; padding: 15px 0; border: 0; border-bottom: 1px solid rgba(16, 19, 26, 0.24); border-radius: 0; background: transparent; color: var(--ink); font-family: var(--sans); font-size: 1rem; transition: border-color 0.25s ease; }
+      .fld textarea { min-height: 110px; resize: vertical; }
+      .fld input:focus, .fld select:focus, .fld textarea:focus { outline: none; border-bottom-color: var(--ink); }
+      .fld.has-error input, .fld.has-error textarea, .fld.has-error select { border-bottom-color: #b91c1c; }
+      .fld__err { display: none; margin-top: 6px; font-size: 0.8rem; color: #b91c1c; }
+      .fld.has-error .fld__err { display: block; }
+      .frm-ok { display: none; align-items: center; gap: 12px; margin-top: 6px; padding: 16px 18px; border-left: 2px solid #1f7a4d; background: rgba(31, 122, 77, 0.08); color: #14532d; font-size: 0.9rem; }
+      .frm-ok.is-visible { display: flex; }
+      .contact-list { border-top: 1px solid rgba(16, 19, 26, 0.16); }
+      .contact-list div { padding: 18px 0; border-bottom: 1px solid rgba(16, 19, 26, 0.16); }
+      .contact-list dt { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #6b7280; }
+      .contact-list dd { margin: 5px 0 0; font-size: 0.98rem; }
+      .foot-t { padding: 84px 0 0; background: var(--dark); color: #f9fafb; }
+      .foot-t__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 44px; padding-bottom: 56px; }
+      .foot-t h4 { font-family: var(--sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 18px; }
+      .foot-t ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+      .foot-t ul a, .foot-t p { color: var(--grey-2); font-size: 0.9rem; }
+      .foot-t ul a:hover { color: var(--accent); }
+      .foot-t__bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 22px 0; border-top: 1px solid rgba(255, 255, 255, 0.12); color: #6b7280; font-size: 0.82rem; }
+      .foot-t__bottom a { color: var(--grey-2); }
+      .foot-t__bottom a:hover { color: var(--accent); }
+      .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.8s ease, transform 0.8s ease; transition-delay: var(--delay, 0ms); }
+      .reveal.is-visible { opacity: 1; transform: none; }
+      .skip-t { position: fixed; left: 16px; top: -80px; z-index: 1100; padding: 10px 18px; background: var(--accent); color: var(--ink); font-weight: 600; font-size: 0.86rem; transition: top 0.2s ease; }
+      .skip-t:focus { top: 0; }
+
+      @media (max-width: 1100px) {
+        .nav-t, .hdr__act .btn-t { display: none; }
+        .burger-t { display: grid; place-items: center; }
+        .about-t, .pro, .form-t { grid-template-columns: 1fr; gap: 48px; }
+        .svcs { grid-template-columns: 1fr; gap: 44px; }
+        .work--tall .work__img, .work--big .work__img { height: 440px; }
+      }
+      @media (max-width: 800px) {
+        .wrap { padding: 0 22px; }
+        .sec { padding: 84px 0; }
+        .work, .work--tall, .work--big { grid-column: span 12; }
+        .work__img, .work--tall .work__img, .work--big .work__img { height: 320px; }
+        .foot-t__grid { grid-template-columns: 1fr; gap: 34px; }
+        .foot-t__bottom { flex-direction: column; }
+      }
+      @media (max-width: 560px) {
+        body { font-size: 15.5px; }
+        .sec { padding: 68px 0; }
+        .facts { grid-template-columns: 1fr; gap: 20px; }
+        .btn-t { width: 100%; }
+        .svc { grid-template-columns: auto 1fr; }
+        .svc i { display: none; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-t" href="#inicio">Ir para o conteúdo principal</a>
+
+    <header class="hdr is-dark" id="hdr">
+      <div class="wrap hdr__in">
+        <a class="mark" href="#inicio" aria-label="Traço Arquitetura — início">
+          <span class="mark__glyph" aria-hidden="true">T</span>
+          <span class="mark__txt">
+            <strong>Traço</strong>
+            <small>Arquitetura e interiores</small>
+          </span>
+        </a>
+
+        <nav aria-label="Navegação principal">
+          <ul class="nav-t">
+            <li><a href="#escritorio">Escritório</a></li>
+            <li><a href="#portfolio">Portfólio</a></li>
+            <li><a href="#categorias">Categorias</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#processo">Processo</a></li>
+          </ul>
+        </nav>
+
+        <div class="hdr__act">
+          <a class="back-t" href="../index.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio</a>
+          <a class="btn-t btn-t--light" href="#contato">Novo projeto</a>
+          <button class="burger-t" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuT" aria-controls="menuT" aria-label="Abrir menu de navegação">
+            <i class="bi bi-list" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="offcanvas offcanvas-end offcanvas-t" tabindex="-1" id="menuT" aria-labelledby="menuTLabel">
+      <div class="offcanvas-header border-bottom" style="border-color: rgba(16,19,26,0.12) !important">
+        <span class="mark" id="menuTLabel"><span class="mark__glyph" aria-hidden="true">T</span><span class="mark__txt"><strong>Traço</strong><small>Arquitetura</small></span></span>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
+      </div>
+      <div class="offcanvas-body">
+        <a class="mt-link" href="#escritorio" data-bs-dismiss="offcanvas">Escritório <i class="bi bi-arrow-right"></i></a>
+        <a class="mt-link" href="#portfolio" data-bs-dismiss="offcanvas">Portfólio <i class="bi bi-arrow-right"></i></a>
+        <a class="mt-link" href="#categorias" data-bs-dismiss="offcanvas">Categorias <i class="bi bi-arrow-right"></i></a>
+        <a class="mt-link" href="#servicos" data-bs-dismiss="offcanvas">Serviços <i class="bi bi-arrow-right"></i></a>
+        <a class="mt-link" href="#processo" data-bs-dismiss="offcanvas">Processo <i class="bi bi-arrow-right"></i></a>
+        <a class="mt-link" href="#contato" data-bs-dismiss="offcanvas">Contato <i class="bi bi-arrow-right"></i></a>
+        <a class="btn-t btn-t--ink w-100 mt-4" href="#contato" data-bs-dismiss="offcanvas">Novo projeto</a>
+        <a class="back-t mt-4" href="../index.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio</a>
+      </div>
+    </div>
+
+    <main id="conteudo">
+      <section class="hero-t" id="inicio" aria-labelledby="hero-title">
+        <div class="hero-t__bg" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1920&q=72"
+            alt=""
+            width="1920"
+            height="1280"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="wrap hero-t__in">
+          <span class="eyebrow">Arquitetura autoral</span>
+          <h1 id="hero-title">Espaços que traduzem <em>quietude</em> e precisão.</h1>
+          <div class="hero-t__row">
+            <p>
+              Projetos residenciais, corporativos e de interiores conduzidos do
+              primeiro estudo até o último detalhe do mobiliário.
+            </p>
+            <div>
+              <a class="btn-t btn-t--light" href="#portfolio">Ver portfólio</a>
+              <div class="hero-t__tags">
+                <span>Residencial</span><span>Corporativo</span><span>Interiores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="escritorio" aria-labelledby="esc-title">
+        <div class="wrap about-t">
+          <div class="about-t__txt reveal">
+            <span class="eyebrow">O escritório</span>
+            <h2 class="h-2" id="esc-title">Desenhar é entender como se vive.</h2>
+            <p class="lead">
+              O Traço Arquitetura nasceu da convicção de que um bom projeto
+              escuta antes de desenhar. Estudamos hábitos, luz e circulação para
+              propor espaços que permanecem bello por muitos anos.
+            </p>
+            <p>
+              Trabalhamos com um número restrito de projetos por ano. Isso
+              permite acompanhamento próximo, decisões rápidas e o nível de
+              detalhamento que o cliente espera — do estudo preliminar à
+              última prancha de detalhamento construtivo.
+            </p>
+
+            <div class="facts">
+              <div><strong>12</strong><span>anos de escritório</span></div>
+              <div><strong>38</strong><span>projetos concluídos</span></div>
+              <div><strong>6</strong><span>países atendidos</span></div>
+            </div>
+            <p class="mt-3" style="font-size:0.78rem;color:#6b7280">
+              * Indicadores ilustrativos desta demonstração.
+            </p>
+          </div>
+
+          <figure class="about-t__img reveal" style="--delay: 120ms; margin:0">
+            <img
+              src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=72"
+              alt="Sala de estar ampla com madeira, plantas e iluminação natural"
+              width="1200"
+              height="900"
+              loading="lazy"
+            />
+            <figcaption>Sala de estar · projeto demonstrativo</figcaption>
+          </figure>
+        </div>
+      </section>
+      <section class="sec sec--dark" id="portfolio" aria-labelledby="port-title">
+        <div class="wrap">
+          <div class="head reveal">
+            <span class="eyebrow">Portfólio selecionado</span>
+            <h2 class="h-2" id="port-title">Projetos que definem a assinatura do escritório</h2>
+            <p class="lead">
+              Uma seleção de trabalhos fictícios, distribuídos por tipologia.
+              Clique em um projeto para ampliar a imagem.
+            </p>
+          </div>
+
+          <div class="filters-t reveal" role="group" aria-label="Filtrar projetos por categoria">
+            <button class="f-t" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+            <button class="f-t" type="button" data-filter="residencial" aria-pressed="false">Residencial</button>
+            <button class="f-t" type="button" data-filter="interiores" aria-pressed="false">Interiores</button>
+            <button class="f-t" type="button" data-filter="corporativo" aria-pressed="false">Corporativo</button>
+          </div>
+
+          <div class="grid-t" id="gridT" aria-live="polite">
+            <button class="work work--big reveal" type="button" data-cat="residencial" data-full="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1800&q=76" data-title="Casa Pátio" data-meta="Residencial · 2025">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1400&q=70" alt="Residência contemporânea com piscina e grandes esquadrias" width="1400" height="620" loading="lazy" /></span>
+              <span class="work__cap"><h3>Casa Pátio</h3><span>Residencial · 340 m²</span></span>
+            </button>
+
+            <button class="work work--tall reveal" style="--delay: 90ms" type="button" data-cat="interiores" data-full="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1800&q=76" data-title="Living Lume" data-meta="Interiores · 2024">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=70" alt="Living com poltrona amarela e painel de madeira" width="1200" height="520" loading="lazy" /></span>
+              <span class="work__cap"><h3>Living Lume</h3><span>Interiores · 96 m²</span></span>
+            </button>
+
+            <button class="work work--tall reveal" style="--delay: 180ms" type="button" data-cat="residencial" data-full="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=76" data-title="Residência Mirante" data-meta="Residencial · 2025">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=70" alt="Residência branca com piscina e céu aberto" width="1200" height="520" loading="lazy" /></span>
+              <span class="work__cap"><h3>Residência Mirante</h3><span>Residencial · 420 m²</span></span>
+            </button>
+
+            <button class="work reveal" style="--delay: 90ms" type="button" data-cat="interiores" data-full="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=1600&q=76" data-title="Apartamento Aurora" data-meta="Interiores · 2023">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?auto=format&fit=crop&w=1000&q=70" alt="Sala clara com sofá claro, plantas e janelas amplas" width="1000" height="700" loading="lazy" /></span>
+              <span class="work__cap"><h3>Apartamento Aurora</h3><span>Interiores · 128 m²</span></span>
+            </button>
+
+            <button class="work reveal" style="--delay: 180ms" type="button" data-cat="corporativo" data-full="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=76" data-title="Sede Nortis" data-meta="Corporativo · 2024">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=70" alt="Escritório corporativo com estrutura de vidro e circulação ampla" width="1000" height="700" loading="lazy" /></span>
+              <span class="work__cap"><h3>Sede Nortis</h3><span>Corporativo · 1.200 m²</span></span>
+            </button>
+
+            <button class="work reveal" style="--delay: 270ms" type="button" data-cat="corporativo" data-full="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1600&q=76" data-title="Coworking Alfaiate" data-meta="Corporativo · 2023">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1000&q=70" alt="Cozinha corporativa clara com bancadas e utensílios" width="1000" height="700" loading="lazy" /></span>
+              <span class="work__cap"><h3>Coworking Alfaiate</h3><span>Corporativo · 480 m²</span></span>
+            </button>
+
+            <button class="work work--tall reveal" style="--delay: 180ms" type="button" data-cat="residencial" data-full="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1800&q=76" data-title="Cabana Bosque" data-meta="Residencial · 2022">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1200&q=70" alt="Casa entre árvores com luz do fim de tarde" width="1200" height="520" loading="lazy" /></span>
+              <span class="work__cap"><h3>Cabana Bosque</h3><span>Residencial · 210 m²</span></span>
+            </button>
+
+            <button class="work work--tall reveal" style="--delay: 270ms" type="button" data-cat="interiores" data-full="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1800&q=76" data-title="Apartamento Verde" data-meta="Interiores · 2023">
+              <span class="work__img"><img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=70" alt="Apartamento acolhedor com plantas e sofá claro" width="1200" height="520" loading="lazy" /></span>
+              <span class="work__cap"><h3>Apartamento Verde</h3><span>Interiores · 88 m²</span></span>
+            </button>
+
+            <p class="empty-t" id="emptyT" hidden>Nenhum projeto nesta categoria por enquanto.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="lbx" id="lbx" role="dialog" aria-modal="true" aria-label="Imagem ampliada do projeto">
+        <div class="lbx__box">
+          <button class="lbx__close" type="button" id="lbxClose" aria-label="Fechar visualização"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+          <img id="lbxImg" src="" alt="" />
+          <div class="lbx__cap"><strong id="lbxTitle"></strong><span id="lbxMeta"></span></div>
+        </div>
+      </div>
+      <section class="sec" id="categorias" aria-labelledby="cat-title">
+        <div class="wrap">
+          <div class="head reveal">
+            <span class="eyebrow">Categorias de projeto</span>
+            <h2 class="h-2" id="cat-title">Cada espaço pede uma resposta diferente</h2>
+          </div>
+
+          <div class="cats reveal">
+            <article class="cat">
+              <em>01</em>
+              <h3>Residencial</h3>
+              <p>Casas, apartamentos e coberturas: estudo preliminar, anteprojeto e detalhamento executivo.</p>
+              <a href="#portfolio" data-goto="residencial">Ver projetos <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="cat">
+              <em>02</em>
+              <h3>Interiores</h3>
+              <p>Layout, marcenaria, iluminação e acabamento residencyendo cada ambiente.</p>
+              <a href="#portfolio" data-goto="interiores">Ver projetos <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+            </article>
+            <article class="cat">
+              <em>03</em>
+              <h3>Corporativo</h3>
+              <p>Escritórios, lojas e coworkings com identidade espacial e fluxo de uso bem resolvido.</p>
+              <a href="#portfolio" data-goto="corporativo">Ver projetos <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="servicos" aria-labelledby="svc-title">
+        <div class="wrap svcs">
+          <div class="reveal">
+            <span class="eyebrow">Serviços</span>
+            <h2 class="h-2" id="svc-title">O que fazemos dentro do escritório</h2>
+            <p class="lead">
+              Cada serviço pode ser contratado isoladamente ou integrado a um
+              processo completo, do conceito à obra concluída.
+            </p>
+
+            <div class="svc-list mt-4">
+              <article class="svc">
+                <em>01</em>
+                <div><h3>Estudo preliminar</h3><p>Levantamento do terreno, conceito e análise de viabilidade.</p></div>
+                <i class="bi bi-rulers" aria-hidden="true"></i>
+              </article>
+              <article class="svc">
+                <em>02</em>
+                <div><h3>Anteprojeto</h3><p>Implantação, volumetria e circulação com plantas e elevações.</p></div>
+                <i class="bi bi-pencil-ruler" aria-hidden="true"></i>
+              </article>
+              <article class="svc">
+                <em>03</em>
+                <div><h3>Projeto executivo</h3><p>Detalhamento completo para obra, com memorial e acabamentos especificados.</p></div>
+                <i class="bi bi-layers" aria-hidden="true"></i>
+              </article>
+              <article class="svc">
+                <em>04</em>
+                <div><h3>Design de interiores</h3><p>Ambientes integrados, marcenaria sob medida e especificação completa.</p></div>
+                <i class="bi bi-lightbulb" aria-hidden="true"></i>
+              </article>
+              <article class="svc">
+                <em>05</em>
+                <div><h3>Iluminação e paisagismo</h3><p>Projetos de luz natural e artificial, com integração ao entorno.</p></div>
+                <i class="bi bi-tree" aria-hidden="true"></i>
+              </article>
+            </div>
+          </div>
+
+          <figure class="svc__img reveal" style="--delay: 120ms; margin:0">
+            <img
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=72"
+              alt="Sala integrada à cozinha com painel de madeira e iluminação natural"
+              width="1200"
+              height="900"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+      <section class="sec sec--dark" id="processo" aria-labelledby="proc-title">
+        <div class="wrap">
+          <div class="head reveal">
+            <span class="eyebrow">Processo criativo</span>
+            <h2 class="h-2" id="proc-title">Quatro momentos que definem cada projeto</h2>
+            <p class="lead">
+              Um método claro para que você acompanhe decisões, não apenas
+              imagens.
+            </p>
+          </div>
+
+          <div class="flow">
+            <article class="reveal">
+              <em>01 — Escuta</em>
+              <h3>Briefing e análise</h3>
+              <p>Entrevistas, visita ao local, levantamento topográfico e análise das restrições.</p>
+            </article>
+            <article class="reveal" style="--delay: 90ms">
+              <em>02 — Conceito</em>
+              <h3>Partido e estudo</h3>
+              <p>Três direções conceituais apresentadas com plantas, imagens de referência e premissas.</p>
+            </article>
+            <article class="reveal" style="--delay: 180ms">
+              <em>03 — Desenvolvimento</em>
+              <h3>Projeto executivo</h3>
+              <p>Detalhamento, compatibilização com complementares e especificação de materiais.</p>
+            </article>
+            <article class="reveal" style="--delay: 270ms">
+              <em>04 — Obra</em>
+              <h3>Acompanhamento</h3>
+              <p>Visitas periódicas, apoio ao canteiro e curadoria das etapas finais de acabamento.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="arquiteto" aria-labelledby="arq-title">
+        <div class="wrap pro">
+          <figure class="pro__img reveal" style="margin:0">
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1000&q=72"
+              alt="Retrato do arquiteto responsável, pessoa de suéter cinza"
+              width="1000"
+              height="1000"
+              loading="lazy"
+            />
+          </figure>
+
+          <div class="pro__txt reveal" style="--delay: 120ms">
+            <span class="eyebrow">Sobre o profissional</span>
+            <h2 class="h-2" id="arq-title">Ana Beltrão, arquiteta urbanista</h2>
+            <p class="lead">
+              Personagem fictício criado para esta demonstração. O objetivo é
+              mostrar a estrutura de um site de escritório de arquitetura com
+              apresentação pessoal.
+            </p>
+            <p>
+              Atua há doze anos com projetos residenciais, corporativos e de
+              interiores. Acredita que a arquitetura de qualidade cabe em
+              decisões pequenas e recorrentes: a posição de um vão, a altura de
+              um banco, a textura de uma parede.
+            </p>
+            <p>
+              Coordena uma equipe pequena e multidisciplinar, o que permite
+              manter o rigor do estudo sem perder a proximidade com o cliente
+              durante todo o processo.
+            </p>
+
+            <dl class="pro__list">
+              <div><dt>Formação</dt><dd>Arquitetura e Urbanismo — FAU</dd></div>
+              <div><dt>Atuação</dt><dd>Residencial, corporativo e interiores</dd></div>
+              <div><dt>Idiomas</dt><dd>Português, inglês e espanhol</dd></div>
+              <div><dt>Área deatuação</dt><dd>Brasil e América Latina</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-t" aria-labelledby="cta-title">
+        <div class="wrap">
+          <h2 id="cta-title" class="reveal">Vamos projetar o seu próximo espaço</h2>
+          <p class="reveal">
+            Conte sobre o terreno, o programa e o prazo. Retornamos com uma
+            proposta de escopo, prazo e honorários.
+          </p>
+          <a class="btn-t btn-t--ink reveal" href="#contato">Iniciar um projeto</a>
+        </div>
+      </section>
+      <section class="sec" id="contato" aria-labelledby="ct-title">
+        <div class="wrap form-t">
+          <div class="reveal">
+            <span class="eyebrow">Contato</span>
+            <h2 class="h-2" id="ct-title">Conte sobre o seu projeto</h2>
+            <p class="lead" style="margin-bottom: 38px">
+              Formulário demonstrativo. Nenhuma informação é enviada a
+              servidores: o comportamento roda apenas no navegador.
+            </p>
+
+            <form id="formT" novalidate>
+              <div class="fld">
+                <label for="nomeT">Nome</label>
+                <input type="text" id="nomeT" name="nome" autocomplete="name" required />
+                <span class="fld__err">Informe seu nome.</span>
+              </div>
+              <div class="fld">
+                <label for="emailT">E-mail</label>
+                <input type="email" id="emailT" name="email" autocomplete="email" required />
+                <span class="fld__err">Informe um e-mail válido.</span>
+              </div>
+              <div class="fld">
+                <label for="tipoT">Tipo de projeto</label>
+                <select id="tipoT" name="tipo" required>
+                  <option value="">Selecione</option>
+                  <option>Residência</option>
+                  <option>Interiores</option>
+                  <option>Corporativo</option>
+                  <option>Reforma</option>
+                </select>
+                <span class="fld__err">Escolha uma opção.</span>
+              </div>
+              <div class="fld">
+                <label for="msgT">Sobre o espaço</label>
+                <textarea id="msgT" name="msg" placeholder="Metragem aproximada, localização, prazo desejado..."></textarea>
+              </div>
+
+              <button class="btn-t btn-t--ink" type="submit" id="btnT">
+                Enviar mensagem
+                <i class="bi bi-arrow-right" aria-hidden="true"></i>
+              </button>
+
+              <div class="frm-ok" id="frmOk" role="status">
+                <i class="bi bi-check2-circle" aria-hidden="true"></i>
+                <span>Mensagem registrada! Em um site real, a resposta chegaria em até dois dias úteis.</span>
+              </div>
+            </form>
+          </div>
+
+          <aside class="reveal" style="--delay: 120ms">
+            <span class="eyebrow">Escritório</span>
+            <h3 style="font-size: 1.5rem">Atendimento</h3>
+            <dl class="contact-list mt-3">
+              <div><dt>Endereço</dt><dd>Rua das Palmeiras, 480<br />Bela Vista · Cidade/UF</dd></div>
+              <div><dt>E-mail</dt><dd>estudio@exemplo.com.br</dd></div>
+              <div><dt>Telefone</dt><dd>(00) 0000-0000</dd></div>
+              <div><dt>Horários</dt><dd>Segunda a sexta, 9h às 18h</dd></div>
+            </dl>
+            <a class="back-t mt-4 d-inline-flex" href="../index.html">
+              <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio
+            </a>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot-t">
+      <div class="wrap">
+        <div class="foot-t__grid">
+          <div>
+            <a class="mark" href="#inicio" aria-label="Traço Arquitetura — início">
+              <span class="mark__glyph" aria-hidden="true">T</span>
+              <span class="mark__txt"><strong>Traço</strong><small>Arquitetura e interiores</small></span>
+            </a>
+            <p class="mt-3" style="max-width: 320px">
+              Escritório de arquitetura dedicado a projetos residenciais,
+              corporativos e de interiores de alto padrão.
+            </p>
+          </div>
+
+          <div>
+            <h4>Navegação</h4>
+            <ul>
+              <li><a href="#escritorio">Escritório</a></li>
+              <li><a href="#portfolio">Portfólio</a></li>
+              <li><a href="#categorias">Categorias</a></li>
+              <li><a href="#servicos">Serviços</a></li>
+              <li><a href="#processo">Processo</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Contato</h4>
+            <ul>
+              <li><a href="#contato">estudio@exemplo.com.br</a></li>
+              <li><a href="#contato">Rua das Palmeiras, 480</a></li>
+              <li><a href="#contato">(00) 0000-0000</a></li>
+              <li><a href="../index.html">Portfólio do autor</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="foot-t__bottom">
+          <span>&copy; <span id="year">2026</span> Traço Arquitetura. Todos os direitos reservados.</span>
+          <span>Projeto demonstrativo criado por <a href="../index.html">Victor Eduardo</a> · conteúdo fictício</span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast-t" id="toastT" role="status" aria-live="polite" style="position:fixed;left:50%;bottom:26px;z-index:1095;display:flex;align-items:center;gap:12px;padding:15px 22px;background:#0b0f19;color:#f9fafb;font-size:0.9rem;transform:translate(-50%,22px);opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.3s ease">
+      <i class="bi bi-info-circle" style="color:#ffc61a" aria-hidden="true"></i>
+      <span id="toastTextT"></span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        var hdr = document.getElementById("hdr");
+        var toast = document.getElementById("toastT");
+        var toastText = document.getElementById("toastTextT");
+        var toastTimer = null;
+
+        function showToast(message, icon) {
+          if (!toast) { return; }
+          toastText.textContent = message;
+          var i = toast.querySelector("i");
+          if (i && icon) { i.className = "bi " + icon + ""; i.style.color = "#ffc61a"; }
+          toast.style.opacity = "1";
+          toast.style.transform = "translate(-50%, 0)";
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () {
+            toast.style.opacity = "0";
+            toast.style.transform = "translate(-50%, 22px)";
+          }, 3600);
+        }
+
+        /* ---------- Header ---------- */
+        function onScroll() {
+          if (!hdr) { return; }
+          hdr.classList.toggle("is-solid", window.pageYOffset > 30);
+          var hero = document.getElementById("inicio");
+          if (hero) {
+            var overDark = window.pageYOffset < hero.offsetHeight - 80;
+            hdr.classList.toggle("is-dark", overDark);
+          }
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+
+        /* ---------- Scroll suave ---------- */
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            var href = this.getAttribute("href");
+            if (!href || href.length < 2) { return; }
+            var target = document.getElementById(href.slice(1));
+            if (!target) { return; }
+            event.preventDefault();
+            var offset = (hdr ? hdr.offsetHeight : 0) + 10;
+            var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+            if (window.history && window.history.replaceState) {
+              window.history.replaceState(null, "", href);
+            }
+          });
+        });
+
+        /* ---------- Reveal ---------- */
+        function initReveal() {
+          var items = document.querySelectorAll(".reveal");
+          if (!items.length) { return; }
+          if (!("IntersectionObserver" in window)) {
+            items.forEach(function (el) { el.classList.add("is-visible"); });
+            return;
+          }
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: "0px 0px -60px 0px", threshold: 0.1 });
+          items.forEach(function (el) { observer.observe(el); });
+        }
+
+        /* ---------- Filtros do portfólio ---------- */
+        function initFilters() {
+          var buttons = document.querySelectorAll(".f-t");
+          var works = document.querySelectorAll(".work");
+          var empty = document.getElementById("emptyT");
+          if (!buttons.length || !works.length) { return; }
+
+          function apply(filter) {
+            var visible = 0;
+            works.forEach(function (work) {
+              var match = filter === "todos" || work.getAttribute("data-cat") === filter;
+              work.classList.toggle("is-hidden", !match);
+              if (match) { visible++; }
+            });
+            if (empty) { empty.hidden = visible !== 0; }
+          }
+
+          buttons.forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              buttons.forEach(function (b) { b.setAttribute("aria-pressed", "false"); });
+              btn.setAttribute("aria-pressed", "true");
+              apply(btn.getAttribute("data-filter"));
+            });
+          });
+
+          /* Links "Ver projetos" das categorias */
+          document.querySelectorAll("[data-goto]").forEach(function (link) {
+            link.addEventListener("click", function () {
+              var cat = link.getAttribute("data-goto");
+              buttons.forEach(function (b) {
+                b.setAttribute("aria-pressed", b.getAttribute("data-filter") === cat ? "true" : "false");
+              });
+              apply(cat);
+            });
+          });
+        }
+
+        /* ---------- Lightbox ---------- */
+        function initLightbox() {
+          var box = document.getElementById("lbx");
+          var img = document.getElementById("lbxImg");
+          var title = document.getElementById("lbxTitle");
+          var meta = document.getElementById("lbxMeta");
+          var close = document.getElementById("lbxClose");
+          var works = document.querySelectorAll(".work");
+          if (!box || !works.length) { return; }
+          var lastFocus = null;
+
+          function open(work) {
+            lastFocus = document.activeElement;
+            img.setAttribute("src", work.getAttribute("data-full"));
+            img.setAttribute("alt", work.getAttribute("data-title") || "");
+            title.textContent = work.getAttribute("data-title") || "";
+            meta.textContent = work.getAttribute("data-meta") || "";
+            box.classList.add("is-open");
+            document.body.style.overflow = "hidden";
+            close.focus();
+          }
+
+          function shut() {
+            box.classList.remove("is-open");
+            document.body.style.overflow = "";
+            if (lastFocus) { lastFocus.focus(); }
+          }
+
+          works.forEach(function (work) {
+            work.addEventListener("click", function () { open(work); });
+          });
+          close.addEventListener("click", shut);
+          box.addEventListener("click", function (event) { if (event.target === box) { shut(); } });
+          document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && box.classList.contains("is-open")) { shut(); }
+          });
+        }
+
+        /* ---------- Formulário ---------- */
+        function initForm() {
+          var form = document.getElementById("formT");
+          if (!form) { return; }
+          var ok = document.getElementById("frmOk");
+          var btn = document.getElementById("btnT");
+
+          function mark(el, valid) {
+            var fld = el.closest(".fld");
+            if (fld) { fld.classList.toggle("has-error", !valid); }
+          }
+
+          form.querySelectorAll("input, select, textarea").forEach(function (el) {
+            el.addEventListener("input", function () {
+              if (el.value.trim() !== "") { mark(el, true); }
+            });
+            el.addEventListener("blur", function () {
+              if (el.required) { mark(el, el.value.trim() !== ""); }
+            });
+          });
+
+          form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var valid = true;
+            form.querySelectorAll("input, select, textarea").forEach(function (el) {
+              var value = el.value.trim();
+              var good = el.required ? value !== "" : true;
+              if (el.type === "email" && good) {
+                good = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+              }
+              mark(el, good);
+              if (!good) { valid = false; }
+            });
+
+            if (!valid) {
+              showToast("Revise os campos destacados.", "bi-exclamation-triangle");
+              return;
+            }
+
+            if (ok) { ok.classList.add("is-visible"); }
+            if (btn) { btn.textContent = "Mensagem enviada"; }
+            showToast("Mensagem registrada (demonstração).", "bi-check2-circle");
+            form.reset();
+
+            setTimeout(function () {
+              if (ok) { ok.classList.remove("is-visible"); }
+              if (btn) { btn.innerHTML = 'Enviar mensagem <i class="bi bi-arrow-right"></i>'; }
+            }, 4500);
+          });
+        }
+
+        var year = document.getElementById("year");
+        if (year) { year.textContent = String(new Date().getFullYear()); }
+
+        initReveal();
+        initFilters();
+        initLightbox();
+        initForm();
+      })();
+    </script>
+  </body>
+</html>

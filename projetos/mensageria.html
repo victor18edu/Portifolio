@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Conecta | Plataforma de atendimento multicanal</title>
+    <meta name="description" content="Conecta é uma demonstração de plataforma de atendimento multicanal com caixa de entrada unificada, conversas, informações de contato e automações. Dados fictícios." />
+    <meta name="author" content="Victor Eduardo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0B0F19" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B0F19'/%3E%3Cpath d='M16 22h32v20H30l-10 8v-8h-4z' fill='none' stroke='%23FFC61A' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #070a11;
+        --panel: #0e1421;
+        --panel-2: #131b2b;
+        --panel-3: #182135;
+        --side: #0a0f1a;
+        --text: #f9fafb;
+        --muted: #9ca3af;
+        --muted-2: #6b7280;
+        --accent: #ffc61a;
+        --accent-soft: rgba(255, 198, 26, 0.13);
+        --green: #34d399;
+        --blue: #60a5fa;
+        --violet: #a78bfa;
+        --pink: #f472b6;
+        --red: #f87171;
+        --line: rgba(255, 255, 255, 0.08);
+        --line-2: rgba(255, 255, 255, 0.15);
+        --list-w: 340px;
+        --info-w: 310px;
+        --radius: 16px;
+        --radius-sm: 12px;
+        --display: "Sora", "Inter", sans-serif;
+        --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0; background: var(--bg); color: var(--text);
+        font-family: var(--sans); font-size: 15px; line-height: 1.6;
+        -webkit-font-smoothing: antialiased; overflow: hidden;
+      }
+      img { max-width: 100%; display: block; }
+      a { text-decoration: none; color: inherit; }
+      h1, h2, h3, h4, h5 { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; margin: 0; }
+      p { margin: 0; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+      ::selection { background: var(--accent); color: #0b0f19; }
+      .shell { display: grid; grid-template-columns: 248px var(--list-w) minmax(0, 1fr) var(--info-w); height: 100vh; }
+    </style>
+    <style>
+      /* ---------------- Coluna 1: navegação ---------------- */
+      .side-c { display: flex; flex-direction: column; background: var(--side); border-right: 1px solid var(--line); min-width: 0; }
+      .side-c__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 18px 18px; border-bottom: 1px solid var(--line); }
+      .logo-c { display: flex; align-items: center; gap: 10px; }
+      .logo-c i { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--accent); color: #0b0f19; font-size: 1rem; }
+      .logo-c strong { display: block; font-family: var(--display); font-size: 1rem; }
+      .logo-c small { display: block; color: var(--muted-2); font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+      .side-c__nav { flex: 1; overflow-y: auto; padding: 14px 12px; }
+      .side-c__nav span.lbl { display: block; padding: 14px 10px 7px; color: var(--muted-2); font-size: 9.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+      .nav-c { display: flex; align-items: center; gap: 11px; width: 100%; padding: 10px 11px; margin-bottom: 2px; border: 0; border-radius: 10px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 0.88rem; text-align: left; cursor: pointer; transition: all 0.2s ease; }
+      .nav-c i { font-size: 1rem; width: 18px; text-align: center; }
+      .nav-c:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+      .nav-c.is-on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+      .nav-c .pill { margin-left: auto; min-width: 20px; padding: 1px 7px; border-radius: 999px; background: rgba(255, 255, 255, 0.09); color: var(--muted); font-size: 10.5px; font-weight: 700; text-align: center; }
+      .nav-c.is-on .pill { background: rgba(255, 198, 26, 0.22); color: var(--accent); }
+      .side-c__foot { padding: 12px; border-top: 1px solid var(--line); }
+      .side-c__foot a { display: flex; align-items: center; gap: 9px; padding: 10px 11px; border-radius: 10px; color: var(--muted); font-size: 0.82rem; font-weight: 500; transition: all 0.2s ease; }
+      .side-c__foot a:hover { background: rgba(255, 255, 255, 0.05); color: var(--accent); }
+      .side-c__foot a.back { margin-top: 6px; border-top: 1px solid var(--line); border-radius: 0; padding-top: 14px; }
+
+      /* ---------------- Coluna 2: lista de conversas ---------------- */
+      .list-c { display: flex; flex-direction: column; background: var(--panel); border-right: 1px solid var(--line); min-width: 0; }
+      .list-c__head { padding: 16px 18px; border-bottom: 1px solid var(--line); }
+      .list-c__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+      .list-c__top h2 { font-size: 1rem; }
+      .search-c { position: relative; margin-top: 14px; }
+      .search-c i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted-2); font-size: 0.9rem; }
+      .search-c input { width: 100%; height: 40px; padding: 0 14px 0 36px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 0.88rem; transition: border-color 0.2s ease; }
+      .search-c input::placeholder { color: var(--muted-2); }
+      .search-c input:focus { outline: none; border-color: var(--accent); }
+      .filters-c { display: flex; gap: 6px; margin-top: 12px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+      .filters-c::-webkit-scrollbar { display: none; }
+      .fchip { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 0.76rem; font-weight: 600; white-space: nowrap; cursor: pointer; transition: all 0.2s ease; }
+      .fchip:hover { color: var(--text); }
+      .fchip.is-on { background: var(--accent); border-color: var(--accent); color: #0b0f19; }
+      .convs { flex: 1; overflow-y: auto; }
+      .conv { display: grid; grid-template-columns: 44px 1fr; gap: 12px; width: 100%; padding: 14px 18px; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; transition: background 0.2s ease; }
+      .conv:hover { background: rgba(255, 255, 255, 0.035); }
+      .conv.is-on { background: var(--panel-3); box-shadow: inset 3px 0 0 var(--accent); }
+      .av-c { position: relative; width: 44px; }
+      .av-c img { width: 44px; height: 44px; border-radius: 12px; object-fit: cover; }
+      .av-c .on { position: absolute; right: -2px; bottom: -2px; width: 13px; height: 13px; border-radius: 50%; background: var(--green); border: 2.5px solid var(--panel); }
+      .conv.is-on .av-c .on { border-color: var(--panel-3); }
+      .conv__top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+      .conv__name { font-size: 0.9rem; font-weight: 600; }
+      .conv__time { color: var(--muted-2); font-size: 0.72rem; white-space: nowrap; }
+      .conv__last { display: flex; align-items: center; gap: 8px; margin-top: 3px; }
+      .conv__last p { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 0.82rem; }
+      .badge-unread { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--accent); color: #0b0f19; font-size: 0.7rem; font-weight: 800; line-height: 20px; text-align: center; }
+      .chan { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; padding: 2px 8px; border-radius: 999px; font-size: 0.68rem; font-weight: 600; }
+      .chan--wa { background: rgba(52, 211, 153, 0.14); color: var(--green); }
+      .chan--ig { background: rgba(244, 114, 182, 0.14); color: var(--pink); }
+      .chan--em { background: rgba(96, 165, 250, 0.14); color: var(--blue); }
+      .chan--tg { background: rgba(167, 139, 250, 0.14); color: var(--violet); }
+      .empty-c { padding: 60px 20px; text-align: center; color: var(--muted-2); }
+      .empty-c i { display: block; font-size: 2rem; margin-bottom: 12px; opacity: 0.5; }
+    </style>
+    <style>
+      /* ---------------- Coluna 3: conversa ---------------- */
+      .chat { display: flex; flex-direction: column; background: var(--bg); min-width: 0; }
+      .chat__head { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--line); background: var(--panel); }
+      .chat__head img { width: 42px; height: 42px; border-radius: 12px; object-fit: cover; }
+      .chat__head h2 { font-size: 1rem; }
+      .chat__head small { color: var(--muted-2); font-size: 0.78rem; }
+      .chat__head .who { min-width: 0; }
+      .chat__head .who > div { display: flex; align-items: center; gap: 8px; }
+      .chat__acts { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+      .iact { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--muted); cursor: pointer; transition: all 0.2s ease; }
+      .iact:hover { color: var(--accent); border-color: var(--accent); }
+      .iact.is-on { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+      .typing { display: inline-flex; gap: 3px; align-items: center; }
+      .typing i { width: 5px; height: 5px; border-radius: 50%; background: var(--muted-2); animation: blinkC 1.3s infinite; }
+      .typing i:nth-child(2) { animation-delay: 0.2s; }
+      .typing i:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes blinkC { 0%, 60%, 100% { opacity: 0.25; } 30% { opacity: 1; } }
+
+      .msgs { flex: 1; overflow-y: auto; padding: 22px 20px; display: flex; flex-direction: column; gap: 14px; }
+      .day-sep { align-self: center; padding: 4px 14px; border-radius: 999px; background: var(--panel-2); color: var(--muted-2); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+      .msg { max-width: min(74%, 560px); display: flex; flex-direction: column; gap: 5px; }
+      .msg--in { align-self: flex-start; }
+      .msg--out { align-self: flex-end; align-items: flex-end; }
+      .bubble { padding: 11px 15px; border-radius: 16px; font-size: 0.92rem; }
+      .msg--in .bubble { background: var(--panel-2); border: 1px solid var(--line); border-bottom-left-radius: 5px; }
+      .msg--out .bubble { background: var(--accent); color: #0b0f19; border-bottom-right-radius: 5px; font-weight: 500; }
+      .msg__meta { display: flex; align-items: center; gap: 6px; color: var(--muted-2); font-size: 0.7rem; }
+      .msg--out .msg__meta i { color: var(--accent); }
+      .msg__note { display: inline-flex; align-items: center; gap: 5px; margin-top: 2px; padding: 3px 9px; border-radius: 999px; background: rgba(96, 165, 250, 0.12); color: var(--blue); font-size: 0.68rem; font-weight: 600; }
+
+      .composer { padding: 14px 20px 18px; border-top: 1px solid var(--line); background: var(--panel); }
+      .quick { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+      .quick button { padding: 6px 13px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-family: var(--sans); font-size: 0.78rem; cursor: pointer; transition: all 0.2s ease; }
+      .quick button:hover { border-color: var(--accent); color: var(--accent); }
+      .composer__row { display: flex; align-items: flex-end; gap: 10px; }
+      .composer textarea { flex: 1; min-height: 46px; max-height: 130px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 13px; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 0.92rem; resize: none; transition: border-color 0.2s ease; }
+      .composer textarea::placeholder { color: var(--muted-2); }
+      .composer textarea:focus { outline: none; border-color: var(--accent); }
+      .send-c { width: 46px; height: 46px; flex: none; border: 0; border-radius: 13px; background: var(--accent); color: #0b0f19; font-size: 1.1rem; cursor: pointer; transition: all 0.2s ease; }
+      .send-c:hover { background: #ffd54d; transform: translateY(-2px); }
+      .composer__hint { margin-top: 9px; color: var(--muted-2); font-size: 0.72rem; }
+
+      /* ---------------- Coluna 4: painel do contato ---------------- */
+      .info-c { display: flex; flex-direction: column; background: var(--panel); border-left: 1px solid var(--line); overflow-y: auto; min-width: 0; }
+      .info-c__head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--line); }
+      .info-c__head h2 { font-size: 0.95rem; }
+      .info-c__body { padding: 20px 18px; display: grid; gap: 20px; }
+      .profile-c { text-align: center; }
+      .profile-c img { width: 78px; height: 78px; border-radius: 22px; object-fit: cover; margin: 0 auto; }
+      .profile-c h3 { margin-top: 14px; font-size: 1.05rem; }
+      .profile-c p { color: var(--muted); font-size: 0.84rem; }
+      .tags-c { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 12px; }
+      .tags-c span { padding: 3px 10px; border-radius: 999px; background: var(--panel-3); color: var(--muted); font-size: 0.72rem; font-weight: 600; }
+      .block-c h4 { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 12px; }
+      .facts-c dl { display: grid; gap: 0; margin: 0; }
+      .facts-c div { display: flex; justify-content: space-between; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
+      .facts-c dt { color: var(--muted-2); }
+      .facts-c dd { margin: 0; text-align: right; }
+      .hist-c { display: grid; gap: 10px; }
+      .hist-c div { display: flex; gap: 10px; padding: 11px 12px; border: 1px solid var(--line); border-radius: 11px; background: var(--panel-2); }
+      .hist-c i { color: var(--accent); font-size: 0.95rem; }
+      .hist-c p { font-size: 0.8rem; }
+      .hist-c small { color: var(--muted-2); font-size: 0.72rem; }
+      .act-c { display: grid; gap: 8px; }
+      .act-c button { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1px solid var(--line); border-radius: 11px; background: var(--panel-2); color: var(--text); font-family: var(--sans); font-size: 0.86rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; }
+      .act-c button:hover { border-color: var(--accent); color: var(--accent); }
+      .act-c button.primary { background: var(--accent); border-color: var(--accent); color: #0b0f19; font-weight: 700; }
+      .act-c button.primary:hover { background: #ffd54d; }
+      .mini-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .mini-stats div { padding: 13px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel-2); text-align: center; }
+      .mini-stats strong { display: block; font-family: var(--display); font-size: 1.2rem; }
+      .mini-stats span { font-size: 0.7rem; color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.08em; }
+    </style>
+    <style>
+      /* ---------------- Visões alternativas (métricas, contatos, automações) ---------------- */
+      .panel-c { flex: 1; overflow-y: auto; padding: 26px 28px; }
+      .panel-c h2 { font-size: 1.3rem; }
+      .panel-c > p.sub2 { margin-top: 8px; color: var(--muted); font-size: 0.9rem; }
+      .grid-m { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 14px; margin-top: 24px; }
+      .kpi-m { padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+      .kpi-m span { font-size: 0.78rem; color: var(--muted); }
+      .kpi-m strong { display: block; font-family: var(--display); font-size: 1.8rem; margin-top: 8px; }
+      .kpi-m em { display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; padding: 2px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; font-style: normal; }
+      .kpi-m em.up { background: rgba(52, 211, 153, 0.14); color: var(--green); }
+      .kpi-m em.down { background: rgba(248, 113, 113, 0.14); color: var(--red); }
+      .bars-c { display: grid; gap: 16px; margin-top: 26px; }
+      .bar-c__row { display: grid; gap: 8px; }
+      .bar-c__top { display: flex; justify-content: space-between; gap: 12px; font-size: 0.86rem; }
+      .bar-c__top span { color: var(--muted); }
+      .bar-c__track { height: 9px; border-radius: 999px; background: var(--panel-2); overflow: hidden; }
+      .bar-c__track i { display: block; height: 100%; border-radius: 999px; background: var(--accent); }
+      .card-c { margin-top: 22px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+      .card-c h3 { font-size: 1rem; }
+      .tbl-c { width: 100%; border-collapse: collapse; margin-top: 14px; min-width: 520px; }
+      .tbl-c th, .tbl-c td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); font-size: 0.86rem; }
+      .tbl-c thead th { color: var(--muted-2); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+      .tbl-c tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+      .table-scroll { overflow-x: auto; }
+      .flow-c { display: grid; gap: 12px; margin-top: 18px; }
+      .flow-c__row { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--panel-2); }
+      .flow-c__row i.ico { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+      .flow-c__row strong { display: block; font-size: 0.92rem; }
+      .flow-c__row small { color: var(--muted-2); font-size: 0.78rem; }
+      .sw-c { position: relative; width: 44px; height: 25px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--panel-3); cursor: pointer; transition: background 0.25s ease; }
+      .sw-c::after { content: ""; position: absolute; top: 2px; left: 2px; width: 19px; height: 19px; border-radius: 50%; background: var(--muted); transition: all 0.25s ease; }
+      .sw-c[aria-checked="true"] { background: var(--accent); border-color: var(--accent); }
+      .sw-c[aria-checked="true"]::after { left: 21px; background: #0b0f19; }
+
+      /* ---------------- Overlays / mobile ---------------- */
+      .scrim-c { position: fixed; inset: 0; z-index: 1050; background: rgba(3, 5, 9, 0.6); opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+      .scrim-c.is-on { opacity: 1; visibility: visible; }
+      .drawer-c { position: fixed; top: 0; bottom: 0; z-index: 1060; background: var(--panel); transition: transform 0.32s ease; }
+      .drawer-c--left { left: 0; width: 264px; transform: translateX(-100%); }
+      .drawer-c--right { right: 0; width: min(330px, 92vw); transform: translateX(100%); }
+      .drawer-c.is-on { transform: none; }
+      .mob-only { display: none; }
+      .toast-c { position: fixed; left: 50%; bottom: 22px; z-index: 1080; display: flex; align-items: center; gap: 12px; padding: 14px 20px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--panel-2); font-size: 0.88rem; box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.9); transform: translate(-50%, 18px); opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
+      .toast-c.is-on { opacity: 1; transform: translate(-50%, 0); }
+      .toast-c i { color: var(--accent); }
+      .skip-c { position: fixed; left: 16px; top: -80px; z-index: 1100; padding: 10px 18px; border-radius: 0 0 10px 10px; background: var(--accent); color: #0b0f19; font-weight: 600; font-size: 0.85rem; transition: top 0.2s ease; }
+      .skip-c:focus { top: 0; }
+
+      @media (max-width: 1400px) {
+        .shell { grid-template-columns: 228px 310px minmax(0, 1fr) 280px; }
+      }
+      @media (max-width: 1200px) {
+        .shell { grid-template-columns: 228px 310px minmax(0, 1fr); }
+        .info-c { position: fixed; top: 0; right: 0; bottom: 0; z-index: 1055; width: min(330px, 92vw); transform: translateX(100%); transition: transform 0.32s ease; }
+        .info-c.is-on { transform: none; }
+      }
+      @media (max-width: 900px) {
+        .shell { grid-template-columns: minmax(0, 1fr); }
+        .side-c { position: fixed; top: 0; bottom: 0; left: 0; z-index: 1055; width: 264px; transform: translateX(-100%); transition: transform 0.32s ease; }
+        .side-c.is-on { transform: none; }
+        .list-c { position: fixed; top: 0; bottom: 0; left: 0; z-index: 1054; width: min(330px, 90vw); transform: translateX(-100%); transition: transform 0.32s ease; }
+        .list-c.is-on { transform: none; }
+        .mob-only { display: inline-flex; }
+        .msg { max-width: 88%; }
+        .panel-c { padding: 20px 16px; }
+      }
+      @media (max-width: 480px) {
+        body { font-size: 14.5px; }
+        .msgs { padding: 16px 14px; }
+        .composer { padding: 12px 14px 16px; }
+        .msg { max-width: 92%; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-c" href="#conversa">Ir para a conversa</a>
+    <div class="scrim-c" id="scrimC"></div>
+    <div class="shell">
+      <!-- ============ Coluna 1: navegação ============ -->
+      <aside class="side-c" id="sideC" aria-label="Menu principal">
+        <div class="side-c__head">
+          <a class="logo-c" href="#conversa" aria-label="Conecta — início">
+            <i class="bi bi-chat-dots-fill" aria-hidden="true"></i>
+            <span>
+              <strong>Conecta</strong>
+              <small>Atendimento</small>
+            </span>
+          </a>
+          <button class="iact mob-only" type="button" id="closeSide" aria-label="Fechar menu"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+        </div>
+
+        <nav class="side-c__nav" aria-label="Seções da plataforma">
+          <span class="lbl">Operação</span>
+          <button class="nav-c is-on" type="button" data-sec="atendimento"><i class="bi bi-inbox" aria-hidden="true"></i> Atendimento <span class="pill" id="pillAtendimento">0</span></button>
+          <button class="nav-c" type="button" data-sec="contatos"><i class="bi bi-people" aria-hidden="true"></i> Contatos</button>
+          <button class="nav-c" type="button" data-sec="metricas"><i class="bi bi-graph-up" aria-hidden="true"></i> Métricas</button>
+          <span class="lbl">Configuração</span>
+          <button class="nav-c" type="button" data-sec="automacoes"><i class="bi bi-lightning-charge" aria-hidden="true"></i> Automações</button>
+          <button class="nav-c" type="button" data-sec="canais"><i class="bi bi-broadcast" aria-hidden="true"></i> Canais</button>
+        </nav>
+
+        <div class="side-c__foot">
+          <a href="#conversa" id="statusLink"><i class="bi bi-circle-fill" style="font-size:.5rem;color:#34d399" aria-hidden="true"></i> Todos os sistemas online</a>
+          <a class="back" href="../index.html"><i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar ao portfólio</a>
+        </div>
+      </aside>
+
+      <!-- ============ Coluna 2: conversas ============ -->
+      <section class="list-c" id="listC" aria-label="Lista de conversas">
+        <div class="list-c__head">
+          <div class="list-c__top">
+            <h2>Conversas</h2>
+            <button class="iact mob-only" type="button" id="closeList" aria-label="Fechar lista de conversas"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+            <span class="badge-unread" id="totalUnread" style="margin-left:auto">0</span>
+          </div>
+
+          <form class="search-c" id="formSearch" role="search">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <label class="visually-hidden" for="inputSearch">Buscar contato</label>
+            <input type="search" id="inputSearch" placeholder="Buscar contato..." autocomplete="off" />
+          </form>
+
+          <div class="filters-c" role="group" aria-label="Filtrar conversas">
+            <button class="fchip is-on" type="button" data-filter="todas">Todas</button>
+            <button class="fchip" type="button" data-filter="nao-lidas">Não lidas</button>
+            <button class="fchip" type="button" data-filter="aguardando">Aguardando</button>
+            <button class="fchip" type="button" data-filter="atendimento">Em atendimento</button>
+            <button class="fchip" type="button" data-filter="resolvidas">Resolvidas</button>
+          </div>
+        </div>
+
+        <div class="convs" id="convs" role="list"></div>
+      </section>
+      <!-- ============ Coluna 3: área de mensagens ============ -->
+      <main class="chat" id="conversa">
+        <header class="chat__head">
+          <button class="iact mob-only" type="button" id="openList" aria-label="Abrir lista de conversas"><i class="bi bi-list" aria-hidden="true"></i></button>
+          <img id="chatAvatar" src="" alt="" width="84" height="84" />
+          <div class="who">
+            <div>
+              <h2 id="chatName">Selecione uma conversa</h2>
+              <span class="chan chan--wa" id="chatChannel">WhatsApp</span>
+            </div>
+            <small id="chatStatus">—</small>
+          </div>
+
+          <div class="chat__acts">
+            <span class="typing" id="typingBox" hidden aria-label="Contato digitando"><i></i><i></i><i></i></span>
+            <button class="iact" type="button" id="btnInfo" aria-label="Ver informações do contato"><i class="bi bi-info-circle" aria-hidden="true"></i></button>
+            <button class="iact" type="button" id="btnSla" aria-label="Definir prazo de atendimento"><i class="bi bi-alarm" aria-hidden="true"></i></button>
+            <button class="iact" type="button" id="btnCloseConv" aria-label="Marcar conversa como resolvida"><i class="bi bi-check2-circle" aria-hidden="true"></i></button>
+            <button class="iact" type="button" id="btnMore" aria-label="Mais ações"><i class="bi bi-three-dots" aria-hidden="true"></i></button>
+          </div>
+        </header>
+
+        <div class="msgs" id="msgs" role="log" aria-live="polite" aria-label="Mensagens da conversa"></div>
+
+        <div class="composer">
+          <div class="quick" id="quickReplies">
+            <button type="button" data-q="Olá! Como posso ajudar hoje?">Saudação</button>
+            <button type="button" data-q="Vou verificar isso e retorno em instantes.">Retorno em instantes</button>
+            <button type="button" data-q="Confira o link enviado por e-mail.">Enviar link</button>
+            <button type="button" data-q="Obrigado pelo contato! Até logo.">Encerramento</button>
+          </div>
+
+          <form class="composer__row" id="formSend">
+            <label class="visually-hidden" for="inputMsg">Escreva uma mensagem</label>
+            <textarea id="inputMsg" rows="1" placeholder="Escreva uma mensagem..." autocomplete="off"></textarea>
+            <button class="send-c" type="submit" aria-label="Enviar mensagem"><i class="bi bi-send-fill" aria-hidden="true"></i></button>
+          </form>
+          <p class="composer__hint">Simulação local: nenhuma mensagem é enviada a serviços externos. Use Enter para enviar e Shift + Enter para nova linha.</p>
+        </div>
+      </main>
+
+      <!-- ============ Coluna 4: informações do contato ============ -->
+      <aside class="info-c" id="infoC" aria-label="Informações do contato">
+        <div class="info-c__head">
+          <h2>Detalhes do contato</h2>
+          <button class="iact mob-only" type="button" id="closeInfo" aria-label="Fechar painel"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+        </div>
+
+        <div class="info-c__body">
+          <div class="profile-c">
+            <img id="infoAvatar" src="" alt="" width="156" height="156" />
+            <h3 id="infoName">—</h3>
+            <p id="infoCompany">—</p>
+            <div class="tags-c" id="infoTags"></div>
+          </div>
+
+          <div class="mini-stats">
+            <div><strong id="msgsCount">0</strong><span>Mensagens</span></div>
+            <div><strong id="respTime">—</strong><span>Resposta média</span></div>
+            <div><strong id="convCount">0</strong><span>Conversas</span></div>
+            <div><strong id="csat">—</strong><span>Satisfação</span></div>
+          </div>
+
+          <div class="facts-c">
+            <h4>Informações</h4>
+            <dl id="infoFacts"></dl>
+          </div>
+
+          <div class="facts-c">
+            <h4>Histórico recente</h4>
+            <div class="hist-c" id="infoHistory"></div>
+          </div>
+
+          <div class="facts-c">
+            <h4>Ações rápidas</h4>
+            <div class="act-c">
+              <button class="primary" type="button" id="actTransfer"><i class="bi bi-person-check" aria-hidden="true"></i> Transferir atendente</button>
+              <button type="button" id="actTag"><i class="bi bi-tag" aria-hidden="true"></i> Adicionar tag</button>
+              <button type="button" id="actNote"><i class="bi bi-journal-text" aria-hidden="true"></i> Criar nota interna</button>
+              <button type="button" id="actSla"><i class="bi bi-stopwatch" aria-hidden="true"></i> Alterar prioridade</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="toast-c" id="toastC" role="status" aria-live="polite">
+      <i class="bi bi-info-circle" aria-hidden="true"></i>
+      <span id="toastTextC"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        /* =======================================================
+           DADOS FICTÍCIOS
+           ======================================================= */
+        var CH = {
+          wa: { nome: "WhatsApp", cls: "chan--wa", icon: "bi-whatsapp" },
+          ig: { nome: "Instagram", cls: "chan--ig", icon: "bi-instagram" },
+          em: { nome: "E-mail", cls: "chan--em", icon: "bi-envelope" },
+          tg: { nome: "Telegram", cls: "chan--tg", icon: "bi-telegram" }
+        };
+
+        var AV = {
+          m1: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=70",
+          m2: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=70",
+          m3: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=70",
+          m4: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&q=70",
+          m5: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=70"
+        };
+
+        var TAGS = ["Cliente novo", "Interessado", "Suporte", "Alto valor", "Renovação"];
+
+        var CONTACTS = [
+          {
+            id: 1, nome: "Mariana Duarte", empresa: "Loja Aurora · Cliente desde 2024",
+            av: AV.m1, canal: "wa", status: "aguardando", naoLidas: 3, online: true, hora: "14:32",
+            email: "mariana.duarte@exemplo.com", telefone: "(00) 90000-1122", cidade: "Curitiba/PR",
+            origem: "Indicação", atendente: "Você", ultima: "Perfeito, vou aguardar a confirmação então!",
+            msgs: [
+              { d: "in", t: "10:12", m: "Olá! Tudo bem? Preciso de ajuda com o pedido que fiz ontem." },
+              { d: "out", t: "10:14", m: "Olá, Mariana! Tudo certo por aqui. Pode me passar o número do pedido?" },
+              { d: "in", t: "10:15", m: "Claro, é o #4821. Ele ainda não chegou aqui." },
+              { d: "out", t: "10:16", m: "Obrigada! Vou consultar com a transportadora e te retorno ainda hoje." },
+              { d: "in", t: "14:30", m: "Oi, conseguiu ver alguma coisa?" },
+              { d: "in", t: "14:31", m: "É para amanhã de manhã, já conferi aqui." },
+              { d: "in", t: "14:32", m: "Perfeito, vou aguardar a confirmação então!" }
+            ],
+            hist: [
+              { i: "bi-box-seam", m: "Pedido #4821 criado", s: "Ontem, 09:12" },
+              { i: "bi-chat-dots", m: "Conversa iniciada no WhatsApp", s: "Ontem, 09:10" }
+            ]
+          },
+          {
+            id: 2, nome: "Rafael Nunes", empresa: "TechNine · Cliente desde 2023",
+            av: AV.m2, canal: "em", status: "atendimento", naoLidas: 0, online: true, hora: "13:58",
+            email: "rafael.nunes@exemplo.com", telefone: "(00) 90000-3344", cidade: "São Paulo/SP",
+            origem: "Site", atendente: "Você", ultima: "Enviei os dados da empresa por e-mail.",
+            msgs: [
+              { d: "in", t: "09:02", m: "Bom dia! Gostaria de renovar o plano anual com desconto." },
+              { d: "out", t: "09:20", m: "Bom dia, Rafael! Comigo é um prazer. Para a renovação, posso enviar a proposta agora mesmo." },
+              { d: "in", t: "13:57", m: "Perfeito, mande por favor." },
+              { d: "out", t: "13:58", m: "Enviei os dados da empresa por e-mail." }
+            ],
+            hist: [
+              { i: "bi-file-earmark-text", m: "Proposta #P-102 enviada", s: "Hoje, 13:58" },
+              { i: "bi-calendar-check", m: "Reunião de renovação agendada", s: "Anteontem" }
+            ]
+          },
+          {
+            id: 3, nome: "Juliana Prado", empresa: "Studio Prado · Cliente desde 2025",
+            av: AV.m4, canal: "ig", status: "aguardando", naoLidas: 1, online: false, hora: "12:45",
+            email: "juliana@exemplo.com", telefone: "(00) 90000-5566", cidade: "Belo Horizonte/MG",
+            origem: "Instagram", atendente: "Você", ultima: "Vem！！ Você tem disponibilidade sexta?",
+            msgs: [
+              { d: "in", t: "12:31", m: "Oi! Vi o post de vocês sobre a nova coleção 👀" },
+              { d: "out", t: "12:40", m: "Oi, Juliana! Que bom que você viu. Como podemos ajudar?" },
+              { d: "in", t: "12:45", m: "Vem!! Você tem disponibilidade sexta?" }
+            ],
+            hist: [{ i: "bi-instagram", m: "Lead recebido pelo Direct", s: "Hoje, 12:31" }]
+          },
+          {
+            id: 4, nome: "Carlos Menezes", empresa: "Distribuidora Norte",
+            av: AV.m3, canal: "tg", status: "resolvida", naoLidas: 0, online: true, hora: "11:20",
+            email: "carlos.menezes@exemplo.com", telefone: "(00) 90000-7788", cidade: "Recife/PE",
+            origem: "Telegram", atendente: "Equipe", ultima: "Perfeito, obrigado pela ajuda!",
+            msgs: [
+              { d: "in", t: "10:40", m: "Bom dia, o romaneio veio com divergência de quantidade." },
+              { d: "out", t: "10:52", m: "Bom dia! Vou conferir com o estoque e retorno com a correção." },
+              { d: "out", t: "11:15", m: "Enviei o romaneio corrigido por e-mail." },
+              { d: "in", t: "11:20", m: "Perfeito, obrigado pela ajuda!" }
+            ],
+            hist: [{ i: "bi-check2-circle", m: "Conversa resolvida", s: "Hoje, 11:18" }]
+          },
+          {
+            id: 5, nome: "Pedro Henrique", empresa: "Oficina PH · Cliente desde 2024",
+            av: AV.m5, canal: "wa", status: "atendimento", naoLidas: 2, online: true, hora: "10:05",
+            email: "pedro@exemplo.com", telefone: "(00) 90000-9900", cidade: "Porto Alegre/RS",
+            origem: "Google", atendente: "Você", ultima: "Tô aguardando a segunda via.",
+            msgs: [
+              { d: "in", t: "09:48", m: "Bom dia! Não recebi a segunda via da fatura deste mês." },
+              { d: "out", t: "09:55", m: "Bom dia! Envio a segunda via por aqui mesmo." },
+              { d: "in", t: "10:04", m: "Valeu!" },
+              { d: "in", t: "10:05", m: "Tô aguardando a segunda via." }
+            ],
+            hist: [{ i: "bi-receipt", m: "Fatura #F-2201 reaberta", s: "Hoje, 10:05" }]
+          },
+          {
+            id: 6, nome: "Ana Beatriz", empresa: "Café Doce Lar",
+            av: AV.m1, canal: "em", status: "aguardando", naoLidas: 0, online: false, hora: "09:22",
+            email: "ana@exemplo.com", telefone: "(00) 90000-2211", cidade: "Salvador/BA",
+            origem: "E-mail", atendente: "Equipe", ultima: "Ficamos no aguardo do retorno.",
+            msgs: [
+              { d: "in", t: "09:10", m: "Bom dia! Gostaria de um catálogo de atacado para a cafeteria." },
+              { d: "out", t: "09:22", m: "Bom dia, Ana! Enviei o catálogo no e-mail. Ficamos no aguardo do retorno." }
+            ],
+            hist: [{ i: "bi-envelope-check", m: "Catálogo enviado", s: "Hoje, 09:22" }]
+          }
+        ];
+
+        var REPLIES = [
+          "Perfeito! Vou verificar isso e já te retorno.",
+          "Obrigado pelo retorno! Qualquer coisa, estou à disposição.",
+          "Anotado por aqui. Consigo resolver ainda hoje.",
+          "Isso mesmo! Vou deixar reservado para você."
+        ];
+
+        var currentId = 1;
+        var currentFilter = "todas";
+        var searchTerm = "";
+        var timer = null;
+        /* =======================================================
+           RENDERIZAÇÃO
+           ======================================================= */
+        var convsBox = document.getElementById("convs");
+        var toast = document.getElementById("toastC");
+        var toastText = document.getElementById("toastTextC");
+        var toastTimer = null;
+
+        function showToast(message, icon) {
+          toastText.textContent = message;
+          var i = toast.querySelector("i");
+          if (i && icon) { i.className = "bi " + icon; }
+          toast.classList.add("is-on");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { toast.classList.remove("is-on"); }, 3200);
+        }
+
+        function contact(id) {
+          for (var i = 0; i < CONTACTS.length; i++) { if (CONTACTS[i].id === id) { return CONTACTS[i]; } }
+          return null;
+        }
+
+        function filtered() {
+          return CONTACTS.filter(function (c) {
+            var okTerm = !searchTerm || c.nome.toLowerCase().indexOf(searchTerm) > -1 || c.empresa.toLowerCase().indexOf(searchTerm) > -1;
+            var okFilter = currentFilter === "todas"
+              || (currentFilter === "nao-lidas" && c.naoLidas > 0)
+              || c.status === currentFilter;
+            return okTerm && okFilter;
+          });
+        }
+
+        function renderList() {
+          var list = filtered();
+          var unread = CONTACTS.reduce(function (a, c) { return a + c.naoLidas; }, 0);
+          document.getElementById("totalUnread").textContent = unread;
+          document.getElementById("pillAtendimento").textContent = unread;
+
+          if (!list.length) {
+            convsBox.innerHTML = '<div class="empty-c"><i class="bi bi-chat-square-dots"></i>Nenhuma conversa encontrada com este filtro.</div>';
+            return;
+          }
+
+          convsBox.innerHTML = list.map(function (c) {
+            var ch = CH[c.canal];
+            var cls = c.status === "atendimento" ? "is-on" : "";
+            return '<button class="conv ' + cls + '" type="button" role="listitem" data-conv="' + c.id + '"' +
+              (c.id === currentId ? ' aria-current="true"' : "") + ">" +
+              '<span class="av-c"><img src="' + c.av + '" alt="" width="88" height="88" loading="lazy" />' +
+              (c.online ? '<span class="on" aria-label="Online"></span>' : "") + "</span>" +
+              "<span><span class='conv__top'><span class='conv__name'>" + c.nome + "</span>" +
+              "<span class='conv__time'>" + c.hora + "</span></span>" +
+              "<span class='conv__last'><p>" + c.ultima + "</p>" +
+              (c.naoLidas > 0 ? '<span class="badge-unread">' + c.naoLidas + "</span>" : "") +
+              "</span>" +
+              '<span class="chan ' + ch.cls + '"><i class="bi ' + ch.icon + '" aria-hidden="true"></i> ' + ch.nome + "</span>" +
+              "</span></button>";
+          }).join("");
+
+          convsBox.querySelectorAll("[data-conv]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              openConv(parseInt(btn.getAttribute("data-conv"), 10));
+            });
+          });
+        }
+
+        function renderChat() {
+          var c = contact(currentId);
+          if (!c) { return; }
+          var ch = CH[c.canal];
+
+          document.getElementById("chatAvatar").setAttribute("src", c.av);
+          document.getElementById("chatAvatar").setAttribute("alt", "Foto de " + c.nome);
+          document.getElementById("chatName").textContent = c.nome;
+
+          var chan = document.getElementById("chatChannel");
+          chan.className = "chan " + ch.cls;
+          chan.innerHTML = '<i class="bi ' + ch.icon + '" aria-hidden="true"></i> ' + ch.nome;
+
+          var statusText = { aguardando: "Aguardando resposta", atendimento: "Em atendimento", resolvida: "Conversa resolvida" }[c.status];
+          document.getElementById("chatStatus").textContent = statusText + " · " + c.atendente;
+
+          var box = document.getElementById("msgs");
+          var html = '<span class="day-sep">Hoje</span>';
+          html += c.msgs.map(function (m) {
+            var out = m.d === "out";
+            return '<div class="msg msg--' + (out ? "out" : "in") + '"><div class="bubble">' + m.m + "</div>" +
+              '<span class="msg__meta">' + m.t + (out ? ' <i class="bi bi-check2-all" aria-hidden="true"></i>' : "") + "</span></div>";
+          }).join("");
+          box.innerHTML = html;
+          box.scrollTop = box.scrollHeight;
+        }
+
+        function renderInfo() {
+          var c = contact(currentId);
+          if (!c) { return; }
+
+          document.getElementById("infoAvatar").setAttribute("src", c.av);
+          document.getElementById("infoAvatar").setAttribute("alt", "Foto de " + c.nome);
+          document.getElementById("infoName").textContent = c.nome;
+          document.getElementById("infoCompany").textContent = c.empresa;
+          document.getElementById("infoTags").innerHTML = TAGS.slice(0, 2 + (c.id % 2))
+            .map(function (t) { return "<span>" + t + "</span>"; }).join("");
+
+          document.getElementById("msgsCount").textContent = c.msgs.length;
+          document.getElementById("respTime").textContent = (4 + (c.id % 6)) + " min";
+          document.getElementById("convCount").textContent = (c.id % 4) + 1;
+          document.getElementById("csat").textContent = c.status === "resolvida" ? "4,8" : "—";
+
+          document.getElementById("infoFacts").innerHTML =
+            "<div><dt>E-mail</dt><dd>" + c.email + "</dd></div>" +
+            "<div><dt>Telefone</dt><dd>" + c.telefone + "</dd></div>" +
+            "<div><dt>Cidade</dt><dd>" + c.cidade + "</dd></div>" +
+            "<div><dt>Origem</dt><dd>" + c.origem + "</dd></div>" +
+            "<div><dt>Canal</dt><dd>" + CH[c.canal].nome + "</dd></div>";
+
+          document.getElementById("infoHistory").innerHTML = c.hist.map(function (h) {
+            return "<div><i class='bi " + h.i + "' aria-hidden='true'></i><div><p>" + h.m + "</p><small>" + h.s + "</small></div></div>";
+          }).join("");
+        }
+
+        function openConv(id) {
+          currentId = id;
+          var c = contact(id);
+          if (c) { c.naoLidas = 0; }
+          renderList();
+          renderChat();
+          renderInfo();
+          closeList();
+          document.getElementById("typingBox").hidden = true;
+        }
+        /* =======================================================
+           ENVIO DE MENSAGENS (SIMULAÇÃO LOCAL)
+           ======================================================= */
+        function now() {
+          var d = new Date();
+          var h = d.getHours();
+          var m = d.getMinutes();
+          return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+        }
+
+        function sendMessage() {
+          var input = document.getElementById("inputMsg");
+          var text = input.value.trim();
+          var c = contact(currentId);
+          if (!c) { return; }
+          if (!text) {
+            input.focus();
+            return;
+          }
+
+          c.msgs.push({ d: "out", t: now(), m: text });
+          c.ultima = text;
+          c.status = "atendimento";
+          input.value = "";
+          input.style.height = "auto";
+          renderChat();
+          renderList();
+          renderInfo();
+
+          var typing = document.getElementById("typingBox");
+          typing.hidden = false;
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            typing.hidden = true;
+            var reply = REPLIES[Math.floor(Math.random() * REPLIES.length)];
+            c.msgs.push({ d: "in", t: now(), m: reply });
+            c.ultima = reply;
+            c.naoLidas = 1;
+            renderChat();
+            renderList();
+            showToast("Nova resposta simulada de " + c.nome + ".", "bi-chat-dots");
+          }, 2200);
+        }
+
+        document.getElementById("formSend").addEventListener("submit", function (event) {
+          event.preventDefault();
+          sendMessage();
+        });
+
+        var inputMsg = document.getElementById("inputMsg");
+        inputMsg.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+          }
+        });
+        inputMsg.addEventListener("input", function () {
+          this.style.height = "auto";
+          this.style.height = Math.min(this.scrollHeight, 130) + "px";
+        });
+
+        document.getElementById("quickReplies").addEventListener("click", function (event) {
+          var btn = event.target.closest("[data-q]");
+          if (!btn) { return; }
+          inputMsg.value = btn.getAttribute("data-q");
+          inputMsg.focus();
+        });
+
+        /* =======================================================
+           FILTROS E BUSCA
+           ======================================================= */
+        document.querySelectorAll("[data-filter]").forEach(function (chip) {
+          chip.addEventListener("click", function () {
+            document.querySelectorAll("[data-filter]").forEach(function (c) { c.classList.remove("is-on"); });
+            chip.classList.add("is-on");
+            currentFilter = chip.getAttribute("data-filter");
+            renderList();
+            showToast("Filtro aplicado: " + chip.textContent.trim().toLowerCase() + ".", "bi-funnel");
+          });
+        });
+
+        document.getElementById("formSearch").addEventListener("submit", function (event) {
+          event.preventDefault();
+        });
+
+        document.getElementById("inputSearch").addEventListener("input", function (event) {
+          searchTerm = event.target.value.trim().toLowerCase();
+          renderList();
+        });
+
+        /* =======================================================
+           SEÇÕES DA PLATAFORMA
+           ======================================================= */
+        var mainBox = document.getElementById("conversa");
+        var navC = document.querySelectorAll(".nav-c");
+        var scrim = document.getElementById("scrimC");
+        var sideBox = document.getElementById("sideC");
+        var listBox = document.getElementById("listC");
+        var infoBox = document.getElementById("infoC");
+
+        function openSide() { sideBox.classList.add("is-on"); scrim.classList.add("is-on"); }
+        function closeSide() { sideBox.classList.remove("is-on"); scrim.classList.remove("is-on"); }
+        function openList() { listBox.classList.add("is-on"); scrim.classList.add("is-on"); }
+        function closeList() { listBox.classList.remove("is-on"); if (!sideBox.classList.contains("is-on")) { scrim.classList.remove("is-on"); } }
+        function openInfo() { infoBox.classList.add("is-on"); }
+        function closeInfo() { infoBox.classList.remove("is-on"); }
+
+        document.getElementById("openList").addEventListener("click", openList);
+        document.getElementById("closeList").addEventListener("click", closeList);
+        document.getElementById("closeSide").addEventListener("click", closeSide);
+        document.getElementById("closeInfo").addEventListener("click", closeInfo);
+        document.getElementById("btnInfo").addEventListener("click", function () { infoBox.classList.contains("is-on") ? closeInfo() : openInfo(); });
+        scrim.addEventListener("click", function () { closeSide(); closeList(); closeInfo(); scrim.classList.remove("is-on"); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeSide(); closeList(); closeInfo(); } });
+
+        function closeAllPanels() {
+          if (window.innerWidth <= 900) { closeSide(); closeList(); }
+          if (window.innerWidth <= 1200) { closeInfo(); }
+        }
+
+        var SECTIONS = {
+          atendimento: { titulo: "Atendimento", sub: "Caixa de entrada unificada de todos os canais" },
+          contatos: { titulo: "Contatos", sub: "Base de contatos e histórico de relacionamento" },
+          metricas: { titulo: "Métricas de atendimento", sub: "Indicadores da operação (dados fictícios)" },
+          automacoes: { titulo: "Automações", sub: "Regras aplicadas automaticamente às conversas" },
+          canais: { titulo: "Canais", sub: "Status das integrações demonstrativas" }
+        };
+
+        navC.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            navC.forEach(function (b) { b.classList.remove("is-on"); });
+            btn.classList.add("is-on");
+            var key = btn.getAttribute("data-sec");
+            showSection(key);
+            closeAllPanels();
+          });
+        });
+
+        function showSection(key) {
+          var chat = mainBox;
+          if (key === "atendimento") {
+            chat.style.display = "";
+            var info = document.getElementById("infoC");
+            if (info) { info.style.display = ""; }
+            renderChat();
+            return;
+          }
+
+          chat.style.display = "none";
+          var info = document.getElementById("infoC");
+          info.style.display = "none";
+
+          var old = document.getElementById("panelSec");
+          if (old) { old.remove(); }
+
+          var panel = document.createElement("section");
+          panel.id = "panelSec";
+          panel.className = "panel-c";
+          panel.setAttribute("aria-label", SECTIONS[key].titulo);
+          panel.innerHTML = "<h2>" + SECTIONS[key].titulo + '</h2><p class="sub2">' + SECTIONS[key].sub + "</p>" +
+            '<p class="empty-c" style="padding:30px 10px">Carregando dados da seção…</p>';
+          mainBox.parentNode.insertBefore(panel, mainBox);
+
+          setTimeout(function () {
+            panel.innerHTML = sectionHTML(key);
+            bindSection(key);
+            showToast("Seção “" + SECTIONS[key].titulo + "” carregada.", "bi-layout-text-window");
+          }, 260);
+        }
+        /* =======================================================
+           CONTEÚDO DAS SEÇÕES
+           ======================================================= */
+        function sectionHTML(key) {
+          if (key === "metricas") {
+            return '<h2>Métricas de atendimento</h2><p class="sub2">Indicadores da operação · dados fictícios</p>' +
+              '<div class="grid-m">' +
+                '<div class="kpi-m"><span>Conversas atendidas</span><strong>1.284</strong><em class="up"><i class="bi bi-arrow-up-short"></i>18% no mês</em></div>' +
+                '<div class="kpi-m"><span>Tempo médio de resposta</span><strong>6 min</strong><em class="up"><i class="bi bi-arrow-down-short"></i>12% melhor</em></div>' +
+                '<div class="kpi-m"><span>Satisfação (CSAT)</span><strong>4,7</strong><em class="up"><i class="bi bi-arrow-up-short"></i>0,3 ponto</em></div>' +
+                '<div class="kpi-m"><span>Tempo de resolução</span><strong>3h 20</strong><em class="down"><i class="bi bi-arrow-up-short"></i>8% pior</em></div>' +
+              "</div>" +
+              '<div class="card-c"><h3>Volume por canal</h3><div class="bars-c">' +
+                '<div class="bar-c__row"><div class="bar-c__top"><span>WhatsApp</span><span>52%</span></div><div class="bar-c__track"><i style="width:52%"></i></div></div>' +
+                '<div class="bar-c__row"><div class="bar-c__top"><span>E-mail</span><span>24%</span></div><div class="bar-c__track"><i style="width:24%;background:#60a5fa"></i></div></div>' +
+                '<div class="bar-c__row"><div class="bar-c__top"><span>Instagram</span><span>15%</span></div><div class="bar-c__track"><i style="width:15%;background:#f472b6"></i></div></div>' +
+                '<div class="bar-c__row"><div class="bar-c__top"><span>Telegram</span><span>9%</span></div><div class="bar-c__track"><i style="width:9%;background:#a78bfa"></i></div></div>' +
+              "</div></div>" +
+              '<div class="card-c"><h3>Atendimento por dia</h3><div class="table-scroll"><table class="tbl-c">' +
+                "<thead><tr><th>Dia</th><th>Conversas</th><th>Resolvidas</th><th>Resposta média</th></tr></thead><tbody>" +
+                [["Segunda", 186, 162, "5 min"], ["Terça", 204, 181, "4 min"], ["Quarta", 198, 175, "6 min"], ["Quinta", 231, 198, "7 min"], ["Sexta", 264, 221, "8 min"]]
+                  .map(function (r) { return "<tr><td>" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + "</td><td>" + r[3] + "</td></tr>"; }).join("") +
+                "</tbody></table></div></div>";
+          }
+
+          if (key === "contatos") {
+            return '<h2>Contatos</h2><p class="sub2">Base de contatos da plataforma · dados fictícios</p>' +
+              '<div class="card-c"><div class="table-scroll"><table class="tbl-c">' +
+              "<thead><tr><th>Contato</th><th>Empresa</th><th>Canal</th><th>Cidade</th><th>Status</th><th></th></tr></thead><tbody>" +
+              CONTACTS.map(function (c) {
+                return "<tr><td><strong>" + c.nome + '</strong><br /><small style="color:var(--muted-2)">' + c.email + "</small></td>" +
+                  "<td>" + c.empresa.split(" · ")[0] + "</td><td>" + CH[c.canal].nome + "</td><td>" + c.cidade + "</td>" +
+                  "<td>" + (c.status === "resolvida" ? "Resolvida" : "Em aberto") + "</td>" +
+                  '<td><button class="iact" type="button" data-open-conv="' + c.id + '" aria-label="Abrir conversa com ' + c.nome + '"><i class="bi bi-chat-dots"></i></button></td></tr>';
+              }).join("") + "</tbody></table></div></div>";
+          }
+
+          if (key === "automacoes") {
+            var flows = [
+              { i: "bi-reply-all", t: "Resposta automática de saudação", s: "Enviada ao receber a primeira mensagem", on: true },
+              { i: "bi-bell", t: "Lembrete de follow-up", s: "Dispara 24h após mensagem sem resposta", on: true },
+              { i: "bi-person-check", t: "Distribuição por atendente", s: "Round-robin por horário e especialidade", on: true },
+              { i: "bi-archive", t: "Arquivamento automático", s: "Move conversas resolvidas após 7 dias", on: false },
+              { i: "bi-tag", t: "Etiquetagem por palavras-chave", s: "Classifica intenção do contato", on: true },
+              { i: "bi-star", t: "Alerta de cliente insatisfeito", s: "Notifica o gestor em conversas negativas", on: false }
+            ];
+            return '<h2>Automações</h2><p class="sub2">Regras configuráveis aplicadas às conversas · demonstração</p>' +
+              '<div class="flow-c">' + flows.map(function (f, i) {
+                return '<div class="flow-c__row"><span class="ico"><i class="bi ' + f.i + '" aria-hidden="true"></i></span>' +
+                  "<span><strong>" + f.t + "</strong><small>" + f.s + "</small></span>" +
+                  '<button class="sw-c" type="button" role="switch" aria-checked="' + (f.on ? "true" : "false") + '" aria-label="' + f.t + '" data-sw="' + i + '"></button></div>';
+              }).join("") + "</div>" +
+              '<p class="empty-c" style="padding:22px 10px">Automações são simuladas localmente nesta demonstração.</p>';
+          }
+
+          if (key === "canais") {
+            var canais = [
+              { k: "wa", nome: "WhatsApp Business", desc: "Caixa de entrada e etiquetas", st: "Conectado" },
+              { k: "ig", nome: "Instagram Direct", desc: "Mensagens e comentários", st: "Conectado" },
+              { k: "em", nome: "E-mail corporativo", desc: "Caixa de entrada compartilhada", st: "Conectado" },
+              { k: "tg", nome: "Telegram", desc: "Bot e grupos", st: "Conectado" }
+            ];
+            return '<h2>Canais</h2><p class="sub2">Integrações disponíveis nesta demonstração</p>' +
+              '<div class="grid-m">' + canais.map(function (ch) {
+                return '<div class="kpi-m"><span><i class="bi ' + CH[ch.k].icon + '" aria-hidden="true"></i> ' + ch.nome + "</span>" +
+                  "<strong style=\"font-size:1.1rem\">" + ch.st + "</strong>" +
+                  '<em class="up" style="background:rgba(52,211,153,.14);color:#34d399">' + ch.desc + "</em></div>";
+              }).join("") + "</div>" +
+              '<div class="card-c"><h3>Webhooks</h3><p style="color:var(--muted);font-size:.9rem;margin-top:8px">' +
+              "Os eventos da plataforma podem ser enviados para sistemas externos por webhooks. Nesta demonstração nenhum endpoint é chamado." +
+              '</p><button class="btn-c" style="margin-top:14px;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid var(--line-2);border-radius:10px;background:transparent;color:var(--text);font-family:var(--sans);font-size:.86rem;font-weight:600;cursor:pointer" id="copyHook">Copiar URL de exemplo</button></div>';
+          }
+
+          return "<p>Selecione uma seção no menu.</p>";
+        }
+
+        function bindSection(key) {
+          if (key === "contatos") {
+            document.querySelectorAll("[data-open-conv]").forEach(function (btn) {
+              btn.addEventListener("click", function () {
+                openConv(parseInt(btn.getAttribute("data-open-conv"), 10));
+                showSection("atendimento");
+                document.querySelectorAll(".nav-c").forEach(function (b) { b.classList.toggle("is-on", b.getAttribute("data-sec") === "atendimento"); });
+              });
+            });
+          }
+          if (key === "automacoes") {
+            document.querySelectorAll("[data-sw]").forEach(function (sw) {
+              sw.addEventListener("click", function () {
+                var on = sw.getAttribute("aria-checked") === "true";
+                sw.setAttribute("aria-checked", on ? "false" : "true");
+                showToast("Automação " + (on ? "desativada" : "ativada") + " (simulação).", on ? "bi-pause-circle" : "bi-play-circle");
+              });
+            });
+          }
+          if (key === "canais") {
+            var hook = document.getElementById("copyHook");
+            if (hook) {
+              hook.addEventListener("click", function () {
+                showToast("URL de exemplo: https://hooks.exemplo.com/conecta", "bi-clipboard");
+              });
+            }
+          }
+        }
+        /* =======================================================
+           AÇÕES DO CABEÇALHO E INICIALIZAÇÃO
+           ======================================================= */
+        document.getElementById("btnCloseConv").addEventListener("click", function () {
+          var c = contact(currentId);
+          if (!c) { return; }
+          c.status = c.status === "resolvida" ? "aguardando" : "resolvida";
+          c.hist.unshift({ i: "bi-check2-circle", m: c.status === "resolvida" ? "Conversa marcada como resolvida" : "Conversa reaberta", s: "Agora" });
+          renderChat();
+          renderList();
+          renderInfo();
+          showToast(c.status === "resolvida" ? "Conversa resolvida." : "Conversa reaberta.", c.status === "resolvida" ? "bi-check2-circle" : "bi-arrow-counterclockwise");
+        });
+
+        document.getElementById("btnSla").addEventListener("click", function () {
+          showToast("Prazo de resposta definido para 2 horas nesta conversa.", "bi-alarm");
+        });
+
+        document.getElementById("btnMore").addEventListener("click", function () {
+          showToast("Ações: transferir, exportar, imprimir e arquivar.", "bi-three-dots");
+        });
+
+        document.getElementById("actTransfer").addEventListener("click", function () {
+          showToast("Conversa transferida para outro atendente (simulação).", "bi-person-check");
+        });
+        document.getElementById("actTag").addEventListener("click", function () {
+          var c = contact(currentId);
+          showToast("Tag adicionada a " + (c ? c.nome : "contato") + ": \"Follow-up\".", "bi-tag");
+        });
+        document.getElementById("actNote").addEventListener("click", function () {
+          showToast("Nota interna criada nesta conversa.", "bi-journal-text");
+        });
+        document.getElementById("actSla").addEventListener("click", function () {
+          showToast("Prioridade alterada para alta nesta conversa.", "bi-stopwatch");
+        });
+        document.getElementById("statusLink").addEventListener("click", function (event) {
+          event.preventDefault();
+          showToast("Todos os canais respondendo normalmente.", "bi-check2-circle");
+        });
+
+        function boot() {
+          renderList();
+          renderChat();
+          renderInfo();
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", boot);
+        } else {
+          boot();
+        }
+      })();
+    </script>
+  </body>
+</html>
