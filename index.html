@@ -6,44 +6,42 @@
 
     <!-- SEO -->
     <title>
-      Victor Eduardo | Desenvolvedor Full Stack | Sites e Soluções Web
+      Evolution | Desenvolvimento Web, Landing Pages e Sites Profissionais
     </title>
     <meta
       name="description"
-      content="Desenvolvedor Full Stack especializado em sites profissionais, landing pages, sistemas web, integrações e soluções digitais sob medida."
+      content="A Evolution cria Landing Pages, sites profissionais e soluções digitais rápidos e responsivos para empresas, profissionais e negócios que querem fortalecer sua presença digital."
     />
     <meta
       name="keywords"
-      content="desenvolvedor full stack, criação de sites, landing page, sistema web, laravel, php, node.js, integrações, api, automação, freelancer, desenvolvimento web"
+      content="evolution, desenvolvimento web, criação de sites, landing page, site profissional, soluções digitais, sites responsivos, manutenção de site, laravel, php, node.js"
     />
-    <meta name="author" content="Victor Eduardo" />
+    <meta name="author" content="Evolution — Victor Eduardo" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0B0F19" />
-    <link rel="canonical" href="https://SEU-DOMINIO.com/" />
+    <!-- Inclua o canonical aqui quando o domínio definitivo do site da Evolution estiver publicado. -->
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
-    <meta property="og:site_name" content="Victor Eduardo" />
+    <meta property="og:site_name" content="Evolution" />
     <meta
       property="og:title"
-      content="Victor Eduardo | Desenvolvedor Full Stack | Sites e Soluções Web"
+      content="Evolution | Desenvolvimento Web, Landing Pages e Sites Profissionais"
     />
     <meta
       property="og:description"
-      content="Desenvolvedor Full Stack especializado em sites profissionais, landing pages, sistemas web, integrações e soluções digitais sob medida."
+      content="A Evolution cria Landing Pages, sites profissionais e soluções digitais rápidos e responsivos para empresas, profissionais e negócios."
     />
-    <meta property="og:url" content="https://SEU-DOMINIO.com/" />
-    <!-- Substitua a linha abaixo por uma imagem 1200x630 publicada junto ao site -->
-    <!-- <meta property="og:image" content="https://SEU-DOMINIO.com/og-image.png"> -->
+    <!-- Inclua og:url e og:image (1200x630) quando o domínio da Evolution estiver publicado. -->
     <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:title"
-      content="Victor Eduardo | Desenvolvedor Full Stack"
+      content="Evolution | Desenvolvimento Web e Criação de Sites"
     />
     <meta
       name="twitter:description"
-      content="Sites profissionais, landing pages e sistemas web sob medida."
+      content="Landing Pages, sites profissionais e soluções digitais pela Evolution."
     />
 
     <!-- Favicon SVG inline (data URI) -->
@@ -920,6 +918,49 @@
         letter-spacing: 0.04em;
       }
 
+      /* Cards de serviço com preço inicial e CTA */
+      .services-featured {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+        gap: 20px;
+        margin-bottom: 44px;
+      }
+      .services-featured .btn {
+        margin-top: auto;
+      }
+      .card-price {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px 14px;
+        border: 1px solid var(--accent-line);
+        border-radius: var(--radius-sm);
+        background: var(--accent-soft);
+      }
+      .card-price span {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .card-price strong {
+        color: var(--accent);
+        font-family: var(--mono);
+        font-size: 1.22rem;
+        letter-spacing: -0.02em;
+      }
+      .card p.card-ideal {
+        color: var(--muted);
+        font-size: 0.83rem;
+        line-height: 1.5;
+      }
+      .card p.card-ideal strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+
       /* ============================================================
    9. HABILIDADES
    ============================================================ */
@@ -996,6 +1037,12 @@
         text-align: center;
         color: var(--muted);
         font-size: 0.88rem;
+      }
+      .section-note {
+        margin-top: 34px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
       }
       /* ============================================================
    10. PORTFÓLIO
@@ -1236,7 +1283,7 @@
       .timeline {
         position: relative;
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 20px;
         padding-top: 34px;
       }
@@ -1344,6 +1391,23 @@
       .cta-box .btn {
         position: relative;
         margin-top: 34px;
+      }
+      .cta-contacts {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 28px;
+        margin-top: 26px;
+        font-size: 0.95rem;
+      }
+      .cta-contacts a {
+        color: var(--muted);
+        transition: color 0.2s ease;
+        word-break: break-word;
+      }
+      .cta-contacts a:hover {
+        color: var(--accent);
       }
 
       /* ============================================================
@@ -1461,8 +1525,23 @@
         font-size: 1.05rem;
       }
       .footer-brand small {
+        display: block;
         color: var(--muted);
         font-size: 0.85rem;
+      }
+      .footer-contact {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px 18px;
+      }
+      .footer-contact a {
+        color: var(--muted);
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+      }
+      .footer-contact a:hover {
+        color: var(--accent);
       }
       .footer-nav ul {
         display: flex;
@@ -1752,12 +1831,12 @@
         <a
           class="brand"
           href="#inicio"
-          aria-label="Victor Eduardo — ir para o início"
+          aria-label="Evolution — ir para o início"
         >
           <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
           <span class="brand-text">
-            <span>Victor Eduardo</span>
-            <small>Desenvolvedor Full Stack</small>
+            <span>Evolution</span>
+            <small>Desenvolvimento Web</small>
           </span>
         </a>
 
@@ -1766,12 +1845,15 @@
             <li><a class="nav-link" href="#inicio">Início</a></li>
             <li><a class="nav-link" href="#sobre">Sobre</a></li>
             <li><a class="nav-link" href="#servicos">Serviços</a></li>
-            <li><a class="nav-link" href="#habilidades">Habilidades</a></li>
-            <li><a class="nav-link" href="#portfolio">Portfólio</a></li>
+            <li><a class="nav-link" href="#portfolio">Projetos</a></li>
             <li><a class="nav-link" href="#processo">Processo</a></li>
+            <li><a class="nav-link" href="#investimento">Investimento</a></li>
             <li><a class="nav-link" href="#contato">Contato</a></li>
             <li class="nav-cta-mobile">
-              <a class="btn btn--primary btn--block" href="#contato"
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-message"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
                 >Solicitar orçamento</a
               >
             </li>
@@ -1779,7 +1861,10 @@
         </nav>
 
         <div class="header-actions">
-          <a class="btn btn--primary header-cta" href="#contato"
+          <a
+            class="btn btn--primary header-cta"
+            data-contact="whatsapp-message"
+            href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
             >Solicitar orçamento</a
           >
           <button
@@ -1805,19 +1890,23 @@
       <section class="hero" id="inicio" aria-labelledby="hero-title">
         <div class="container hero-grid">
           <div class="hero-copy">
-            <span class="eyebrow">Disponível para novos projetos</span>
+            <span class="eyebrow">Evolution — Desenvolvimento Web</span>
             <h1 id="hero-title">
-              Sites profissionais que
-              <span class="highlight">transformam visitantes em clientes</span>.
+              Sua empresa merece uma
+              <span class="highlight">presença digital profissional</span>.
             </h1>
             <p class="hero-sub">
-              Desenvolvimento de sites, landing pages e soluções web sob medida
-              para empresas e profissionais que querem fortalecer sua presença
-              digital.
+              A Evolution cria Landing Pages e sites profissionais, rápidos e
+              responsivos para transformar sua presença online em oportunidades
+              de negócio.
             </p>
 
             <div class="hero-actions">
-              <a class="btn btn--primary" href="#contato">
+              <a
+                class="btn btn--primary"
+                data-contact="whatsapp-message"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+              >
                 Solicitar orçamento
                 <svg
                   width="18"
@@ -1833,12 +1922,13 @@
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
               </a>
-              <a class="btn btn--ghost" href="#portfolio">Ver portfólio</a>
+              <a class="btn btn--ghost" href="#portfolio">Ver projetos</a>
             </div>
 
             <p class="hero-authority">
               <span class="pulse" aria-hidden="true"></span>
-              Desenvolvedor Full Stack &bull; <b>8+ anos de experiência</b>
+              Landing Pages &bull; Sites profissionais &bull;
+              <b>Manutenção e melhorias</b>
             </p>
           </div>
 
@@ -1912,29 +2002,30 @@
         <div class="container about-grid">
           <div class="about-text reveal">
             <div class="section-head">
-              <span class="eyebrow">Sobre mim</span>
+              <span class="eyebrow">Sobre a Evolution</span>
               <h2 id="sobre-title">
-                Desenvolvimento web com foco em resultado
+                Desenvolvimento web profissional para o seu negócio
               </h2>
             </div>
 
             <p>
-              Sou Victor Eduardo, desenvolvedor Full Stack especializado na
-              criação de soluções web modernas, escaláveis e orientadas a
-              resultados.
+              A Evolution nasceu com o propósito de tornar o desenvolvimento
+              web profissional mais acessível para empresas, profissionais e
+              negócios que precisam de uma presença digital eficiente.
             </p>
             <p>
-              Ao longo da minha carreira, participei do desenvolvimento de
-              diferentes tipos de sistemas, sites, APIs, integrações e
-              automações. Minha experiência combina desenvolvimento frontend e
-              backend, permitindo entender o projeto como um todo e construir
-              soluções que realmente atendam às necessidades do negócio.
+              À frente da Evolution está Victor Eduardo, desenvolvedor com
+              experiência em desenvolvimento de sistemas, aplicações web, APIs e
+              integrações digitais — do frontend ao backend — o que permite
+              entender o projeto como um todo e construir soluções que
+              realmente atendam às necessidades do negócio.
             </p>
             <p>
-              Hoje também trabalho com ferramentas de inteligência artificial
-              aplicadas ao desenvolvimento, como Cursor e GitHub Copilot,
-              utilizando tecnologia para aumentar produtividade sem abrir mão de
-              qualidade, organização e boas práticas.
+              A Evolution combina boas práticas de desenvolvimento com
+              ferramentas atuais de produtividade, como inteligência artificial
+              aplicada ao código, utilizando tecnologia para aumentar
+              eficiência sem abrir mão de qualidade, organização e foco no
+              resultado de cada projeto.
             </p>
 
             <ul class="about-list">
@@ -1993,36 +2084,174 @@
 
           <div class="stats reveal delay-2">
             <div class="stat">
-              <strong>8+ anos</strong>
-              <span>Experiência com PHP/Laravel</span>
+              <strong>Responsivo</strong>
+              <span>Para computadores, tablets e celulares</span>
             </div>
             <div class="stat">
-              <strong>4+ anos</strong>
-              <span>Experiência com Node.js</span>
+              <strong>Sob medida</strong>
+              <span>Solução definida conforme o objetivo</span>
             </div>
             <div class="stat">
-              <strong>Full Stack</strong>
-              <span>Frontend + Backend</span>
+              <strong>WhatsApp</strong>
+              <span>Atendimento direto, sem compromisso</span>
             </div>
             <div class="stat">
-              <strong>Projetos Web</strong>
-              <span>Sites, sistemas e integrações</span>
+              <strong>Do início ao ar</strong>
+              <span>Acompanhamento em todas as etapas</span>
             </div>
           </div>
         </div>
       </section>
       <!-- ==========================================================
-         SERVIÇOS
+         O QUE A EVOLUTION FAZ
          ========================================================== -->
       <section class="section" id="servicos" aria-labelledby="servicos-title">
         <div class="container">
           <div class="section-head reveal">
             <span class="eyebrow">Serviços</span>
-            <h2 id="servicos-title">O que posso criar para você</h2>
+            <h2 id="servicos-title">O que a Evolution faz</h2>
             <p class="lead">
-              Soluções sob medida para empresas, profissionais e projetos que
-              precisam de presença digital com qualidade técnica e foco em
-              resultado.
+              Desenvolvimento web pensado para o objetivo do seu negócio.
+              Criamos experiências digitais profissionais para apresentar sua
+              empresa, divulgar serviços, gerar oportunidades e melhorar
+              processos.
+            </p>
+          </div>
+
+          <div class="services-featured">
+            <article class="card reveal">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 11l18-7-7 18-2.5-8.5L3 11z" />
+                </svg>
+              </span>
+              <h3>Landing Pages</h3>
+              <p class="card-price">
+                <span>A partir de</span>
+                <strong>R$ 250</strong>
+              </p>
+              <p>
+                Uma página criada para um objetivo específico: divulgar uma
+                oferta, campanha, produto ou serviço e transformar visitantes
+                em contatos.
+              </p>
+              <p class="card-ideal">
+                <strong>Ideal para:</strong> campanhas, anúncios, lançamentos
+                e captação de leads.
+              </p>
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-landing"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20tenho%20interesse%20em%20criar%20uma%20Landing%20Page.%20Gostaria%20de%20saber%20mais%20sobre%20o%20projeto."
+                >Quero uma Landing Page</a
+              >
+            </article>
+
+            <article class="card reveal delay-1">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M2 9h20M6 22h12" />
+                </svg>
+              </span>
+              <h3>Sites Profissionais</h3>
+              <p class="card-price">
+                <span>A partir de</span>
+                <strong>R$ 400</strong>
+              </p>
+              <p>
+                Sites completos para empresas e profissionais que precisam
+                apresentar seus serviços, fortalecer sua presença digital e
+                facilitar o contato com novos clientes.
+              </p>
+              <p class="card-ideal">
+                <strong>Ideal para:</strong> empresas, profissionais liberais,
+                negócios locais e prestadores de serviços.
+              </p>
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-site"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20tenho%20interesse%20em%20criar%20um%20site%20profissional.%20Gostaria%20de%20saber%20mais%20sobre%20o%20projeto."
+                >Quero um site</a
+              >
+            </article>
+
+            <article class="card reveal delay-2">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14.6 6.4a4 4 0 105.2 5.2l-2.6 2.6 3.6 3.6-1.4 1.4-3.6-3.6-2.6 2.6a4 4 0 01-5.2-5.2l2.6-2.6L6.4 6.6 7.8 5.2l3.6 3.6 2.6-2.6z"
+                  />
+                </svg>
+              </span>
+              <h3>Manutenção e Evolução</h3>
+              <p class="card-price">
+                <span>A partir de</span>
+                <strong>R$ 100</strong>
+              </p>
+              <p>
+                Seu site já existe? A Evolution também cuida de melhorias,
+                correções, ajustes de responsividade, performance e novas
+                funcionalidades.
+              </p>
+              <p class="card-ideal">
+                <strong>Ideal para:</strong> sites existentes que precisam de
+                atualização ou melhorias.
+              </p>
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-manutencao"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20preciso%20de%20uma%20manuten%C3%A7%C3%A3o%20ou%20melhoria%20em%20um%20site."
+                >Melhorar meu site</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+      <!-- ==========================================================
+         SOLUÇÕES PARA DIFERENTES NECESSIDADES
+         ========================================================== -->
+      <section
+        class="section section--alt"
+        id="necessidades"
+        aria-labelledby="necessidades-title"
+      >
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Soluções</span>
+            <h2 id="necessidades-title">
+              Soluções para diferentes necessidades
+            </h2>
+            <p class="lead">
+              Cada negócio tem um objetivo. A solução digital precisa
+              acompanhar essa necessidade.
             </p>
           </div>
 
@@ -2043,38 +2272,16 @@
                   <path d="M2 9h20M6 22h12" />
                 </svg>
               </span>
-              <h3>Sites Institucionais</h3>
+              <h3>Apresentar sua empresa</h3>
               <p>
-                Sites profissionais para empresas que querem apresentar seus
-                serviços, fortalecer sua marca e gerar novas oportunidades.
+                Sites institucionais para empresas que precisam apresentar
+                sua história, serviços, diferenciais e formas de contato de
+                maneira profissional.
               </p>
-              <span class="card-tag">Presença digital</span>
+              <span class="card-tag">Objetivo: Presença digital</span>
             </article>
 
             <article class="card reveal delay-1">
-              <span class="card-icon" aria-hidden="true">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M3 11l18-7-7 18-2.5-8.5L3 11z" />
-                </svg>
-              </span>
-              <h3>Landing Pages</h3>
-              <p>
-                Páginas focadas em campanhas, produtos, serviços e geração de
-                leads.
-              </p>
-              <span class="card-tag">Conversão</span>
-            </article>
-
-            <article class="card reveal delay-2">
               <span class="card-icon" aria-hidden="true">
                 <svg
                   width="22"
@@ -2090,13 +2297,36 @@
                   <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
                 </svg>
               </span>
-              <h3>Sites para Profissionais</h3>
+              <h3>Fortalecer sua imagem profissional</h3>
               <p>
-                Presença digital profissional para médicos, advogados,
-                arquitetos, consultores, prestadores de serviços e outros
-                profissionais.
+                Sites personalizados para profissionais que precisam
+                apresentar seu trabalho, experiência, serviços e formas de
+                contato.
               </p>
-              <span class="card-tag">Autoridade</span>
+              <span class="card-tag">Objetivo: Autoridade</span>
+            </article>
+
+            <article class="card reveal delay-2">
+              <span class="card-icon" aria-hidden="true">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 11l18-7-7 18-2.5-8.5L3 11z" />
+                </svg>
+              </span>
+              <h3>Divulgar um produto ou serviço</h3>
+              <p>
+                Landing Pages desenvolvidas para campanhas, anúncios,
+                produtos, serviços e ações específicas.
+              </p>
+              <span class="card-tag">Objetivo: Conversão</span>
             </article>
 
             <article class="card reveal">
@@ -2117,12 +2347,12 @@
                   <rect x="14" y="14" width="7" height="7" rx="1.5" />
                 </svg>
               </span>
-              <h3>Sistemas Web</h3>
+              <h3>Automatizar processos</h3>
               <p>
-                Sistemas personalizados para automatizar processos e centralizar
-                informações do seu negócio.
+                Sistemas web personalizados para reduzir tarefas manuais,
+                organizar informações e melhorar processos internos.
               </p>
-              <span class="card-tag">Gestão e operação</span>
+              <span class="card-tag">Objetivo: Produtividade</span>
             </article>
 
             <article class="card reveal delay-1">
@@ -2142,67 +2372,15 @@
                   />
                 </svg>
               </span>
-              <h3>Integrações e APIs</h3>
+              <h3>Conectar ferramentas</h3>
               <p>
-                Integração entre sistemas, APIs, plataformas, ferramentas de
-                atendimento e serviços externos.
+                Integrações entre sistemas, APIs, plataformas e serviços
+                utilizados pela empresa.
               </p>
-              <span class="card-tag">Sistemas conectados</span>
+              <span class="card-tag">Objetivo: Conectividade</span>
             </article>
 
             <article class="card reveal delay-2">
-              <span class="card-icon" aria-hidden="true">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="3" />
-                  <path
-                    d="M12 3v4M12 17v4M3 12h4M17 12h4M6.5 6.5l2.8 2.8M14.7 14.7l2.8 2.8M17.5 6.5l-2.8 2.8M9.3 14.7l-2.8 2.8"
-                  />
-                </svg>
-              </span>
-              <h3>Automação</h3>
-              <p>
-                Automação de processos repetitivos para reduzir trabalho manual
-                e aumentar produtividade.
-              </p>
-              <span class="card-tag">Eficiência</span>
-            </article>
-
-            <article class="card reveal">
-              <span class="card-icon" aria-hidden="true">
-                <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M3 6h18l-1.6 12.4A2 2 0 0117.4 20H6.6a2 2 0 01-2-1.6L3 6z"
-                  />
-                  <path d="M8.5 10.5a3.5 3.5 0 007 0" />
-                </svg>
-              </span>
-              <h3>E-commerce</h3>
-              <p>
-                Soluções para lojas virtuais e integração com plataformas de
-                vendas.
-              </p>
-              <span class="card-tag">Vendas online</span>
-            </article>
-
-            <article class="card reveal delay-1">
               <span class="card-icon" aria-hidden="true">
                 <svg
                   width="22"
@@ -2219,12 +2397,12 @@
                   />
                 </svg>
               </span>
-              <h3>Manutenção e Evolução</h3>
+              <h3>Evoluir um projeto existente</h3>
               <p>
-                Correções, melhorias, novas funcionalidades e modernização de
-                sistemas existentes.
+                Correções, melhorias, novas funcionalidades e ajustes em
+                sistemas e sites que já estão em funcionamento.
               </p>
-              <span class="card-tag">Continuidade</span>
+              <span class="card-tag">Objetivo: Evolução</span>
             </article>
           </div>
         </div>
@@ -2233,7 +2411,7 @@
          HABILIDADES
          ========================================================== -->
       <section
-        class="section section--alt"
+        class="section"
         id="habilidades"
         aria-labelledby="habilidades-title"
       >
@@ -2242,8 +2420,8 @@
             <span class="eyebrow">Tecnologias</span>
             <h2 id="habilidades-title">Tecnologias e habilidades</h2>
             <p class="lead">
-              Ferramentas e tecnologias que uso no dia a dia para construir
-              sites, sistemas, integrações e automações.
+              Ferramentas e tecnologias que a Evolution utiliza no dia a dia
+              para construir sites, sistemas, integrações e automações.
             </p>
           </div>
 
@@ -2432,15 +2610,20 @@
       <!-- ==========================================================
          PORTFÓLIO
          ========================================================== -->
-      <section class="section" id="portfolio" aria-labelledby="portfolio-title">
+      <section
+        class="section section--alt"
+        id="portfolio"
+        aria-labelledby="portfolio-title"
+      >
         <div class="container">
           <div class="section-head reveal">
-            <span class="eyebrow">Portfólio</span>
-            <h2 id="portfolio-title">Projetos e experiências</h2>
+            <span class="eyebrow">Projetos</span>
+            <h2 id="portfolio-title">Projetos da Evolution</h2>
             <p class="lead">
-              Cada projeto abaixo é uma demonstração funcional que pode ser
-              explorada no navegador. Os cases com nome do cliente, métricas
-              reais e depoimentos serão publicados aqui em breve.
+              Alguns projetos que representam o que podemos construir. Todos
+              abaixo são demonstrações funcionais — projetos próprios criados
+              para apresentar conceito e qualidade — e podem ser explorados no
+              navegador.
             </p>
           </div>
 
@@ -2835,16 +3018,16 @@
          DIFERENCIAIS
          ========================================================== -->
       <section
-        class="section section--alt"
+        class="section"
         id="diferenciais"
         aria-labelledby="diferenciais-title"
       >
         <div class="container">
           <div class="section-head reveal">
             <span class="eyebrow">Diferenciais</span>
-            <h2 id="diferenciais-title">Por que trabalhar comigo?</h2>
+            <h2 id="diferenciais-title">Por que escolher a Evolution?</h2>
             <p class="lead">
-              Mais do que entregar páginas, meu objetivo é que o projeto
+              Mais do que entregar páginas, a Evolution quer que o projeto
               funcione bem para o seu negócio.
             </p>
           </div>
@@ -2868,7 +3051,9 @@
               </span>
               <div>
                 <h3>Visão Full Stack</h3>
-                <p>Entendo o projeto do frontend ao backend.</p>
+                <p>
+                  A Evolution entende o projeto do frontend ao backend.
+                </p>
               </div>
             </article>
 
@@ -2892,7 +3077,8 @@
               <div>
                 <h3>Experiência prática</h3>
                 <p>
-                  Anos de experiência desenvolvendo aplicações e soluções web.
+                  Experiência real no desenvolvimento de aplicações e soluções
+                  web.
                 </p>
               </div>
             </article>
@@ -2941,7 +3127,7 @@
               <div>
                 <h3>Comunicação clara</h3>
                 <p>
-                  Procuro explicar soluções técnicas de forma simples e
+                  A Evolution explica soluções técnicas de forma simples e
                   objetiva.
                 </p>
               </div>
@@ -2991,8 +3177,8 @@
               <div>
                 <h3>Foco no negócio</h3>
                 <p>
-                  Mais do que criar páginas, busco entender o objetivo do
-                  projeto.
+                  Mais do que criar páginas, a Evolution busca entender o
+                  objetivo do projeto.
                 </p>
               </div>
             </article>
@@ -3003,49 +3189,126 @@
       <!-- ==========================================================
          PROCESSO
          ========================================================== -->
-      <section class="section" id="processo" aria-labelledby="processo-title">
+      <section
+        class="section section--alt"
+        id="processo"
+        aria-labelledby="processo-title"
+      >
         <div class="container">
           <div class="section-head reveal">
             <span class="eyebrow">Processo</span>
-            <h2 id="processo-title">Como funciona o projeto</h2>
-            <p class="lead">
-              Um processo simples e transparente, do primeiro contato até a
-              publicação.
-            </p>
+            <h2 id="processo-title">Como funciona</h2>
+            <p class="lead">Do primeiro contato à publicação.</p>
           </div>
 
           <ol class="timeline">
             <li class="step reveal">
               <span class="step-num">01</span>
-              <h3>Conversa inicial</h3>
-              <p>Entendo sua necessidade, objetivo e público.</p>
+              <h3>Entendemos sua necessidade</h3>
+              <p>Você apresenta sua ideia, negócio ou problema.</p>
             </li>
             <li class="step reveal delay-1">
               <span class="step-num">02</span>
-              <h3>Planejamento</h3>
-              <p>Definimos estrutura, funcionalidades e prioridades.</p>
+              <h3>Definimos a solução</h3>
+              <p>
+                A Evolution avalia o projeto e define o melhor formato para
+                atender ao objetivo.
+              </p>
             </li>
             <li class="step reveal delay-2">
               <span class="step-num">03</span>
-              <h3>Desenvolvimento</h3>
+              <h3>Desenvolvemos</h3>
               <p>
-                Construo a solução seguindo boas práticas e foco em qualidade.
+                Criamos o projeto com foco em qualidade, responsividade e
+                experiência do usuário.
               </p>
             </li>
             <li class="step reveal delay-3">
               <span class="step-num">04</span>
-              <h3>Ajustes</h3>
-              <p>Validamos o resultado e realizamos os ajustes necessários.</p>
-            </li>
-            <li class="step reveal delay-4">
-              <span class="step-num">05</span>
-              <h3>Publicação</h3>
+              <h3>Publicamos</h3>
               <p>
-                Colocamos o projeto no ar e deixamos tudo preparado para sua
-                utilização.
+                Depois da aprovação, colocamos o projeto no ar e orientamos os
+                próximos passos.
               </p>
             </li>
           </ol>
+          <p class="section-note reveal">
+            O processo pode ser adaptado de acordo com a complexidade do
+            projeto.
+          </p>
+        </div>
+      </section>
+      <!-- ==========================================================
+         INVESTIMENTO
+         ========================================================== -->
+      <section
+        class="section"
+        id="investimento"
+        aria-labelledby="investimento-title"
+      >
+        <div class="container">
+          <div class="section-head reveal">
+            <span class="eyebrow">Valores</span>
+            <h2 id="investimento-title">Investimento</h2>
+            <p class="lead">
+              Projetos diferentes exigem soluções diferentes. Para facilitar
+              o planejamento, trabalhamos com valores iniciais:
+            </p>
+          </div>
+
+          <div class="services-featured">
+            <article class="card reveal">
+              <h3>Landing Page</h3>
+              <p class="card-price">
+                <span>A partir de</span>
+                <strong>R$ 250</strong>
+              </p>
+              <p>Para campanhas, produtos, serviços e geração de contatos.</p>
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-message"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+                >Solicitar orçamento</a
+              >
+            </article>
+
+            <article class="card reveal delay-1">
+              <h3>Site Profissional</h3>
+              <p class="card-price">
+                <span>A partir de</span>
+                <strong>R$ 400</strong>
+              </p>
+              <p>
+                Para empresas, profissionais e negócios que precisam de uma
+                presença digital completa.
+              </p>
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-message"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+                >Solicitar orçamento</a
+              >
+            </article>
+
+            <article class="card reveal delay-2">
+              <h3>Manutenção e melhorias</h3>
+              <p class="card-price">
+                <span>A partir de</span>
+                <strong>R$ 100</strong>
+              </p>
+              <p>Para ajustes, correções e evolução de sites existentes.</p>
+              <a
+                class="btn btn--primary btn--block"
+                data-contact="whatsapp-message"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
+                >Solicitar orçamento</a
+              >
+            </article>
+          </div>
+          <p class="section-note reveal">
+            O valor final depende do escopo e das necessidades de cada
+            projeto.
+          </p>
         </div>
       </section>
       <!-- ==========================================================
@@ -3054,13 +3317,18 @@
       <section class="cta" aria-labelledby="cta-title">
         <div class="container">
           <div class="cta-box reveal">
-            <h2 id="cta-title">Tem uma ideia ou precisa melhorar seu site?</h2>
+            <h2 id="cta-title">Vamos transformar sua ideia em um projeto?</h2>
+            <p>Conte para a Evolution o que você precisa.</p>
             <p>
-              Vamos conversar sobre seu projeto e entender como transformar sua
-              ideia em uma solução digital profissional.
+              Pode ser uma Landing Page, um novo site, uma melhoria no projeto
+              atual ou até uma solução personalizada.
             </p>
-            <a class="btn btn--primary" href="#contato">
-              Falar sobre meu projeto
+            <a
+              class="btn btn--primary"
+              data-contact="whatsapp-project"
+              href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+            >
+              Falar com a Evolution
               <svg
                 width="18"
                 height="18"
@@ -3075,6 +3343,16 @@
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </a>
+            <div class="cta-contacts">
+              <a data-contact="whatsapp" href="https://wa.me/5579999133578"
+                >WhatsApp: +55 79 99913-3578</a
+              >
+              <a
+                data-contact="email"
+                href="mailto:victor.evolution.dev@gmail.com"
+                >E-mail: victor.evolution.dev@gmail.com</a
+              >
+            </div>
           </div>
         </div>
       </section>
@@ -3082,7 +3360,7 @@
       <!-- ==========================================================
          CONTATO
          Observação: os endereços de contato (WhatsApp, e-mail, LinkedIn e GitHub)
-         ficam no bloco "CONFIGURAÇÃO DE CONTATO" no final deste arquivo,
+         ficam no bloco "CONTATO OFICIAL DA EVOLUTION" no final deste arquivo,
          nas constantes WHATSAPP_URL, EMAIL_URL, LINKEDIN_URL e GITHUB_URL.
          ========================================================== -->
       <section
@@ -3093,10 +3371,12 @@
         <div class="container">
           <div class="section-head reveal">
             <span class="eyebrow">Contato</span>
-            <h2 id="contato-title">Vamos conversar?</h2>
+            <h2 id="contato-title">Vamos criar seu próximo projeto?</h2>
             <p class="lead">
-              Conte um pouco sobre o que você precisa. Podemos conversar sem
-              compromisso e avaliar a melhor solução para o seu projeto.
+              Tem uma ideia, precisa de um site ou quer melhorar sua presença
+              digital? Fale com a Evolution: conte um pouco sobre o que você
+              precisa e solicite um orçamento sem compromisso. Os perfis no
+              LinkedIn e GitHub são de Victor Eduardo, fundador da Evolution.
             </p>
           </div>
 
@@ -3104,8 +3384,8 @@
             <a
               class="contact-card"
               data-contact="whatsapp"
-              href="#contato"
-              aria-label="Conversar pelo WhatsApp"
+              href="https://wa.me/5579999133578"
+              aria-label="Conversar com a Evolution pelo WhatsApp"
             >
               <span class="card-icon" aria-hidden="true">
                 <svg
@@ -3126,15 +3406,15 @@
               </span>
               <span>
                 <strong>WhatsApp</strong>
-                <small data-contact-text="whatsapp">+55 (00) 00000-0000</small>
+                <small data-contact-text="whatsapp">+55 79 99913-3578</small>
               </span>
             </a>
 
             <a
               class="contact-card"
               data-contact="email"
-              href="#contato"
-              aria-label="Enviar e-mail"
+              href="mailto:victor.evolution.dev@gmail.com"
+              aria-label="Enviar e-mail para a Evolution"
             >
               <span class="card-icon" aria-hidden="true">
                 <svg
@@ -3153,15 +3433,17 @@
               </span>
               <span>
                 <strong>E-mail</strong>
-                <small data-contact-text="email">seu-email@exemplo.com</small>
+                <small data-contact-text="email"
+                  >victor.evolution.dev@gmail.com</small
+                >
               </span>
             </a>
 
             <a
               class="contact-card"
               data-contact="linkedin"
-              href="#contato"
-              aria-label="Abrir meu perfil no LinkedIn"
+              href="https://www.linkedin.com/in/developer-victor-santos/"
+              aria-label="Abrir o perfil profissional de Victor Eduardo no LinkedIn"
             >
               <span class="card-icon" aria-hidden="true">
                 <svg
@@ -3181,7 +3463,7 @@
               <span>
                 <strong>LinkedIn</strong>
                 <small data-contact-text="linkedin"
-                  >linkedin.com/in/seu-usuario</small
+                  >linkedin.com/in/developer-victor-santos</small
                 >
               </span>
             </a>
@@ -3189,8 +3471,8 @@
             <a
               class="contact-card"
               data-contact="github"
-              href="#contato"
-              aria-label="Abrir meu perfil no GitHub"
+              href="https://github.com/victor18edu"
+              aria-label="Abrir o perfil profissional de Victor Eduardo no GitHub"
             >
               <span class="card-icon" aria-hidden="true">
                 <svg
@@ -3210,7 +3492,7 @@
               </span>
               <span>
                 <strong>GitHub</strong>
-                <small data-contact-text="github">github.com/seu-usuario</small>
+                <small data-contact-text="github">github.com/victor18edu</small>
               </span>
             </a>
           </div>
@@ -3226,7 +3508,7 @@
               <a
                 class="btn btn--primary btn--block"
                 data-contact="whatsapp-message"
-                href="#contato"
+                href="https://wa.me/5579999133578?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Evolution%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento."
               >
                 <svg
                   width="18"
@@ -3249,7 +3531,7 @@
               <a
                 class="btn btn--ghost btn--block"
                 data-contact="email"
-                href="#contato"
+                href="mailto:victor.evolution.dev@gmail.com"
                 >Prefiro enviar e-mail</a
               >
             </div>
@@ -3258,8 +3540,8 @@
           <div class="contact-note reveal delay-2">
             <strong>Prefere explicar por mensagem?</strong>
             <span
-              >Envie os detalhes do seu projeto e retornarei assim que
-              possível.</span
+              >Envie os detalhes do seu projeto para a Evolution e retornaremos
+              assim que possível.</span
             >
           </div>
         </div>
@@ -3274,8 +3556,9 @@
           <div class="footer-brand">
             <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
             <span>
-              <strong>Victor Eduardo</strong>
-              <small>Desenvolvedor Full Stack</small>
+              <strong>Evolution</strong>
+              <small>Desenvolvimento Web &amp; Soluções Digitais</small>
+              <small>Landing Pages • Sites Profissionais • Manutenção</small>
             </span>
           </div>
 
@@ -3283,15 +3566,35 @@
             <ul>
               <li><a href="#inicio">Início</a></li>
               <li><a href="#servicos">Serviços</a></li>
-              <li><a href="#portfolio">Portfólio</a></li>
+              <li><a href="#portfolio">Projetos</a></li>
+              <li><a href="#investimento">Investimento</a></li>
               <li><a href="#contato">Contato</a></li>
             </ul>
           </nav>
+
+          <div class="footer-contact">
+            <a
+              data-contact="whatsapp"
+              href="https://wa.me/5579999133578"
+              >WhatsApp</a
+            >
+            <a data-contact="email" href="mailto:victor.evolution.dev@gmail.com"
+              >E-mail</a
+            >
+            <a
+              data-contact="linkedin"
+              href="https://www.linkedin.com/in/developer-victor-santos/"
+              >LinkedIn</a
+            >
+            <a data-contact="github" href="https://github.com/victor18edu"
+              >GitHub</a
+            >
+          </div>
         </div>
 
         <div class="footer-bottom">
           <span
-            >&copy; <span id="current-year">2026</span> Victor Eduardo. Todos os
+            >&copy; <span id="current-year">2026</span> Evolution. Todos os
             direitos reservados.</span
           >
           <span>Site desenvolvido em HTML, CSS e JavaScript.</span>
@@ -3299,30 +3602,21 @@
       </div>
     </footer>
 
-    <!-- Dados estruturados para buscadores (substitua a URL e os perfis) -->
+    <!-- Dados estruturados para buscadores (Evolution) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Victor Eduardo",
-        "jobTitle": "Desenvolvedor Full Stack",
-        "description": "Desenvolvedor Full Stack especializado em sites profissionais, landing pages, sistemas web, integrações e soluções digitais sob medida.",
-        "url": "https://SEU-DOMINIO.com/",
-        "knowsAbout": [
-          "PHP",
-          "Laravel",
-          "Node.js",
-          "JavaScript",
-          "Vue.js",
-          "React.js",
-          "Docker",
-          "AWS",
-          "REST APIs",
-          "Integrações"
-        ],
+        "@type": "Organization",
+        "name": "Evolution",
+        "description": "A Evolution é uma marca de desenvolvimento web especializada na criação de Landing Pages, sites profissionais e soluções digitais para empresas, profissionais e negócios.",
+        "email": "victor.evolution.dev@gmail.com",
+        "founder": {
+          "@type": "Person",
+          "name": "Victor Eduardo"
+        },
         "sameAs": [
-          "https://www.linkedin.com/in/seu-usuario",
-          "https://github.com/seu-usuario"
+          "https://www.linkedin.com/in/developer-victor-santos/",
+          "https://github.com/victor18edu"
         ]
       }
     </script>
@@ -3332,25 +3626,43 @@
         "use strict";
 
         /* ==========================================================
-       CONFIGURAÇÃO DE CONTATO — SUBSTITUA OS VALORES ABAIXO
+       CONTATO OFICIAL DA EVOLUTION
        ----------------------------------------------------------
        WHATSAPP_NUMBER: somente números, com código do país + DDD.
-       Exemplo: "5511998765432"
        ========================================================== */
-        var WHATSAPP_NUMBER = "5500000000000";
+        var WHATSAPP_NUMBER = "5579999133578";
         var WHATSAPP_URL = "https://wa.me/" + WHATSAPP_NUMBER;
-        var EMAIL_URL = "mailto:seu-email@exemplo.com";
-        var LINKEDIN_URL = "https://www.linkedin.com/in/seu-usuario";
-        var GITHUB_URL = "https://github.com/seu-usuario";
+        var EMAIL_URL = "mailto:victor.evolution.dev@gmail.com";
+        var LINKEDIN_URL =
+          "https://www.linkedin.com/in/developer-victor-santos/";
+        var GITHUB_URL = "https://github.com/victor18edu";
 
-        var WHATSAPP_MESSAGE =
-          "Olá Victor! Vi seu portfólio e gostaria de conversar sobre um projeto.";
-        var WHATSAPP_MESSAGE_URL =
-          WHATSAPP_URL + "?text=" + encodeURIComponent(WHATSAPP_MESSAGE);
+        /* Mensagens pré-preenchidas no WhatsApp */
+        var WHATSAPP_MESSAGES = {
+          orcamento:
+            "Olá! Vim pelo site da Evolution e gostaria de solicitar um orçamento.",
+          landing:
+            "Olá! Vim pelo site da Evolution e tenho interesse em criar uma Landing Page. Gostaria de saber mais sobre o projeto.",
+          site: "Olá! Vim pelo site da Evolution e tenho interesse em criar um site profissional. Gostaria de saber mais sobre o projeto.",
+          manutencao:
+            "Olá! Vim pelo site da Evolution e preciso de uma manutenção ou melhoria em um site.",
+          project:
+            "Olá! Vim pelo site da Evolution e gostaria de conversar sobre um projeto.",
+        };
+
+        function buildWhatsappUrl(message) {
+          return WHATSAPP_URL + "?text=" + encodeURIComponent(message);
+        }
 
         var CONTACT_LINKS = {
           whatsapp: WHATSAPP_URL,
-          "whatsapp-message": WHATSAPP_MESSAGE_URL,
+          "whatsapp-message": buildWhatsappUrl(WHATSAPP_MESSAGES.orcamento),
+          "whatsapp-landing": buildWhatsappUrl(WHATSAPP_MESSAGES.landing),
+          "whatsapp-site": buildWhatsappUrl(WHATSAPP_MESSAGES.site),
+          "whatsapp-manutencao": buildWhatsappUrl(
+            WHATSAPP_MESSAGES.manutencao,
+          ),
+          "whatsapp-project": buildWhatsappUrl(WHATSAPP_MESSAGES.project),
           email: EMAIL_URL,
           linkedin: LINKEDIN_URL,
           github: GITHUB_URL,
@@ -3358,10 +3670,10 @@
 
         /* Texto exibido nos cards de contato */
         var CONTACT_LABELS = {
-          whatsapp: "+55 (00) 00000-0000",
-          email: "seu-email@exemplo.com",
-          linkedin: "linkedin.com/in/seu-usuario",
-          github: "github.com/seu-usuario",
+          whatsapp: "+55 79 99913-3578",
+          email: "victor.evolution.dev@gmail.com",
+          linkedin: "linkedin.com/in/developer-victor-santos",
+          github: "github.com/victor18edu",
         };
 
         /* ==========================================================
